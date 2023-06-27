@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liqid SDK Programming Reference for Java&trade;</title>
+</head>
+<body>
+<h1>
+Liqid&trade; SDK Programming Reference for Java&trade; - Version 3.2.0<br>
+</h1>
+<hr>
+<h2>Enumerator <span style="color:brown;">DeviceType</span></h2>
+<table style="margin-left:4em;">
+<tr><td style="padding:3px"><b>Package:</b></td><td style="padding:3px">com.liqid.sdk</td></tr>
+</table>
+<h3>Description:</h3>
+<span style="margin-left:4em;">Represents a particular device type as a short string.</span><br>
+<span style="margin-left:4em;">Note that redundant but differing values are not represented here.</span><br>
+<span style="margin-left:4em;">This includes iba, fch, ramd, scm, vic, enc, nof, gof, pcpu, ncpu, gcpu</span><br>
+<h3>Values:</h3>
+<table style="margin-left:4em;border:1px solid black;border-collapse:collapse;">
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Enclosure</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents an enclosure<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Ethernet</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents an ethernet NIC<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Link</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a general network link<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Memory</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents configurable/switchable memory<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Network</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a general network link<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Infiniband1</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents an infiniband link<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Infiniband2</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents an infiniband link<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">SSD</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a switchable SSD resource<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Target</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a target resource<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">PLX</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a PLX chip resource<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">Compute</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a CPU resource.<br>Returned from CPUDeviceInfo<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">CPU</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Returned from CPUDeviceInfo<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">GPU</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a graphics processing unit resource<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">GCPU</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a graphics processing unit resource<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">FiberChannel1</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a fiber channel link<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">FiberChannel2</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents a fiber channel link<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:purple;">FPGA</span></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Represents an FPGA resource<br></td></tr>
+</table>
+<h3>See Also:</h3>
+<span style="margin-left:4em;"><a href="class_ConnectionHistory.html"><span style="color:orangered;">ConnectionHistory</span></a></span><br>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#CreateDeviceDescription">CreateDeviceDescription()</a></span><br>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#DeleteDeviceDescription">DeleteDeviceDescription()</a></span><br>
+<span style="margin-left:4em;"><a href="class_DeviceInfo.html"><span style="color:orangered;">DeviceInfo</span></a></span><br>
+<span style="margin-left:4em;"><a href="class_DeviceStatus.html"><span style="color:orangered;">DeviceStatus</span></a></span><br>
+<span style="margin-left:4em;"><a href="class_DeviceTypeAndAttributes.html"><span style="color:orangered;">DeviceTypeAndAttributes</span></a></span><br>
+<span style="margin-left:4em;"><a href="class_FabricItem.html"><span style="color:orangered;">FabricItem</span></a></span><br>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#GetDevices">GetDevices()</a></span><br>
+<span style="margin-left:4em;"><a href="class_ManagedEntity.html"><span style="color:orangered;">ManagedEntity</span></a></span><br>
+<span style="margin-left:4em;"><a href="class_PreDevice.html"><span style="color:orangered;">PreDevice</span></a></span><br>
+<span style="margin-left:4em;"><a href="index.html">Index</a></span><br>
+<hr>
+Copyright (c) 2022 Liqid, Inc. All rights reserved.<br>
+Redistribution and use in source and binary forms, with or without modification, are not permitted without prior consent.<br>
+Oracle and Java are registered trademarks of Oracle and/or its affiliates.<br>
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation.<br>
+Other names may be trademarks of their respective owners.
+</body>
+</html>

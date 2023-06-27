@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liqid SDK Programming Reference for Java&trade;</title>
+</head>
+<body>
+<h1>
+Liqid&trade; SDK Programming Reference for Java&trade; - Version 3.2.0<br>
+</h1>
+<hr>
+<h2>Category <span style="color:fuchsia;">MessageDigest</span></h2>
+<h3>Description:</h3>
+<span style="margin-left:4em;">These functions relate to secure authentication of REST API function calls.</span><br>
+<span style="margin-left:4em;">They are not of use to the SDK clients, as the SDK provides wrapper methods for these functions.</span><br>
+<span style="margin-left:4em;">See commentary on authentication models and functions related to logging in and logging out.</span><br>
+<br><b>Related Functions:</b><br>
+<table style="margin-left:4em;border:1px solid black;border-collapse:collapse;">
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><a href="class_LiqidClient.html#CreateMessageDigest">CreateMessageDigest()</a></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Creates a new digest associated with a given label.<br>The digest will be returned to the client, and will not be otherwise exposed by the Director.<br>This digest should be used for authenticating subsequent REST API invocations.<br>At the end of the client session, this digest should be deleted by invoking <a href="class_LiqidClient.html#DeleteMessageDigest">DeleteMessageDigest()</a>.<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><a href="class_LiqidClient.html#DeleteMessageDigest">DeleteMessageDigest()</a></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Deletes a previously-created message digest.<br></td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><a href="class_LiqidClient.html#GetMessageDigestLabels">GetMessageDigestLabels()</a></td>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;">Retrieves all existing message digest labels.<br></td></tr>
+</table>
+<h3>See Also:</h3>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#CreateMessageDigest">CreateMessageDigest()</a></span><br>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#DeleteMessageDigest">DeleteMessageDigest()</a></span><br>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#GetMessageDigestLabels">GetMessageDigestLabels()</a></span><br>
+<span style="margin-left:4em;"><a href="index.html">Index</a></span><br>
+<hr>
+Copyright (c) 2022 Liqid, Inc. All rights reserved.<br>
+Redistribution and use in source and binary forms, with or without modification, are not permitted without prior consent.<br>
+Oracle and Java are registered trademarks of Oracle and/or its affiliates.<br>
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation.<br>
+Other names may be trademarks of their respective owners.
+</body>
+</html>

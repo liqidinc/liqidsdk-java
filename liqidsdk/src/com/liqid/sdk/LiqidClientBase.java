@@ -103,7 +103,6 @@ public abstract class LiqidClientBase {
     public String getLastHttpResponseMessage() { return _lastHttpResponseMessage; }
     public int getLastRetryCount() { return _lastRetryCount; }
     public String getLastAsyncRequestStatus() { return _lastAsyncRequestStatus; }
-    public Logger getLogger() { return _logger; }
     public int getMaxAsyncWaitTimeInSeconds() { return _maxAsyncWaitTimeInSeconds; }
     public int getPortNumber() { return _portNumber; }
     public boolean getRetryOnServerError() { return _retryOnServerError; }
@@ -112,6 +111,7 @@ public abstract class LiqidClientBase {
     public boolean getSecureHTTP() { return _secureHTTP; }
     public int getTimeoutInSeconds() { return _timeoutInSeconds; }
     public boolean getWaitForAsyncCompletion() { return _waitForAsyncCompletion; }
+    public void setLogger(Logger logger) { _logger = logger; }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class AsyncLinks {

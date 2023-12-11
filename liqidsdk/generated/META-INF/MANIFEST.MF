@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: jackson-core-2.13.3.jar jackson-annotations-2.13.3.jar jacks
+ on-databind-2.14.1.jar jackson-annotations-2.14.1.jar jackson-core-2.14
+ .1.jar log4j-core-2.19.0.jar log4j-api-2.19.0.jar junit-4.13.2.jar hamc
+ rest-core-1.3.jar
+

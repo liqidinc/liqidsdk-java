@@ -85,13 +85,13 @@ public class ManagedEntity {
      * Type of the device
      */
     @JsonProperty("device_type")
-    private DeviceType _deviceType = null;
+    private ManagedEntityDeviceType _deviceType = null;
 
-    public DeviceType getDeviceType() {
+    public ManagedEntityDeviceType getDeviceType() {
         return _deviceType;
     }
 
-    public void setDeviceType(DeviceType value) {
+    public void setDeviceType(ManagedEntityDeviceType value) {
         _deviceType = value;
     }
 
@@ -302,7 +302,8 @@ public class ManagedEntity {
     /**
      * Parameterized Constructor
      */
-    protected ManagedEntity(String description,
+    protected ManagedEntity(ManagedEntityDeviceType deviceType,
+                            String description,
                             String pciVendorId,
                             String pciDeviceId,
                             String model,
@@ -317,10 +318,10 @@ public class ManagedEntity {
                             Integer dramSize,
                             String dramType,
                             String manufacturer,
-                            DeviceType deviceType,
                             String discoveryToken,
                             String companionDevice,
                             ManagedEntityState entryDescription) {
+        _deviceType = deviceType;
         _description = description;
         _pciVendorId = pciVendorId;
         _pciDeviceId = pciDeviceId;
@@ -336,7 +337,6 @@ public class ManagedEntity {
         _dramSize = dramSize;
         _dramType = dramType;
         _manufacturer = manufacturer;
-        _deviceType = deviceType;
         _discoveryToken = discoveryToken;
         _companionDevice = companionDevice;
         _entryDescription = entryDescription;
@@ -349,7 +349,8 @@ public class ManagedEntity {
     public String toString() {
         var sb = new StringBuilder();
         sb.append("{");
-        sb.append("_description:").append(getDescription());
+        sb.append("_deviceType:").append(getDeviceType());
+        sb.append(", ").append("_description:").append(getDescription());
         sb.append(", ").append("_pciVendorId:").append(getPCIVendorId());
         sb.append(", ").append("_pciDeviceId:").append(getPCIDeviceId());
         sb.append(", ").append("_model:").append(getModel());
@@ -364,7 +365,6 @@ public class ManagedEntity {
         sb.append(", ").append("_dramSize:").append(getDRAMSize());
         sb.append(", ").append("_dramType:").append(getDRAMType());
         sb.append(", ").append("_manufacturer:").append(getManufacturer());
-        sb.append(", ").append("_deviceType:").append(getDeviceType());
         sb.append(", ").append("_discoveryToken:").append(getDiscoveryToken());
         sb.append(", ").append("_companionDevice:").append(getCompanionDevice());
         sb.append(", ").append("_entryDescription:").append(getEntryDescription());
@@ -377,6 +377,7 @@ public class ManagedEntity {
      */
     public static class Builder {
 
+        private ManagedEntityDeviceType _deviceType = null;
         private String _description = null;
         private String _pciVendorId = null;
         private String _pciDeviceId = null;
@@ -392,11 +393,11 @@ public class ManagedEntity {
         private Integer _dramSize = null;
         private String _dramType = null;
         private String _manufacturer = null;
-        private DeviceType _deviceType = null;
         private String _discoveryToken = null;
         private String _companionDevice = null;
         private ManagedEntityState _entryDescription = null;
 
+        public Builder setDeviceType(ManagedEntityDeviceType value) { _deviceType = value; return this; }
         public Builder setDescription(String value) { _description = value; return this; }
         public Builder setPCIVendorId(String value) { _pciVendorId = value; return this; }
         public Builder setPCIDeviceId(String value) { _pciDeviceId = value; return this; }
@@ -412,12 +413,14 @@ public class ManagedEntity {
         public Builder setDRAMSize(Integer value) { _dramSize = value; return this; }
         public Builder setDRAMType(String value) { _dramType = value; return this; }
         public Builder setManufacturer(String value) { _manufacturer = value; return this; }
-        public Builder setDeviceType(DeviceType value) { _deviceType = value; return this; }
         public Builder setDiscoveryToken(String value) { _discoveryToken = value; return this; }
         public Builder setCompanionDevice(String value) { _companionDevice = value; return this; }
         public Builder setEntryDescription(ManagedEntityState value) { _entryDescription = value; return this; }
 
         public ManagedEntity build() {
+            if (_deviceType == null) {
+                throw new RuntimeException("setDeviceType() was not invoked in Builder for class ManagedEntity");
+            }
             if (_description == null) {
                 throw new RuntimeException("setDescription() was not invoked in Builder for class ManagedEntity");
             }
@@ -463,9 +466,6 @@ public class ManagedEntity {
             if (_manufacturer == null) {
                 throw new RuntimeException("setManufacturer() was not invoked in Builder for class ManagedEntity");
             }
-            if (_deviceType == null) {
-                throw new RuntimeException("setDeviceType() was not invoked in Builder for class ManagedEntity");
-            }
             if (_discoveryToken == null) {
                 throw new RuntimeException("setDiscoveryToken() was not invoked in Builder for class ManagedEntity");
             }
@@ -475,7 +475,8 @@ public class ManagedEntity {
             if (_entryDescription == null) {
                 throw new RuntimeException("setEntryDescription() was not invoked in Builder for class ManagedEntity");
             }
-            return new ManagedEntity(_description,
+            return new ManagedEntity(_deviceType,
+                                     _description,
                                      _pciVendorId,
                                      _pciDeviceId,
                                      _model,
@@ -490,7 +491,6 @@ public class ManagedEntity {
                                      _dramSize,
                                      _dramType,
                                      _manufacturer,
-                                     _deviceType,
                                      _discoveryToken,
                                      _companionDevice,
                                      _entryDescription);

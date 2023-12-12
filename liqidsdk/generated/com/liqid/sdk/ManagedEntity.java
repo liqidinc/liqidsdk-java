@@ -85,13 +85,13 @@ public class ManagedEntity {
      * Type of the device
      */
     @JsonProperty("device_type")
-    private ManagedEntityDeviceType _deviceType = null;
+    private String _deviceType = null;
 
-    public ManagedEntityDeviceType getDeviceType() {
+    public String getDeviceType() {
         return _deviceType;
     }
 
-    public void setDeviceType(ManagedEntityDeviceType value) {
+    public void setDeviceType(String value) {
         _deviceType = value;
     }
 
@@ -302,7 +302,7 @@ public class ManagedEntity {
     /**
      * Parameterized Constructor
      */
-    protected ManagedEntity(ManagedEntityDeviceType deviceType,
+    protected ManagedEntity(String deviceType,
                             String description,
                             String pciVendorId,
                             String pciDeviceId,
@@ -377,7 +377,7 @@ public class ManagedEntity {
      */
     public static class Builder {
 
-        private ManagedEntityDeviceType _deviceType = null;
+        private String _deviceType = null;
         private String _description = null;
         private String _pciVendorId = null;
         private String _pciDeviceId = null;
@@ -397,7 +397,7 @@ public class ManagedEntity {
         private String _companionDevice = null;
         private ManagedEntityState _entryDescription = null;
 
-        public Builder setDeviceType(ManagedEntityDeviceType value) { _deviceType = value; return this; }
+        public Builder setDeviceType(String value) { _deviceType = value; return this; }
         public Builder setDescription(String value) { _description = value; return this; }
         public Builder setPCIVendorId(String value) { _pciVendorId = value; return this; }
         public Builder setPCIDeviceId(String value) { _pciDeviceId = value; return this; }

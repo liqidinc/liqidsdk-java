@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liqid SDK Programming Reference for Java&trade;</title>
+</head>
+<body>
+<h1>
+Liqid&trade; SDK Programming Reference for Java&trade; - Version 3.4<br>
+</h1>
+<hr>
+<h2>Class <span style="color:orangered;">BackupResult</span></h2>
+<table style="margin-left:4em;">
+<tr><td style="padding:3px"><b>Package:</b></td><td style="padding:3px">com.liqid.sdk</td></tr>
+</table>
+<h3>Description:</h3>
+<span style="margin-left:4em;">Backups up the Director configuration</span><br>
+<h3>Members:</h3>
+<span style="margin-left:4em;">All members are private, and should be accessed via the indicated get and set methods.<br>
+</span><br><table style="margin-left:4em;border:1px solid black;border-collapse:collapse;">
+<tr><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Name</th><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Type</th><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Accessors</th><th style="padding:3px;border:1px solid black;border-collapse:collapse;"><center>Optional</center></th><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Default Value</th><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Description</th><tr>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:blue;">_commandLine</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">String</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;">String <span style="color:green;">getCommandLine</span>()</span><BR><span style="font-family:monospace;">void <span style="color:green;">setCommandLine</span>(String <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><center>no</center</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">The command line used to perform the backup operation</td><tr><tr>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:blue;">_standardOutput</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">String</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;">String <span style="color:green;">getStandardOutput</span>()</span><BR><span style="font-family:monospace;">void <span style="color:green;">setStandardOutput</span>(String <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><center>no</center</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Content written to stdout during the backup operation</td><tr><tr>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:blue;">_standardError</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">String</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;">String <span style="color:green;">getStandardError</span>()</span><BR><span style="font-family:monospace;">void <span style="color:green;">setStandardError</span>(String <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><center>no</center</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Content written to stderr during the backup operation</td><tr><tr>
+<td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="color:blue;">_exitValue</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Integer</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;">Integer <span style="color:green;">getExitValue</span>()</span><BR><span style="font-family:monospace;">void <span style="color:green;">setExitValue</span>(Integer <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><center>no</center</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Resulting value of the backup operation; zero indicates success</td><tr><tr>
+</table>
+<h3>Constructors:</h3>
+<span style="margin-left:4em;">All constructors are private, and should be accessed via the indicated Builder class.</span><br><br>
+<table style="margin-left:4em;border:1px solid black;border-collapse:collapse;">
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Default Constructor</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;color:green;">BackupResult</span>()</td></tr><tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Parameterizing Constructor</td><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:green;">BackupResult</span>(String <span style="color:olive;">commandLine</span>, String <span style="color:olive;">standardOutput</span>, String <span style="color:olive;">standardError</span>, Integer <span style="color:olive;">exitValue</span>)</span></td></tr>
+</table>
+<h3>Builder:</h3>
+<div style="margin-left:4em;">
+<b>Class <span style="color:orangered;">BackupResult.Builder</span>:</b><br>
+This is a static class inside the containing class which provides a fluent interface for creating an instance of the class.<br>
+The usage of each of the methods in this class follows standard conventions.<br>
+<br><table style="border:1px solid black;border-collapse:collapse;">
+<tr><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Method</th><th style="padding:3px;border:1px solid black;border-collapse:collapse;">Description</th></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:orangered;">BackupResult.Builder</span>()</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Builder constructor which creates a builder object for the <span style="color:orangered;">BackupResult</span> class</td></tr>
+<tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:orangered;">Builder</span> <span style="color:green;">setCommandLine</span>(String <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Specifies the value for the <span style="color:blue;">_commandLine</span> attribute.</td></tr><tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:orangered;">Builder</span> <span style="color:green;">setStandardOutput</span>(String <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Specifies the value for the <span style="color:blue;">_standardOutput</span> attribute.</td></tr><tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:orangered;">Builder</span> <span style="color:green;">setStandardError</span>(String <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Specifies the value for the <span style="color:blue;">_standardError</span> attribute.</td></tr><tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:orangered;">Builder</span> <span style="color:green;">setExitValue</span>(Integer <span style="color:olive;">value</span>)</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Specifies the value for the <span style="color:blue;">_exitValue</span> attribute.</td></tr><tr><td style="padding:3px;border:1px solid black;border-collapse:collapse;"><span style="font-family:monospace;"><span style="color:orangered;">BackupResult</span> <span style="color:green;">build</span>()</span></td><td style="padding:3px;border:1px solid black;border-collapse:collapse;">Creates an instance of the <span style="color:orangered;">BackupResult</span> class using the specified attribute values</td></tr>
+</table>
+</div>
+<h3>See Also:</h3>
+<span style="margin-left:4em;"><a href="class_LiqidClient.html#BackupDirector">BackupDirector()</a></span><br>
+<span style="margin-left:4em;"><a href="index.html">Index</a></span><br>
+<hr>
+Copyright (c) 2022 Liqid, Inc. All rights reserved.<br>
+Redistribution and use in source and binary forms, with or without modification, are not permitted without prior consent.<br>
+Oracle and Java are registered trademarks of Oracle and/or its affiliates.<br>
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation.<br>
+Other names may be trademarks of their respective owners.
+</body>
+</html>

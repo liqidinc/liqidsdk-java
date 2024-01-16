@@ -559,6 +559,13 @@ public abstract class LiqidClientBase {
     public abstract Integer getNextGroupId() throws LiqidException;
     public abstract String getNextMachineId() throws LiqidException;
 
+    public abstract LinkedList<ComputeDeviceInfo> getComputeDeviceInfo() throws LiqidException;
+    public abstract LinkedList<FPGADeviceInfo> getFPGADeviceInfo() throws LiqidException;
+    public abstract LinkedList<GPUDeviceInfo> getGPUDeviceInfo() throws LiqidException;
+    public abstract LinkedList<MemoryDeviceInfo> getMemoryDeviceInfo() throws LiqidException;
+    public abstract LinkedList<NetworkDeviceInfo> getNetworkDeviceInfo() throws LiqidException;
+    public abstract LinkedList<StorageDeviceInfo> getStorageDeviceInfo() throws LiqidException;
+
     public abstract GroupComputeDeviceRelator removeComputeDeviceFromGroup(Integer deviceId, Integer GroupId) throws LiqidException;
     public abstract GroupFPGADeviceRelator removeFPGADeviceFromGroup(Integer deviceId, Integer GroupId) throws LiqidException;
     public abstract GroupGPUDeviceRelator removeGPUDeviceFromGroup(Integer deviceId, Integer GroupId) throws LiqidException;
@@ -566,24 +573,24 @@ public abstract class LiqidClientBase {
     public abstract GroupNetworkDeviceRelator removeNetworkDeviceFromGroup(Integer deviceId, Integer GroupId) throws LiqidException;
     public abstract GroupStorageDeviceRelator removeStorageDeviceFromGroup(Integer deviceId, Integer GroupId) throws LiqidException;
 
-    public abstract GroupComputeDeviceRelator removeComputeDeviceFromMachine(Integer deviceId,
-                                                                             Integer groupId,
-                                                                             Integer machineId) throws LiqidException;
-    public abstract GroupFPGADeviceRelator removeFPGADeviceFromMachine(Integer deviceId,
+    public abstract MachineComputeDeviceRelator removeComputeDeviceFromMachine(Integer deviceId,
+                                                                               Integer groupId,
+                                                                               Integer machineId) throws LiqidException;
+    public abstract MachineFPGADeviceRelator removeFPGADeviceFromMachine(Integer deviceId,
+                                                                         Integer GroupId,
+                                                                         Integer machineId) throws LiqidException;
+    public abstract MachineGPUDeviceRelator removeGPUDeviceFromMachine(Integer deviceId,
                                                                        Integer GroupId,
                                                                        Integer machineId) throws LiqidException;
-    public abstract GroupGPUDeviceRelator removeGPUDeviceFromMachine(Integer deviceId,
-                                                                     Integer GroupId,
-                                                                     Integer machineId) throws LiqidException;
-    public abstract GroupMemoryDeviceRelator removeMemoryDeviceFromMachine(Integer deviceId,
-                                                                           Integer GroupId,
-                                                                           Integer machineId) throws LiqidException;
-    public abstract GroupNetworkDeviceRelator removeNetworkDeviceFromMachine(Integer deviceId,
+    public abstract MachineMemoryDeviceRelator removeMemoryDeviceFromMachine(Integer deviceId,
                                                                              Integer GroupId,
                                                                              Integer machineId) throws LiqidException;
-    public abstract GroupStorageDeviceRelator removeStorageDeviceFromMachine(Integer deviceId,
-                                                                             Integer GroupId,
-                                                                             Integer machineId) throws LiqidException;
+    public abstract MachineNetworkDeviceRelator removeNetworkDeviceFromMachine(Integer deviceId,
+                                                                               Integer GroupId,
+                                                                               Integer machineId) throws LiqidException;
+    public abstract MachineStorageDeviceRelator removeStorageDeviceFromMachine(Integer deviceId,
+                                                                               Integer GroupId,
+                                                                               Integer machineId) throws LiqidException;
 
     public void checkParameterNotNull(Object value, String parameterName, String functionName) throws LiqidException {
         if (value == null) {
@@ -767,6 +774,17 @@ public abstract class LiqidClientBase {
         }
 
         _logger.trace("%s returning", fn);
+    }
+
+    public LinkedList<DeviceInfo> getAllDeviceInfos() throws LiqidException {
+        var infos = new LinkedList<DeviceInfo>();
+        infos.addAll(getComputeDeviceInfo());
+        infos.addAll(getFPGADeviceInfo());
+        infos.addAll(getGPUDeviceInfo());
+        infos.addAll(getMemoryDeviceInfo());
+        infos.addAll(getNetworkDeviceInfo());
+        infos.addAll(getStorageDeviceInfo());
+        return infos;
     }
 
     public LinkedList<PreDevice> getUnattachedDevicesForGroup(

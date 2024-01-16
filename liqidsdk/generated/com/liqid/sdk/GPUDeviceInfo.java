@@ -5,7 +5,7 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are not permitted without prior consent.
 //
-// Liqid SDK - Version 3.3.0
+// Liqid SDK - Version 3.4
 // This file was automatically generated - do not modify it directly.
 //
 

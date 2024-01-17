@@ -8,15 +8,14 @@ package com.liqid.sdk.mock;
 
 import com.liqid.sdk.Group;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class MockGroup extends Group {
 
-    private boolean _editMode = false;
-    private final Set<Integer> _machineIds = new HashSet<>();
+    final Map<Integer, MockDevice> _freePool = new HashMap<>();
+    final Map<Integer, MockMachine> _machines = new HashMap<>();
 
     MockGroup(
         final Integer groupId,
@@ -47,11 +46,4 @@ public class MockGroup extends Group {
     public String toString() {
         return String.format("{id=%d, name=%s}", getGroupId(), getGroupName());
     }
-
-    MockGroup addMachineId(final Integer machineId) { _machineIds.add(machineId); return this; }
-    boolean getEditMode() { return _editMode; }
-    Collection<Integer> getMachineIds() { return _machineIds; }
-    boolean hasMachines() { return !_machineIds.isEmpty(); }
-    MockGroup removeMachine(final Integer machineId) { _machineIds.remove(machineId); return this; }
-    MockGroup setEditMode(final boolean flag) { _editMode = flag; return this; }
 }

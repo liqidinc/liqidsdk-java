@@ -9,12 +9,14 @@ package com.liqid.sdk.mock;
 import com.liqid.sdk.Machine;
 import com.liqid.sdk.P2PType;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Objects;
 
 public class MockMachine extends Machine {
 
-    private boolean _isReprogramming = false;
+    final Map<Integer, MockDevice> _attachedDevices = new HashMap<>();
 
     MockMachine(
         final Integer index,
@@ -36,9 +38,6 @@ public class MockMachine extends Machine {
               System.currentTimeMillis(),
               new LinkedList<>());
     }
-
-    boolean isReprogramming() { return _isReprogramming; }
-    MockMachine setIsReprogramming(final boolean flag) { _isReprogramming = flag; return this; }
 
     @Override
     public boolean equals(

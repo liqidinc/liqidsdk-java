@@ -174,7 +174,7 @@ public class IntegrationTests {
         client.addDeviceToGroup(gpuId, groupId);
         client.groupPoolDone(group.getGroupId());
 
-        var devCheck = client.getDevices(null, groupId, null);
+        var devCheck = client.getPreDevices(null, groupId, null);
         assertEquals(2, devCheck.size());
         client.deleteGroup(group.getGroupId());
     }

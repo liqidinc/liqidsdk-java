@@ -533,29 +533,29 @@ public abstract class LiqidClientBase {
     public abstract GroupNetworkDeviceRelator addNetworkDeviceToGroup(Integer deviceId, Integer GroupId) throws LiqidException;
     public abstract GroupStorageDeviceRelator addStorageDeviceToGroup(Integer deviceId, Integer GroupId) throws LiqidException;
 
-    public abstract GroupComputeDeviceRelator addComputeDeviceToMachine(Integer deviceId,
-                                                                        Integer groupId,
-                                                                        Integer machineId) throws LiqidException;
-    public abstract GroupFPGADeviceRelator addFPGADeviceToMachine(Integer deviceId,
+    public abstract MachineComputeDeviceRelator addComputeDeviceToMachine(Integer deviceId,
+                                                                          Integer groupId,
+                                                                          Integer machineId) throws LiqidException;
+    public abstract MachineFPGADeviceRelator addFPGADeviceToMachine(Integer deviceId,
+                                                                    Integer GroupId,
+                                                                    Integer machineId) throws LiqidException;
+    public abstract MachineGPUDeviceRelator addGPUDeviceToMachine(Integer deviceId,
                                                                   Integer GroupId,
                                                                   Integer machineId) throws LiqidException;
-    public abstract GroupGPUDeviceRelator addGPUDeviceToMachine(Integer deviceId,
-                                                                Integer GroupId,
-                                                                Integer machineId) throws LiqidException;
-    public abstract GroupMemoryDeviceRelator addMemoryDeviceToMachine(Integer deviceId,
-                                                                      Integer GroupId,
-                                                                      Integer machineId) throws LiqidException;
-    public abstract GroupNetworkDeviceRelator addNetworkDeviceToMachine(Integer deviceId,
+    public abstract MachineMemoryDeviceRelator addMemoryDeviceToMachine(Integer deviceId,
                                                                         Integer GroupId,
                                                                         Integer machineId) throws LiqidException;
-    public abstract GroupStorageDeviceRelator addStorageDeviceToMachine(Integer deviceId,
-                                                                        Integer GroupId,
-                                                                        Integer machineId) throws LiqidException;
+    public abstract MachineNetworkDeviceRelator addNetworkDeviceToMachine(Integer deviceId,
+                                                                          Integer GroupId,
+                                                                          Integer machineId) throws LiqidException;
+    public abstract MachineStorageDeviceRelator addStorageDeviceToMachine(Integer deviceId,
+                                                                          Integer GroupId,
+                                                                          Integer machineId) throws LiqidException;
 
     public abstract LinkedList<DeviceStatus> getAllDevicesStatus() throws LiqidException;
     public abstract Integer getCurrentFabricId() throws LiqidException;
     public abstract Coordinates getDefaultCoordinates() throws LiqidException;
-    public abstract LinkedList<PreDevice> getDevices(DeviceQueryType deviceType, Integer groupId, Integer machineId) throws LiqidException;
+    public abstract LinkedList<PreDevice> getPreDevices(DeviceQueryType deviceType, Integer groupId, Integer machineId) throws LiqidException;
     public abstract Integer getNextGroupId() throws LiqidException;
     public abstract String getNextMachineId() throws LiqidException;
 
@@ -791,7 +791,7 @@ public abstract class LiqidClientBase {
         final DeviceQueryType deviceType,
         final Integer groupId
     ) throws LiqidException {
-        var devs = getDevices(deviceType, groupId, null);
+        var devs = getPreDevices(deviceType, groupId, null);
         return devs.stream()
                    .filter(preDev -> preDev.getMachineId() == 0)
                    .collect(Collectors.toCollection(LinkedList::new));

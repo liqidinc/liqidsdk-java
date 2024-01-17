@@ -40,8 +40,8 @@ public class LiqidClient extends LiqidClientBase {
                                                              Integer groupId) throws LiqidException {
         var fn = "addComputeDeviceToGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "addComputeDeviceToGroup");
-        checkParameterNotNull(groupId, "groupId", "addComputeDeviceToGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupComputeDeviceRelator();
             composite.setDeviceStatus(getComputeDeviceStatus(deviceId));
@@ -77,14 +77,14 @@ public class LiqidClient extends LiqidClientBase {
      * @return A description of the relation being created
      * @throws LiqidException if anything goes wrong
      */
-    public GroupComputeDeviceRelator addComputeDeviceToMachine(Integer deviceId,
-                                                               Integer groupId,
-                                                               Integer machineId) throws LiqidException {
+    public MachineComputeDeviceRelator addComputeDeviceToMachine(Integer deviceId,
+                                                                 Integer groupId,
+                                                                 Integer machineId) throws LiqidException {
         var fn = "addComputeDeviceToMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "addComputeDeviceToMachine");
-        checkParameterNotNull(groupId, "groupId", "addComputeDeviceToMachine");
-        checkParameterNotNull(machineId, "machineId", "addComputeDeviceToMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineComputeDeviceRelator();
             composite.setGroupDeviceRelator(getGroupComputeDeviceRelator(groupId, deviceId));
@@ -95,7 +95,7 @@ public class LiqidClient extends LiqidClientBase {
             var mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-            var wrapper = mapper.readValue((String) httpResponse.body(), GroupComputeDeviceRelator.GroupComputeDeviceRelatorWrapper.class);
+            var wrapper = mapper.readValue((String) httpResponse.body(), MachineComputeDeviceRelator.MachineComputeDeviceRelatorWrapper.class);
             wrapper.check();
             var result = wrapper.getResponse().getData().getFirst();
 
@@ -123,8 +123,8 @@ public class LiqidClient extends LiqidClientBase {
                                                        Integer groupId) throws LiqidException {
         var fn = "addFPGADeviceToGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "addFPGADeviceToGroup");
-        checkParameterNotNull(groupId, "groupId", "addFPGADeviceToGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupFPGADeviceRelator();
             composite.setDeviceStatus(getFPGADeviceStatus(deviceId));
@@ -160,14 +160,14 @@ public class LiqidClient extends LiqidClientBase {
      * @return A description of the relation being created
      * @throws LiqidException if anything goes wrong
      */
-    public GroupFPGADeviceRelator addFPGADeviceToMachine(Integer deviceId,
-                                                         Integer groupId,
-                                                         Integer machineId) throws LiqidException {
+    public MachineFPGADeviceRelator addFPGADeviceToMachine(Integer deviceId,
+                                                           Integer groupId,
+                                                           Integer machineId) throws LiqidException {
         var fn = "addFPGADeviceToMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "addFPGADeviceToMachine");
-        checkParameterNotNull(groupId, "groupId", "addFPGADeviceToMachine");
-        checkParameterNotNull(machineId, "machineId", "addFPGADeviceToMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineFPGADeviceRelator();
             composite.setGroupDeviceRelator(getGroupFPGADeviceRelator(groupId, deviceId));
@@ -178,7 +178,7 @@ public class LiqidClient extends LiqidClientBase {
             var mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-            var wrapper = mapper.readValue((String) httpResponse.body(), GroupFPGADeviceRelator.GroupFPGADeviceRelatorWrapper.class);
+            var wrapper = mapper.readValue((String) httpResponse.body(), MachineFPGADeviceRelator.MachineFPGADeviceRelatorWrapper.class);
             wrapper.check();
             var result = wrapper.getResponse().getData().getFirst();
 
@@ -206,8 +206,8 @@ public class LiqidClient extends LiqidClientBase {
                                                      Integer groupId) throws LiqidException {
         var fn = "addGPUDeviceToGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "addGPUDeviceToGroup");
-        checkParameterNotNull(groupId, "groupId", "addGPUDeviceToGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupGPUDeviceRelator();
             composite.setDeviceStatus(getGPUDeviceStatus(deviceId));
@@ -243,14 +243,14 @@ public class LiqidClient extends LiqidClientBase {
      * @return A description of the relation being created
      * @throws LiqidException if anything goes wrong
      */
-    public GroupGPUDeviceRelator addGPUDeviceToMachine(Integer deviceId,
-                                                       Integer groupId,
-                                                       Integer machineId) throws LiqidException {
+    public MachineGPUDeviceRelator addGPUDeviceToMachine(Integer deviceId,
+                                                         Integer groupId,
+                                                         Integer machineId) throws LiqidException {
         var fn = "addGPUDeviceToMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "addGPUDeviceToMachine");
-        checkParameterNotNull(groupId, "groupId", "addGPUDeviceToMachine");
-        checkParameterNotNull(machineId, "machineId", "addGPUDeviceToMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineGPUDeviceRelator();
             composite.setGroupDeviceRelator(getGroupGPUDeviceRelator(groupId, deviceId));
@@ -261,7 +261,7 @@ public class LiqidClient extends LiqidClientBase {
             var mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-            var wrapper = mapper.readValue((String) httpResponse.body(), GroupGPUDeviceRelator.GroupGPUDeviceRelatorWrapper.class);
+            var wrapper = mapper.readValue((String) httpResponse.body(), MachineGPUDeviceRelator.MachineGPUDeviceRelatorWrapper.class);
             wrapper.check();
             var result = wrapper.getResponse().getData().getFirst();
 
@@ -289,8 +289,8 @@ public class LiqidClient extends LiqidClientBase {
                                                            Integer groupId) throws LiqidException {
         var fn = "addMemoryDeviceToGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "addMemoryDeviceToGroup");
-        checkParameterNotNull(groupId, "groupId", "addMemoryDeviceToGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupMemoryDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -326,14 +326,14 @@ public class LiqidClient extends LiqidClientBase {
      * @return A description of the relation being created
      * @throws LiqidException if anything goes wrong
      */
-    public GroupMemoryDeviceRelator addMemoryDeviceToMachine(Integer deviceId,
-                                                             Integer groupId,
-                                                             Integer machineId) throws LiqidException {
+    public MachineMemoryDeviceRelator addMemoryDeviceToMachine(Integer deviceId,
+                                                               Integer groupId,
+                                                               Integer machineId) throws LiqidException {
         var fn = "addMemoryDeviceToMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "addMemoryDeviceToMachine");
-        checkParameterNotNull(groupId, "groupId", "addMemoryDeviceToMachine");
-        checkParameterNotNull(machineId, "machineId", "addMemoryDeviceToMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineMemoryDeviceRelator();
             composite.setGroupDeviceRelator(getGroupMemoryDeviceRelator(groupId, deviceId));
@@ -344,7 +344,7 @@ public class LiqidClient extends LiqidClientBase {
             var mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-            var wrapper = mapper.readValue((String) httpResponse.body(), GroupMemoryDeviceRelator.GroupMemoryDeviceRelatorWrapper.class);
+            var wrapper = mapper.readValue((String) httpResponse.body(), MachineMemoryDeviceRelator.MachineMemoryDeviceRelatorWrapper.class);
             wrapper.check();
             var result = wrapper.getResponse().getData().getFirst();
 
@@ -372,8 +372,8 @@ public class LiqidClient extends LiqidClientBase {
                                                              Integer groupId) throws LiqidException {
         var fn = "addNetworkDeviceToGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "addNetworkDeviceToGroup");
-        checkParameterNotNull(groupId, "groupId", "addNetworkDeviceToGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupNetworkDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -409,14 +409,14 @@ public class LiqidClient extends LiqidClientBase {
      * @return A description of the relation being created
      * @throws LiqidException if anything goes wrong
      */
-    public GroupNetworkDeviceRelator addNetworkDeviceToMachine(Integer deviceId,
-                                                               Integer groupId,
-                                                               Integer machineId) throws LiqidException {
+    public MachineNetworkDeviceRelator addNetworkDeviceToMachine(Integer deviceId,
+                                                                 Integer groupId,
+                                                                 Integer machineId) throws LiqidException {
         var fn = "addNetworkDeviceToMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "addNetworkDeviceToMachine");
-        checkParameterNotNull(groupId, "groupId", "addNetworkDeviceToMachine");
-        checkParameterNotNull(machineId, "machineId", "addNetworkDeviceToMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineNetworkDeviceRelator();
             composite.setGroupDeviceRelator(getGroupNetworkDeviceRelator(groupId, deviceId));
@@ -427,7 +427,7 @@ public class LiqidClient extends LiqidClientBase {
             var mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-            var wrapper = mapper.readValue((String) httpResponse.body(), GroupNetworkDeviceRelator.GroupNetworkDeviceRelatorWrapper.class);
+            var wrapper = mapper.readValue((String) httpResponse.body(), MachineNetworkDeviceRelator.MachineNetworkDeviceRelatorWrapper.class);
             wrapper.check();
             var result = wrapper.getResponse().getData().getFirst();
 
@@ -455,8 +455,8 @@ public class LiqidClient extends LiqidClientBase {
                                                              Integer groupId) throws LiqidException {
         var fn = "addStorageDeviceToGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "addStorageDeviceToGroup");
-        checkParameterNotNull(groupId, "groupId", "addStorageDeviceToGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupStorageDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -492,14 +492,14 @@ public class LiqidClient extends LiqidClientBase {
      * @return A description of the relation being created
      * @throws LiqidException if anything goes wrong
      */
-    public GroupStorageDeviceRelator addStorageDeviceToMachine(Integer deviceId,
-                                                               Integer groupId,
-                                                               Integer machineId) throws LiqidException {
+    public MachineStorageDeviceRelator addStorageDeviceToMachine(Integer deviceId,
+                                                                 Integer groupId,
+                                                                 Integer machineId) throws LiqidException {
         var fn = "addStorageDeviceToMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "addStorageDeviceToMachine");
-        checkParameterNotNull(groupId, "groupId", "addStorageDeviceToMachine");
-        checkParameterNotNull(machineId, "machineId", "addStorageDeviceToMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineStorageDeviceRelator();
             composite.setGroupDeviceRelator(getGroupStorageDeviceRelator(groupId, deviceId));
@@ -510,7 +510,7 @@ public class LiqidClient extends LiqidClientBase {
             var mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-            var wrapper = mapper.readValue((String) httpResponse.body(), GroupStorageDeviceRelator.GroupStorageDeviceRelatorWrapper.class);
+            var wrapper = mapper.readValue((String) httpResponse.body(), MachineStorageDeviceRelator.MachineStorageDeviceRelatorWrapper.class);
             wrapper.check();
             var result = wrapper.getResponse().getData().getFirst();
 
@@ -540,9 +540,9 @@ public class LiqidClient extends LiqidClientBase {
                                                     FabricToggleCompositeOption operation) throws LiqidException {
         var fn = "applyFabricChanges";
         _logger.trace("Entering %s flagName:%s flagValue:%s operation:%s", fn, flagName, flagValue, operation);
-        checkParameterNotNull(flagName, "flagName", "applyFabricChanges");
-        checkParameterNotNull(flagValue, "flagValue", "applyFabricChanges");
-        checkParameterNotNull(operation, "operation", "applyFabricChanges");
+        checkParameterNotNull(flagName, "flagName", fn);
+        checkParameterNotNull(flagValue, "flagValue", fn);
+        checkParameterNotNull(operation, "operation", fn);
 
         try {
             var path = "fabric";
@@ -583,7 +583,7 @@ public class LiqidClient extends LiqidClientBase {
     public BackupResult backupDirector(BackupDestination destination) throws LiqidException {
         var fn = "backupDirector";
         _logger.trace("Entering %s destination:%s", fn, destination);
-        checkParameterNotNull(destination, "destination", "backupDirector");
+        checkParameterNotNull(destination, "destination", fn);
 
         try {
             var path = "backup";
@@ -618,7 +618,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine cancelEditFabric(Integer machineId) throws LiqidException {
         var fn = "cancelEditFabric";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "cancelEditFabric");
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var object = getMachine(machineId);
             var path = "fabric/edit/cancel";
@@ -653,7 +653,7 @@ public class LiqidClient extends LiqidClientBase {
     public GroupPool cancelGroupPoolEdit(Integer groupId) throws LiqidException {
         var fn = "cancelGroupPoolEdit";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "cancelGroupPoolEdit");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "pool/cancel";
@@ -693,7 +693,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine cancelReprogramFabric(Integer machineId) throws LiqidException {
         var fn = "cancelReprogramFabric";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "cancelReprogramFabric");
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var object = getMachine(machineId);
             var path = "fabric/reprogram/cancel";
@@ -765,9 +765,9 @@ public class LiqidClient extends LiqidClientBase {
                                                          String description) throws LiqidException {
         var fn = "createDeviceDescription";
         _logger.trace("Entering %s queryDeviceType:%s deviceId:%s description:%s", fn, queryDeviceType, deviceId, description);
-        checkParameterNotNull(queryDeviceType, "queryDeviceType", "createDeviceDescription");
-        checkParameterNotNull(deviceId, "deviceId", "createDeviceDescription");
-        checkParameterNotNull(description, "description", "createDeviceDescription");
+        checkParameterNotNull(queryDeviceType, "queryDeviceType", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(description, "description", fn);
         var deviceIdTranslated = String.format("0x%08x", deviceId);
 
         try {
@@ -811,8 +811,8 @@ public class LiqidClient extends LiqidClientBase {
                                    String groupName) throws LiqidException {
         var fn = "createGroupWithId";
         _logger.trace("Entering %s groupId:%s groupName:%s", fn, groupId, groupName);
-        checkParameterNotNull(groupId, "groupId", "createGroupWithId");
-        checkParameterNotNull(groupName, "groupName", "createGroupWithId");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(groupName, "groupName", fn);
 
         try {
             var path = "group";
@@ -857,9 +857,9 @@ public class LiqidClient extends LiqidClientBase {
                                        String machineName) throws LiqidException {
         var fn = "createMachineWithId";
         _logger.trace("Entering %s groupId:%s machineId:%s machineName:%s", fn, groupId, machineId, machineName);
-        checkParameterNotNull(groupId, "groupId", "createMachineWithId");
-        checkParameterNotNull(machineId, "machineId", "createMachineWithId");
-        checkParameterNotNull(machineName, "machineName", "createMachineWithId");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
+        checkParameterNotNull(machineName, "machineName", fn);
 
         try {
             var path = "machine";
@@ -902,7 +902,7 @@ public class LiqidClient extends LiqidClientBase {
     public DigestInfo createMessageDigest(String label) throws LiqidException {
         var fn = "createMessageDigest";
         _logger.trace("Entering %s label:%s", fn, label);
-        checkParameterNotNull(label, "label", "createMessageDigest");
+        checkParameterNotNull(label, "label", fn);
 
         try {
             var path = "digest";
@@ -939,8 +939,8 @@ public class LiqidClient extends LiqidClientBase {
                                                          Integer deviceId) throws LiqidException {
         var fn = "deleteDeviceDescription";
         _logger.trace("Entering %s queryDeviceType:%s deviceId:%s", fn, queryDeviceType, deviceId);
-        checkParameterNotNull(queryDeviceType, "queryDeviceType", "deleteDeviceDescription");
-        checkParameterNotNull(deviceId, "deviceId", "deleteDeviceDescription");
+        checkParameterNotNull(queryDeviceType, "queryDeviceType", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         var deviceIdTranslated = String.format("0x%08x", deviceId);
 
         try {
@@ -978,7 +978,7 @@ public class LiqidClient extends LiqidClientBase {
     public Group deleteGroup(Integer groupId) throws LiqidException {
         var fn = "deleteGroup";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "deleteGroup");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "group";
@@ -1013,7 +1013,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine deleteMachine(Integer machineId) throws LiqidException {
         var fn = "deleteMachine";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "deleteMachine");
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "machine";
@@ -1049,7 +1049,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine editFabric(Integer machineId) throws LiqidException {
         var fn = "editFabric";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "editFabric");
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var object = getMachine(machineId);
             var path = "fabric/edit";
@@ -1148,7 +1148,7 @@ public class LiqidClient extends LiqidClientBase {
     public ComputeDeviceStatus getComputeDeviceStatus(Integer deviceId) throws LiqidException {
         var fn = "getComputeDeviceStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getComputeDeviceStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         for (var item : getComputeDevicesStatus()) {
             if (deviceId.equals(item.getDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -1271,7 +1271,7 @@ public class LiqidClient extends LiqidClientBase {
     public ComputeDeviceInfo getComputeDeviceInfoByName(String deviceName) throws LiqidException {
         var fn = "getComputeDeviceInfoByName";
         _logger.trace("Entering %s deviceName:%s", fn, deviceName);
-        checkParameterNotNull(deviceName, "deviceName", "getComputeDeviceInfoByName");
+        checkParameterNotNull(deviceName, "deviceName", fn);
 
         try {
             var path = "device/info/cpu";
@@ -1361,7 +1361,7 @@ public class LiqidClient extends LiqidClientBase {
     }
 
     /**
-     * getDevices()
+     * getPreDevices()
      * Category: GroupDeviceRelator
      * Returns information regarding devices which are attached to a particular group.
      * @param queryDeviceType: Limits the device type of the devices to be queried.
@@ -1375,12 +1375,12 @@ public class LiqidClient extends LiqidClientBase {
      * @return An array of PreDevice entities describing the various devices in the configuration
      * @throws LiqidException if anything goes wrong
      */
-    public LinkedList<PreDevice> getDevices(DeviceQueryType queryDeviceType,
-                                            Integer groupId,
-                                            Integer machineId) throws LiqidException {
-        var fn = "getDevices";
+    public LinkedList<PreDevice> getPreDevices(DeviceQueryType queryDeviceType,
+                                               Integer groupId,
+                                               Integer machineId) throws LiqidException {
+        var fn = "getPreDevices";
         _logger.trace("Entering %s queryDeviceType:%s groupId:%s machineId:%s", fn, queryDeviceType, groupId, machineId);
-        checkParameterNotNull(groupId, "groupId", "getDevices");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "predevice";
@@ -1519,7 +1519,7 @@ public class LiqidClient extends LiqidClientBase {
     public LinkedList<DiscoveryToken> getDiscoveryTokensByType(TokenType tokenType) throws LiqidException {
         var fn = "getDiscoveryTokensByType";
         _logger.trace("Entering %s tokenType:%s", fn, tokenType);
-        checkParameterNotNull(tokenType, "tokenType", "getDiscoveryTokensByType");
+        checkParameterNotNull(tokenType, "tokenType", fn);
 
         try {
             var path = "manager/discovery";
@@ -1618,7 +1618,7 @@ public class LiqidClient extends LiqidClientBase {
     public FPGADeviceStatus getFPGADeviceStatus(Integer deviceId) throws LiqidException {
         var fn = "getFPGADeviceStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getFPGADeviceStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         for (var item : getFPGADevicesStatus()) {
             if (deviceId.equals(item.getDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -1709,7 +1709,7 @@ public class LiqidClient extends LiqidClientBase {
     public FPGADeviceInfo getFPGADeviceInfoByName(String deviceName) throws LiqidException {
         var fn = "getFPGADeviceInfoByName";
         _logger.trace("Entering %s deviceName:%s", fn, deviceName);
-        checkParameterNotNull(deviceName, "deviceName", "getFPGADeviceInfoByName");
+        checkParameterNotNull(deviceName, "deviceName", fn);
 
         try {
             var path = "device/info/fpga";
@@ -1960,7 +1960,7 @@ public class LiqidClient extends LiqidClientBase {
     public GPUDeviceStatus getGPUDeviceStatus(Integer deviceId) throws LiqidException {
         var fn = "getGPUDeviceStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getGPUDeviceStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         for (var item : getGPUDevicesStatus()) {
             if (deviceId.equals(item.getDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -2051,7 +2051,7 @@ public class LiqidClient extends LiqidClientBase {
     public GPUDeviceInfo getGPUDeviceInfoByName(String deviceName) throws LiqidException {
         var fn = "getGPUDeviceInfoByName";
         _logger.trace("Entering %s deviceName:%s", fn, deviceName);
-        checkParameterNotNull(deviceName, "deviceName", "getGPUDeviceInfoByName");
+        checkParameterNotNull(deviceName, "deviceName", fn);
 
         try {
             var path = "device/info/gpu";
@@ -2086,7 +2086,7 @@ public class LiqidClient extends LiqidClientBase {
     public Group getGroup(Integer groupId) throws LiqidException {
         var fn = "getGroup";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "getGroup");
+        checkParameterNotNull(groupId, "groupId", fn);
         for (var item : getGroups()) {
             if (groupId.equals(item.getGroupId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -2145,8 +2145,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                   Integer deviceId) throws LiqidException {
         var fn = "getGroupComputeDeviceRelator";
         _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", "getGroupComputeDeviceRelator");
-        checkParameterNotNull(deviceId, "deviceId", "getGroupComputeDeviceRelator");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         try {
             var composite = new GroupComputeDeviceRelator();
             composite.setDeviceStatus(getComputeDeviceStatus(deviceId));
@@ -2177,8 +2177,8 @@ public class LiqidClient extends LiqidClientBase {
                                                             Integer deviceId) throws LiqidException {
         var fn = "getGroupFPGADeviceRelator";
         _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", "getGroupFPGADeviceRelator");
-        checkParameterNotNull(deviceId, "deviceId", "getGroupFPGADeviceRelator");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         try {
             var composite = new GroupFPGADeviceRelator();
             composite.setDeviceStatus(getFPGADeviceStatus(deviceId));
@@ -2209,8 +2209,8 @@ public class LiqidClient extends LiqidClientBase {
                                                           Integer deviceId) throws LiqidException {
         var fn = "getGroupGPUDeviceRelator";
         _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", "getGroupGPUDeviceRelator");
-        checkParameterNotNull(deviceId, "deviceId", "getGroupGPUDeviceRelator");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         try {
             var composite = new GroupGPUDeviceRelator();
             composite.setDeviceStatus(getGPUDeviceStatus(deviceId));
@@ -2241,8 +2241,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                 Integer deviceId) throws LiqidException {
         var fn = "getGroupMemoryDeviceRelator";
         _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", "getGroupMemoryDeviceRelator");
-        checkParameterNotNull(deviceId, "deviceId", "getGroupMemoryDeviceRelator");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         try {
             var composite = new GroupMemoryDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -2273,8 +2273,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                   Integer deviceId) throws LiqidException {
         var fn = "getGroupNetworkDeviceRelator";
         _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", "getGroupNetworkDeviceRelator");
-        checkParameterNotNull(deviceId, "deviceId", "getGroupNetworkDeviceRelator");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         try {
             var composite = new GroupNetworkDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -2305,8 +2305,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                   Integer deviceId) throws LiqidException {
         var fn = "getGroupStorageDeviceRelator";
         _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", "getGroupStorageDeviceRelator");
-        checkParameterNotNull(deviceId, "deviceId", "getGroupStorageDeviceRelator");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(deviceId, "deviceId", fn);
         try {
             var composite = new GroupStorageDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -2334,7 +2334,7 @@ public class LiqidClient extends LiqidClientBase {
     public GroupDetails getGroupDetails(Integer groupId) throws LiqidException {
         var fn = "getGroupDetails";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "getGroupDetails");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "group/details";
@@ -2369,7 +2369,7 @@ public class LiqidClient extends LiqidClientBase {
     public Integer getGroupIdByName(String groupName) throws LiqidException {
         var fn = "getGroupIdByName";
         _logger.trace("Entering %s groupName:%s", fn, groupName);
-        checkParameterNotNull(groupName, "groupName", "getGroupIdByName");
+        checkParameterNotNull(groupName, "groupName", fn);
 
         try {
             var path = "group/mapper";
@@ -2406,7 +2406,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine getMachine(Integer machineId) throws LiqidException {
         var fn = "getMachine";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "getMachine");
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "machine";
@@ -2479,9 +2479,9 @@ public class LiqidClient extends LiqidClientBase {
                                                         Integer nodeId) throws LiqidException {
         var fn = "getMachinesAtCoordinates";
         _logger.trace("Entering %s rackId:%s shelfId:%s nodeId:%s", fn, rackId, shelfId, nodeId);
-        checkParameterNotNull(rackId, "rackId", "getMachinesAtCoordinates");
-        checkParameterNotNull(shelfId, "shelfId", "getMachinesAtCoordinates");
-        checkParameterNotNull(nodeId, "nodeId", "getMachinesAtCoordinates");
+        checkParameterNotNull(rackId, "rackId", fn);
+        checkParameterNotNull(shelfId, "shelfId", fn);
+        checkParameterNotNull(nodeId, "nodeId", fn);
 
         try {
             var path = "machine";
@@ -2518,7 +2518,7 @@ public class LiqidClient extends LiqidClientBase {
     public LinkedList<Machine> getMachinesByGroupId(Integer groupId) throws LiqidException {
         var fn = "getMachinesByGroupId";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "getMachinesByGroupId");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "machine";
@@ -2555,7 +2555,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine getMachineByName(String machineName) throws LiqidException {
         var fn = "getMachineByName";
         _logger.trace("Entering %s machineName:%s", fn, machineName);
-        checkParameterNotNull(machineName, "machineName", "getMachineByName");
+        checkParameterNotNull(machineName, "machineName", fn);
 
         try {
             var path = "machine";
@@ -2592,7 +2592,7 @@ public class LiqidClient extends LiqidClientBase {
     public MachineDetails getMachineDetails(Integer machineId) throws LiqidException {
         var fn = "getMachineDetails";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "getMachineDetails");
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "machine/details";
@@ -2661,8 +2661,8 @@ public class LiqidClient extends LiqidClientBase {
                                           String pciDeviceId) throws LiqidException {
         var fn = "getManagedEntity";
         _logger.trace("Entering %s pciVendorId:%s pciDeviceId:%s", fn, pciVendorId, pciDeviceId);
-        checkParameterNotNull(pciVendorId, "pciVendorId", "getManagedEntity");
-        checkParameterNotNull(pciDeviceId, "pciDeviceId", "getManagedEntity");
+        checkParameterNotNull(pciVendorId, "pciVendorId", fn);
+        checkParameterNotNull(pciDeviceId, "pciDeviceId", fn);
         for (var item : getManagedEntities()) {
             if (pciVendorId.equals(item.getPCIVendorId()) && pciDeviceId.equals(item.getPCIDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -2718,7 +2718,7 @@ public class LiqidClient extends LiqidClientBase {
     public MemoryDeviceInfo getMemoryDeviceInfoByName(String deviceName) throws LiqidException {
         var fn = "getMemoryDeviceInfoByName";
         _logger.trace("Entering %s deviceName:%s", fn, deviceName);
-        checkParameterNotNull(deviceName, "deviceName", "getMemoryDeviceInfoByName");
+        checkParameterNotNull(deviceName, "deviceName", fn);
 
         try {
             var path = "device/info/mem";
@@ -2753,7 +2753,7 @@ public class LiqidClient extends LiqidClientBase {
     public MemoryDeviceStatus getMemoryDeviceStatus(Integer deviceId) throws LiqidException {
         var fn = "getMemoryDeviceStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getMemoryDeviceStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         for (var item : getMemoryDevicesStatus()) {
             if (deviceId.equals(item.getDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -2877,7 +2877,7 @@ public class LiqidClient extends LiqidClientBase {
     public NetworkDeviceInfo getNetworkDeviceInfoByName(String deviceName) throws LiqidException {
         var fn = "getNetworkDeviceInfoByName";
         _logger.trace("Entering %s deviceName:%s", fn, deviceName);
-        checkParameterNotNull(deviceName, "deviceName", "getNetworkDeviceInfoByName");
+        checkParameterNotNull(deviceName, "deviceName", fn);
 
         try {
             var path = "device/info/link";
@@ -2912,7 +2912,7 @@ public class LiqidClient extends LiqidClientBase {
     public NetworkDeviceStatus getNetworkDeviceStatus(Integer deviceId) throws LiqidException {
         var fn = "getNetworkDeviceStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getNetworkDeviceStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         for (var item : getNetworkDevicesStatus()) {
             if (deviceId.equals(item.getDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -2971,7 +2971,7 @@ public class LiqidClient extends LiqidClientBase {
     public NetworkManagedCPU getNetworkIPMIManagedCPU(String cpuName) throws LiqidException {
         var fn = "getNetworkIPMIManagedCPU";
         _logger.trace("Entering %s cpuName:%s", fn, cpuName);
-        checkParameterNotNull(cpuName, "cpuName", "getNetworkIPMIManagedCPU");
+        checkParameterNotNull(cpuName, "cpuName", fn);
         for (var item : getNetworkIPMIManagedCPUS()) {
             if (cpuName.equals(item.getCPUName())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -3027,7 +3027,7 @@ public class LiqidClient extends LiqidClientBase {
     public NetworkManagedEnclosure getNetworkIPMIManagedEnclosure(Integer enclosureName) throws LiqidException {
         var fn = "getNetworkIPMIManagedEnclosure";
         _logger.trace("Entering %s enclosureName:%s", fn, enclosureName);
-        checkParameterNotNull(enclosureName, "enclosureName", "getNetworkIPMIManagedEnclosure");
+        checkParameterNotNull(enclosureName, "enclosureName", fn);
         for (var item : getNetworkIPMIManagedEnclosures()) {
             if (enclosureName.equals(item.getEnclosureName())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -3193,7 +3193,7 @@ public class LiqidClient extends LiqidClientBase {
     public AsynchronousStatus getSecureEraseStatus(Integer deviceId) throws LiqidException {
         var fn = "getSecureEraseStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getSecureEraseStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         var deviceIdTranslated = String.format("0x%08x", deviceId);
 
         try {
@@ -3261,7 +3261,7 @@ public class LiqidClient extends LiqidClientBase {
     public StorageDeviceStatus getStorageDeviceStatus(Integer deviceId) throws LiqidException {
         var fn = "getStorageDeviceStatus";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "getStorageDeviceStatus");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         for (var item : getStorageDevicesStatus()) {
             if (deviceId.equals(item.getDeviceId())) {
                 _logger.trace("%%s returning %%s", fn, item);
@@ -3352,7 +3352,7 @@ public class LiqidClient extends LiqidClientBase {
     public StorageDeviceInfo getStorageDeviceInfoByName(String deviceName) throws LiqidException {
         var fn = "getStorageDeviceInfoByName";
         _logger.trace("Entering %s deviceName:%s", fn, deviceName);
-        checkParameterNotNull(deviceName, "deviceName", "getStorageDeviceInfoByName");
+        checkParameterNotNull(deviceName, "deviceName", fn);
 
         try {
             var path = "device/info/ssd";
@@ -3420,7 +3420,7 @@ public class LiqidClient extends LiqidClientBase {
     public GroupPool groupPoolDone(Integer groupId) throws LiqidException {
         var fn = "groupPoolDone";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "groupPoolDone");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "pool/done";
@@ -3461,7 +3461,7 @@ public class LiqidClient extends LiqidClientBase {
     public GroupPool groupPoolEdit(Integer groupId) throws LiqidException {
         var fn = "groupPoolEdit";
         _logger.trace("Entering %s groupId:%s", fn, groupId);
-        checkParameterNotNull(groupId, "groupId", "groupPoolEdit");
+        checkParameterNotNull(groupId, "groupId", fn);
 
         try {
             var path = "pool/edit";
@@ -3503,8 +3503,8 @@ public class LiqidClient extends LiqidClientBase {
                               Integer machineId) throws LiqidException {
         var fn = "rebootNode";
         _logger.trace("Entering %s groupId:%s machineId:%s", fn, groupId, machineId);
-        checkParameterNotNull(groupId, "groupId", "rebootNode");
-        checkParameterNotNull(machineId, "machineId", "rebootNode");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "power/reboot";
@@ -3542,8 +3542,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                   Integer groupId) throws LiqidException {
         var fn = "removeComputeDeviceFromGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "removeComputeDeviceFromGroup");
-        checkParameterNotNull(groupId, "groupId", "removeComputeDeviceFromGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupComputeDeviceRelator();
             composite.setDeviceStatus(getComputeDeviceStatus(deviceId));
@@ -3584,9 +3584,9 @@ public class LiqidClient extends LiqidClientBase {
                                                                       Integer machineId) throws LiqidException {
         var fn = "removeComputeDeviceFromMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "removeComputeDeviceFromMachine");
-        checkParameterNotNull(groupId, "groupId", "removeComputeDeviceFromMachine");
-        checkParameterNotNull(machineId, "machineId", "removeComputeDeviceFromMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineComputeDeviceRelator();
             composite.setGroupDeviceRelator(getGroupComputeDeviceRelator(groupId, deviceId));
@@ -3625,8 +3625,8 @@ public class LiqidClient extends LiqidClientBase {
                                                             Integer groupId) throws LiqidException {
         var fn = "removeFPGADeviceFromGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "removeFPGADeviceFromGroup");
-        checkParameterNotNull(groupId, "groupId", "removeFPGADeviceFromGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupFPGADeviceRelator();
             composite.setDeviceStatus(getFPGADeviceStatus(deviceId));
@@ -3667,9 +3667,9 @@ public class LiqidClient extends LiqidClientBase {
                                                                 Integer machineId) throws LiqidException {
         var fn = "removeFPGADeviceFromMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "removeFPGADeviceFromMachine");
-        checkParameterNotNull(groupId, "groupId", "removeFPGADeviceFromMachine");
-        checkParameterNotNull(machineId, "machineId", "removeFPGADeviceFromMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineFPGADeviceRelator();
             composite.setGroupDeviceRelator(getGroupFPGADeviceRelator(groupId, deviceId));
@@ -3708,8 +3708,8 @@ public class LiqidClient extends LiqidClientBase {
                                                           Integer groupId) throws LiqidException {
         var fn = "removeGPUDeviceFromGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "removeGPUDeviceFromGroup");
-        checkParameterNotNull(groupId, "groupId", "removeGPUDeviceFromGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupGPUDeviceRelator();
             composite.setDeviceStatus(getGPUDeviceStatus(deviceId));
@@ -3750,9 +3750,9 @@ public class LiqidClient extends LiqidClientBase {
                                                               Integer machineId) throws LiqidException {
         var fn = "removeGPUDeviceFromMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "removeGPUDeviceFromMachine");
-        checkParameterNotNull(groupId, "groupId", "removeGPUDeviceFromMachine");
-        checkParameterNotNull(machineId, "machineId", "removeGPUDeviceFromMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineGPUDeviceRelator();
             composite.setGroupDeviceRelator(getGroupGPUDeviceRelator(groupId, deviceId));
@@ -3791,8 +3791,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                 Integer groupId) throws LiqidException {
         var fn = "removeMemoryDeviceFromGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "removeMemoryDeviceFromGroup");
-        checkParameterNotNull(groupId, "groupId", "removeMemoryDeviceFromGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupMemoryDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -3833,9 +3833,9 @@ public class LiqidClient extends LiqidClientBase {
                                                                     Integer machineId) throws LiqidException {
         var fn = "removeMemoryDeviceFromMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "removeMemoryDeviceFromMachine");
-        checkParameterNotNull(groupId, "groupId", "removeMemoryDeviceFromMachine");
-        checkParameterNotNull(machineId, "machineId", "removeMemoryDeviceFromMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineMemoryDeviceRelator();
             composite.setGroupDeviceRelator(getGroupMemoryDeviceRelator(groupId, deviceId));
@@ -3874,8 +3874,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                   Integer groupId) throws LiqidException {
         var fn = "removeNetworkDeviceFromGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "removeNetworkDeviceFromGroup");
-        checkParameterNotNull(groupId, "groupId", "removeNetworkDeviceFromGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupNetworkDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -3916,9 +3916,9 @@ public class LiqidClient extends LiqidClientBase {
                                                                       Integer machineId) throws LiqidException {
         var fn = "removeNetworkDeviceFromMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "removeNetworkDeviceFromMachine");
-        checkParameterNotNull(groupId, "groupId", "removeNetworkDeviceFromMachine");
-        checkParameterNotNull(machineId, "machineId", "removeNetworkDeviceFromMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineNetworkDeviceRelator();
             composite.setGroupDeviceRelator(getGroupNetworkDeviceRelator(groupId, deviceId));
@@ -3957,8 +3957,8 @@ public class LiqidClient extends LiqidClientBase {
                                                                   Integer groupId) throws LiqidException {
         var fn = "removeStorageDeviceFromGroup";
         _logger.trace("Entering %s deviceId:%s groupId:%s", fn, deviceId, groupId);
-        checkParameterNotNull(deviceId, "deviceId", "removeStorageDeviceFromGroup");
-        checkParameterNotNull(groupId, "groupId", "removeStorageDeviceFromGroup");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
         try {
             var composite = new GroupStorageDeviceRelator();
             composite.setGroup(getGroup(groupId));
@@ -3999,9 +3999,9 @@ public class LiqidClient extends LiqidClientBase {
                                                                       Integer machineId) throws LiqidException {
         var fn = "removeStorageDeviceFromMachine";
         _logger.trace("Entering %s deviceId:%s groupId:%s machineId:%s", fn, deviceId, groupId, machineId);
-        checkParameterNotNull(deviceId, "deviceId", "removeStorageDeviceFromMachine");
-        checkParameterNotNull(groupId, "groupId", "removeStorageDeviceFromMachine");
-        checkParameterNotNull(machineId, "machineId", "removeStorageDeviceFromMachine");
+        checkParameterNotNull(deviceId, "deviceId", fn);
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var composite = new MachineStorageDeviceRelator();
             composite.setGroupDeviceRelator(getGroupStorageDeviceRelator(groupId, deviceId));
@@ -4039,7 +4039,7 @@ public class LiqidClient extends LiqidClientBase {
     public Machine reprogramFabric(Integer machineId) throws LiqidException {
         var fn = "reprogramFabric";
         _logger.trace("Entering %s machineId:%s", fn, machineId);
-        checkParameterNotNull(machineId, "machineId", "reprogramFabric");
+        checkParameterNotNull(machineId, "machineId", fn);
         try {
             var object = getMachine(machineId);
             var path = "fabric/reprogram";
@@ -4173,8 +4173,8 @@ public class LiqidClient extends LiqidClientBase {
                                Integer machineId) throws LiqidException {
         var fn = "restartNode";
         _logger.trace("Entering %s groupId:%s machineId:%s", fn, groupId, machineId);
-        checkParameterNotNull(groupId, "groupId", "restartNode");
-        checkParameterNotNull(machineId, "machineId", "restartNode");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "power/restart";
@@ -4244,7 +4244,7 @@ public class LiqidClient extends LiqidClientBase {
     public AsynchronousInfo secureErase(Integer deviceId) throws LiqidException {
         var fn = "secureErase";
         _logger.trace("Entering %s deviceId:%s", fn, deviceId);
-        checkParameterNotNull(deviceId, "deviceId", "secureErase");
+        checkParameterNotNull(deviceId, "deviceId", fn);
         var deviceIdTranslated = String.format("0x%08x", deviceId);
 
         try {
@@ -4289,7 +4289,7 @@ public class LiqidClient extends LiqidClientBase {
                                              Integer node) throws LiqidException {
         var fn = "setDefaultCoordinates";
         _logger.trace("Entering %s rack:%s shelf:%s node:%s", fn, rack, shelf, node);
-        checkParameterNotNull(node, "node", "setDefaultCoordinates");
+        checkParameterNotNull(node, "node", fn);
 
         try {
             var path = "coordinates";
@@ -4329,8 +4329,8 @@ public class LiqidClient extends LiqidClientBase {
                                   Boolean enabled) throws LiqidException {
         var fn = "setSSHStatus";
         _logger.trace("Entering %s active:%s enabled:%s", fn, active, enabled);
-        checkParameterNotNull(active, "active", "setSSHStatus");
-        checkParameterNotNull(enabled, "enabled", "setSSHStatus");
+        checkParameterNotNull(active, "active", fn);
+        checkParameterNotNull(enabled, "enabled", fn);
 
         try {
             var path = "ssh/enable";
@@ -4403,9 +4403,9 @@ public class LiqidClient extends LiqidClientBase {
                                   Integer nodeId) throws LiqidException {
         var fn = "shutdownAt";
         _logger.trace("Entering %s rackId:%s shelfId:%s nodeId:%s", fn, rackId, shelfId, nodeId);
-        checkParameterNotNull(rackId, "rackId", "shutdownAt");
-        checkParameterNotNull(shelfId, "shelfId", "shutdownAt");
-        checkParameterNotNull(nodeId, "nodeId", "shutdownAt");
+        checkParameterNotNull(rackId, "rackId", fn);
+        checkParameterNotNull(shelfId, "shelfId", fn);
+        checkParameterNotNull(nodeId, "nodeId", fn);
 
         try {
             var path = "system/shutdown";
@@ -4444,8 +4444,8 @@ public class LiqidClient extends LiqidClientBase {
                                 Integer machineId) throws LiqidException {
         var fn = "shutdownNode";
         _logger.trace("Entering %s groupId:%s machineId:%s", fn, groupId, machineId);
-        checkParameterNotNull(groupId, "groupId", "shutdownNode");
-        checkParameterNotNull(machineId, "machineId", "shutdownNode");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "power/shutdown";
@@ -4483,8 +4483,8 @@ public class LiqidClient extends LiqidClientBase {
                              Integer machineId) throws LiqidException {
         var fn = "startNode";
         _logger.trace("Entering %s groupId:%s machineId:%s", fn, groupId, machineId);
-        checkParameterNotNull(groupId, "groupId", "startNode");
-        checkParameterNotNull(machineId, "machineId", "startNode");
+        checkParameterNotNull(groupId, "groupId", fn);
+        checkParameterNotNull(machineId, "machineId", fn);
 
         try {
             var path = "power/start";
@@ -4523,8 +4523,8 @@ public class LiqidClient extends LiqidClientBase {
                                  P2PType p2pEnabled) throws LiqidException {
         var fn = "setP2PEnabled";
         _logger.trace("Entering %s machineId:%s p2pEnabled:%s", fn, machineId, p2pEnabled);
-        checkParameterNotNull(machineId, "machineId", "setP2PEnabled");
-        checkParameterNotNull(p2pEnabled, "p2pEnabled", "setP2PEnabled");
+        checkParameterNotNull(machineId, "machineId", fn);
+        checkParameterNotNull(p2pEnabled, "p2pEnabled", fn);
         try {
             var object = getMachine(machineId);
             object.setP2PEnabled(p2pEnabled);

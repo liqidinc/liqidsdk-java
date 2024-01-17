@@ -1782,7 +1782,7 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     @Override
-    public GroupComputeDeviceRelator removeComputeDeviceFromMachine(
+    public MachineComputeDeviceRelator removeComputeDeviceFromMachine(
         Integer deviceId,
         Integer groupId,
         Integer machineId
@@ -1820,7 +1820,7 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     @Override
-    public GroupFPGADeviceRelator removeFPGADeviceFromMachine(
+    public MachineFPGADeviceRelator removeFPGADeviceFromMachine(
         Integer deviceId,
         Integer groupId,
         Integer machineId
@@ -1858,7 +1858,7 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     @Override
-    public GroupGPUDeviceRelator removeGPUDeviceFromMachine(
+    public MachineGPUDeviceRelator removeGPUDeviceFromMachine(
         Integer deviceId,
         Integer groupId,
         Integer machineId
@@ -1896,7 +1896,7 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     @Override
-    public GroupMemoryDeviceRelator removeMemoryDeviceFromMachine(
+    public MachineMemoryDeviceRelator removeMemoryDeviceFromMachine(
         Integer deviceId,
         Integer groupId,
         Integer machineId
@@ -1934,7 +1934,7 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     @Override
-    public GroupNetworkDeviceRelator removeNetworkDeviceFromMachine(
+    public MachineNetworkDeviceRelator removeNetworkDeviceFromMachine(
         Integer deviceId,
         Integer groupId,
         Integer machineId
@@ -1972,7 +1972,7 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     @Override
-    public GroupStorageDeviceRelator removeStorageDeviceFromMachine(
+    public MachineStorageDeviceRelator removeStorageDeviceFromMachine(
         Integer deviceId,
         Integer groupId,
         Integer machineId
@@ -1999,7 +1999,7 @@ public class MockLiqidClient extends LiqidClient {
                                                                   .build();
 
         _logger.trace("%s returning %s", machineRel);
-        return groupRel;
+        return machineRel;
     }
 
     @Override

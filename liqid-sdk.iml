@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/liqidsdk/generated" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/liqidsdk/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/liqidsdk/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/liqidsdk/mock" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -26,6 +26,12 @@ public class MockGroup extends Group {
         super(fabricId, groupId, groupName, podIdentifier);
     }
 
+    MockGroup(
+        final Group source
+    ) {
+        this(source.getGroupId(), source.getGroupName(), source.getFabricId(), source.getPodId());
+    }
+
     @Override
     public boolean equals(
         final Object obj

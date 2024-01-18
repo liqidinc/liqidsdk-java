@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,14 @@ public class MockLiqidClient extends LiqidClient {
     private final Set<Integer> _systemFreePool = new HashSet<>();
     private final Set<Integer> _devicesToBeAdded = new HashSet<>();
     private final Set<Integer> _devicesToBeRemoved = new HashSet<>();
+    private final Map<String, MockDevice> _devicesByName = new HashMap<>();
+
+    private final Set<Integer> _computeDeviceIds = new TreeSet<>();
+    private final Set<Integer> _fpgaDeviceIds = new TreeSet<>();
+    private final Set<Integer> _gpuDeviceIds = new TreeSet<>();
+    private final Set<Integer> _memoryDeviceIds = new TreeSet<>();
+    private final Set<Integer> _networkDeviceIds = new TreeSet<>();
+    private final Set<Integer> _storageDeviceIds = new TreeSet<>();
 
     // unchanging
     private final MockCoordinates _coordinates;
@@ -120,36 +129,158 @@ public class MockLiqidClient extends LiqidClient {
         }
     }
 
+    /**
+     * Create a MockLiqidClient which contains the general inventory of an existing LiqidClient
+     * (which may be another mock, or it may be real).
+     * @param client source client
+     * @return new MockLiqidClient
+     * @throws LiqidException if something goes wrong while communicating with the Liqid Cluster
+     * (unless source client is another mock)
+     */
+    public static MockLiqidClient createFrom(
+        final LiqidClient client
+    ) throws LiqidException {
+        // get everything we need from the client before populating anything
+        var devStatusList = client.getAllDevicesStatus();
+        var devInfoList = client.getAllDeviceInfos();
+        var groups = client.getGroups();
+        var machines = client.getMachines();
+        var fabricIdentifier = client.getCurrentFabricId();
+        var coordinates = client.getDefaultCoordinates();
+        var sshStatus = client.getSSHStatus();
+
+        var devInfoMap =
+            devInfoList.stream()
+                       .collect(Collectors.toMap(DeviceInfo::getDeviceIdentifier, di -> di, (a, b) -> b, HashMap::new));
+
+        var mock = new MockLiqidClient(fabricIdentifier, new MockCoordinates(coordinates), -1, sshStatus);
+
+        // populate devices
+        for (var devStat : devStatusList) {
+            var devId = devStat.getDeviceId();
+            var mockDev = new MockDevice(devStat, devInfoMap.get(devId));
+            mock._devices.put(devId, mockDev);
+            mock._devicesByName.put(devStat.getName(), mockDev);
+            mock._systemFreePool.add(devId);
+            switch (mockDev.getDeviceType()) {
+                case COMPUTE -> mock._computeDeviceIds.add(devId);
+                case FPGA -> mock._fpgaDeviceIds.add(devId);
+                case GPU -> mock._gpuDeviceIds.add(devId);
+                case MEMORY -> mock._memoryDeviceIds.add(devId);
+                case ETHERNET_LINK, FIBER_CHANNEL_LINK, INFINIBAND_LINK -> mock._networkDeviceIds.add(devId);
+                case SSD -> mock._storageDeviceIds.add(devId);
+            }
+        }
+
+        // populate groups
+        for (var group : groups) {
+            var mockGroup = new MockGroup(group);
+            mock._groups.put(mockGroup.getGroupId(), mockGroup);
+
+            var preDevs = client.getPreDevices(null, group.getGroupId(), null);
+            for (var preDev : preDevs) {
+                var mockDev = mock._devicesByName.get(preDev.getDeviceName());
+                mock._systemFreePool.remove(mockDev.getDeviceId());
+                mockGroup._freePool.put(mockDev.getDeviceId(), mockDev);
+            }
+        }
+
+        // populate machines
+        for (var machine : machines) {
+            var mockMachine = new MockMachine(machine);
+            mock._machines.put(mockMachine.getMachineId(), mockMachine);
+
+            var mockGroup = mock._groups.get(mockMachine.getGroupId());
+            mockGroup._machines.put(mockMachine.getMachineId(), mockMachine);
+
+            var preDevs = client.getPreDevices(null, mockGroup.getGroupId(), machine.getMachineId());
+            for (var preDev : preDevs) {
+                var mockDev = mock._devicesByName.get(preDev.getDeviceName());
+                mockGroup._freePool.remove(mockDev.getDeviceId()); // should not be there, but just in case...
+                mockMachine._attachedDevices.put(mockDev.getDeviceId(), mockDev);
+            }
+        }
+
+        return mock;
+    }
+
     // mock-specific methods
 
-    public Collection<Integer> createDevices(
+    /**
+     * Creates a mock device for the mock client, and injects it into the inventory of this mock client
+     * placing it into the system free pool.
+     * @param deviceType type of the devies. for network devices, we really only want ETHERNET
+     * @param pciVendorId value for PCI vendor id
+     * @param vendor name of the vendor
+     * @param model name of the model
+     * @return device id of the created mock device.
+     */
+    public Integer createDevice(
         final DeviceType deviceType,
+        final short pciVendorId,
         final String vendor,
         final String model
     ) {
-        return null; // TODO
+        var fn = "createDevice";
+        _logger.trace("Entering %s with devType=%s pciVendorId=0x%04x vendor=%s model=%s",
+                      fn, deviceType, pciVendorId, vendor, model);
+
+        MockDevice mockDevice = switch (deviceType) {
+            case COMPUTE -> createComputeMockDevice();
+            case FPGA -> createFPGAMockDevice();
+            case GPU -> createGPUMockDevice();
+            case MEMORY -> createMemoryMockDevice();
+            case ETHERNET_LINK, FIBER_CHANNEL_LINK, INFINIBAND_LINK -> createNetworkMockDevice();
+            case SSD -> createStorageMockDevice();
+        };
+
+        var deviceStatus = mockDevice.getDeviceStatus();
+        deviceStatus.setDeviceType(deviceType);
+        deviceStatus.setFabricType(FabricType.GEN4.getValue());
+        deviceStatus.setFabricId(_fabricIdentifier);
+        deviceStatus.setPodId(_podIdentifier);
+
+        var deviceInfo = mockDevice.getDeviceInfo();
+        deviceInfo.setDeviceInfoType(deviceType);
+        deviceInfo.setFabricType(FabricType.GEN4);
+        deviceInfo.setPodId(_podIdentifier);
+        deviceInfo.setPCIVendorId(String.format("0x%04x", pciVendorId));
+        deviceInfo.setVendor(vendor);
+        deviceInfo.setModel(model);
+        deviceInfo.setUserDescription("n/a");
+
+        var devId = mockDevice.getDeviceId();
+        _logger.trace("%s returning 0x%08x", fn, devId);
+        return devId;
     }
 
-    public MockLiqidClient injectFrom(
-        final LiqidClient source
+    /**
+     * A convenient wrapper around createDevice() - for creating a number of devices in one call.
+     * @param deviceType type of the devies. for network devices, we really only want ETHERNET
+     * @param pciVendorId value for PCI vendor id
+     * @param vendor name of the vendor
+     * @param model name of the model
+     * @param count number of devices to be created
+     * @return collection of the device identifiers of the newly-created mock devices
+     */
+    public Collection<Integer> createDevices(
+        final DeviceType deviceType,
+        final short pciVendorId,
+        final String vendor,
+        final String model,
+        final int count
     ) {
-        // TODO
-        return this;
-    }
+        var fn = "createDevices";
+        _logger.trace("Entering %s with devType=%s pciVendorId=0x%04x vendor=%s model=%s count=%d",
+                      fn, deviceType, pciVendorId, vendor, model, count);
 
-    public MockLiqidClient injectDevice(
-        final DeviceStatus deviceStatus,
-        final DeviceInfo deviceInfo
-    ) {
-        // TODO
-        return this;
-    }
+        var deviceIds = new LinkedList<Integer>();
+        for (var dx = 0; dx < count; dx++) {
+            deviceIds.add(createDevice(deviceType, pciVendorId, vendor, model));
+        }
 
-    public MockLiqidClient injectMockDevices(
-        final Collection<MockDevice> devices
-    ) {
-        // TODO
-        return this;
+        _logger.trace("%s returning %s", fn, deviceIds);
+        return deviceIds;
     }
 
     // private helpful functions
@@ -246,6 +377,173 @@ public class MockLiqidClient extends LiqidClient {
         }
     }
 
+    private MockDevice createComputeMockDevice() {
+        var fn = "createComputeMockDevice";
+        _logger.trace("Entering %s", fn);
+
+        var index = _computeDeviceIds.size();
+        var deviceId = index;
+        var deviceIdStr = String.format("0x%08x", deviceId);
+        _computeDeviceIds.add(deviceId);
+        var deviceName = String.format("cpu%d", deviceId);
+
+        var deviceStatus = new ComputeDeviceStatus.Builder().setDeviceId(deviceIdStr)
+                                                            .setName(deviceName)
+                                                            .setIndex(index)
+                                                            .build();
+
+        var deviceInfo = new ComputeDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
+                                                        .setName(deviceName)
+                                                        .setIndex(index)
+                                                        .build();
+
+        var mockDevice = new MockDevice(deviceStatus, deviceInfo);
+        _devices.put(deviceId, mockDevice);
+        _devicesByName.put(deviceName, mockDevice);
+        _logger.trace("%s returning %s", fn, mockDevice);
+        return mockDevice;
+    }
+
+    private MockDevice createFPGAMockDevice() {
+        var fn = "createFPGAMockDevice";
+        _logger.trace("Entering %s", fn);
+
+        var index = _fpgaDeviceIds.size();
+        var deviceId = 0x1000 + index;
+        var deviceIdStr = String.format("0x%08x", deviceId);
+        _fpgaDeviceIds.add(deviceId);
+        var deviceName = String.format("fpga%d", deviceId);
+
+        var deviceStatus = new FPGADeviceStatus.Builder().setDeviceId(deviceIdStr)
+                                                         .setName(deviceName)
+                                                         .setIndex(index)
+                                                         .build();
+
+        var deviceInfo = new FPGADeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
+                                                     .setName(deviceName)
+                                                     .setIndex(index)
+                                                     .build();
+
+        var mockDevice = new MockDevice(deviceStatus, deviceInfo);
+        _devices.put(deviceId, mockDevice);
+        _devicesByName.put(deviceName, mockDevice);
+
+        _logger.trace("%s returning %s", fn, mockDevice);
+        return mockDevice;
+    }
+
+    private MockDevice createGPUMockDevice() {
+        var fn = "createGPUMockDevice";
+        _logger.trace("Entering %s", fn);
+
+        var index = _gpuDeviceIds.size();
+        var deviceId = 0x2000 + index;
+        var deviceIdStr = String.format("0x%08x", deviceId);
+        _gpuDeviceIds.add(deviceId);
+        var deviceName = String.format("gpu%d", deviceId);
+
+        var deviceStatus = new GPUDeviceStatus.Builder().setDeviceId(deviceIdStr)
+                                                        .setName(deviceName)
+                                                        .setIndex(index)
+                                                        .build();
+
+        var deviceInfo = new GPUDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
+                                                    .setName(deviceName)
+                                                    .setIndex(index)
+                                                    .build();
+
+        var mockDevice = new MockDevice(deviceStatus, deviceInfo);
+        _devices.put(deviceId, mockDevice);
+        _devicesByName.put(deviceName, mockDevice);
+
+        _logger.trace("%s returning %s", fn, mockDevice);
+        return mockDevice;
+    }
+
+    private MockDevice createMemoryMockDevice() {
+        var fn = "createMemoryMockDevice";
+        _logger.trace("Entering %s", fn);
+
+        var index = _memoryDeviceIds.size();
+        var deviceId = 0x3000 + index;
+        var deviceIdStr = String.format("0x%08x", deviceId);
+        _memoryDeviceIds.add(deviceId);
+        var deviceName = String.format("mem%d", deviceId);
+
+        var deviceStatus = new MemoryDeviceStatus.Builder().setDeviceId(deviceIdStr)
+                                                           .setName(deviceName)
+                                                           .setIndex(index)
+                                                           .build();
+
+        var deviceInfo = new MemoryDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
+                                                       .setName(deviceName)
+                                                       .setIndex(index)
+                                                       .build();
+
+        var mockDevice = new MockDevice(deviceStatus, deviceInfo);
+        _devices.put(deviceId, mockDevice);
+        _devicesByName.put(deviceName, mockDevice);
+
+        _logger.trace("%s returning %s", fn, mockDevice);
+        return mockDevice;
+    }
+
+    private MockDevice createNetworkMockDevice() {
+        var fn = "createNetworkMockDevice";
+        _logger.trace("Entering %s", fn);
+
+        var index = _networkDeviceIds.size();
+        var deviceId = 0x4000 + index;
+        var deviceIdStr = String.format("0x%08x", deviceId);
+        _networkDeviceIds.add(deviceId);
+        var deviceName = String.format("nic%d", deviceId);
+
+        var deviceStatus = new NetworkDeviceStatus.Builder().setDeviceId(deviceIdStr)
+                                                            .setName(deviceName)
+                                                            .setIndex(index)
+                                                            .build();
+
+        var deviceInfo = new MemoryDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
+                                                       .setName(deviceName)
+                                                       .setIndex(index)
+                                                       .build();
+
+        var mockDevice = new MockDevice(deviceStatus, deviceInfo);
+        _devices.put(deviceId, mockDevice);
+        _devicesByName.put(deviceName, mockDevice);
+
+        _logger.trace("%s returning %s", fn, mockDevice);
+        return mockDevice;
+    }
+
+    private MockDevice createStorageMockDevice() {
+        var fn = "createStorageMockDevice";
+        _logger.trace("Entering %s", fn);
+
+        var index = _storageDeviceIds.size();
+        var deviceId = 0x5000 + index;
+        var deviceIdStr = String.format("0x%08x", deviceId);
+        _storageDeviceIds.add(deviceId);
+        var deviceName = String.format("targ%d", deviceId);
+
+        var deviceStatus = new StorageDeviceStatus.Builder().setDeviceId(deviceIdStr)
+                                                            .setName(deviceName)
+                                                            .setIndex(index)
+                                                            .build();
+
+        var deviceInfo = new StorageDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
+                                                        .setName(deviceName)
+                                                        .setIndex(index)
+                                                        .build();
+
+        var mockDevice = new MockDevice(deviceStatus, deviceInfo);
+        _devices.put(deviceId, mockDevice);
+        _devicesByName.put(deviceName, mockDevice);
+
+        _logger.trace("%s returning %s", fn, mockDevice);
+        return mockDevice;
+    }
+
     private PreDevice createPreDevice(
         final MockDevice device
     ) {
@@ -324,15 +622,76 @@ public class MockLiqidClient extends LiqidClient {
     private MockDevice getMockDeviceByName(
         final String deviceName
     ) throws LiqidException {
-        for (var device : _devices.values()) {
-            if (device.getDeviceName().equals(deviceName)) {
-                return device;
-            }
+        if (!_devicesByName.containsKey(deviceName)) {
+            var ex = new LiqidException(String.format("Device '%s' does not exist", deviceName));
+            _logger.throwing(ex);
+            throw ex;
         }
 
-        var ex = new LiqidException(String.format("Device '%s' does not exist", deviceName));
-        _logger.throwing(ex);
-        throw ex;
+        return _devicesByName.get(deviceName);
+    }
+
+    private void injectDevice(
+        final MockDevice device
+    ) {
+        int devId = 0;
+        int index = 0;
+        String name = null;
+        switch (device.getDeviceType()) {
+            case INFINIBAND_LINK, ETHERNET_LINK, FIBER_CHANNEL_LINK -> {
+                index = _networkDeviceIds.size();
+                devId = index;
+                name = String.format("net%d", index);
+                _networkDeviceIds.add(index);
+            }
+            case GPU -> {
+                index = _gpuDeviceIds.size();
+                devId = 0x1000 + index;
+                name = String.format("gpu%d", index);
+                _gpuDeviceIds.add(index);
+            }
+            case SSD -> {
+                index = _storageDeviceIds.size();
+                devId = 0x2000 + index;
+                name = String.format("targ%d", index);
+                _storageDeviceIds.add(index);
+            }
+            case FPGA -> {
+                index = _fpgaDeviceIds.size();
+                devId = 0x3000 + index;
+                name = String.format("fpga%d", index);
+                _fpgaDeviceIds.add(index);
+            }
+            case COMPUTE -> {
+                index = _computeDeviceIds.size();
+                devId = 0x4000 + index;
+                name = String.format("cpu%d", index);
+                _computeDeviceIds.add(index);
+            }
+            case MEMORY -> {
+                index = _memoryDeviceIds.size();
+                devId = 0x5000 + index;
+                name = String.format("mem%d", index);
+                _memoryDeviceIds.add(index);
+            }
+        };
+
+        var stat = device.getDeviceStatus();
+        stat.setDeviceId(devId);
+        stat.setIndex(index);
+        stat.setName(name);
+        stat.setFabricId(_fabricIdentifier);
+        stat.setFabricType(FabricType.GEN4.getValue());
+        stat.setPodId(_podIdentifier);
+
+        var info = device.getDeviceInfo();
+        info.setDeviceIdentifier(devId);
+        info.setIndex(index);
+        info.setName(name);
+        info.setPodId(_podIdentifier);
+        info.setFabricType(FabricType.GEN4);
+
+        _devices.put(device.getDeviceId(), device);
     }
 
     private boolean isValidGroupIdentifier(

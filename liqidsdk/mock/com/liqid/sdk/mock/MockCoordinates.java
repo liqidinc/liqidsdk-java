@@ -20,6 +20,12 @@ public class MockCoordinates extends Coordinates {
         super(rack, shelf, node);
     }
 
+    MockCoordinates(
+        final Coordinates source
+    ) {
+        super(source.getRack(), source.getShelf(), source.getNode());
+    }
+
     @Override
     public boolean equals(
         final Object obj

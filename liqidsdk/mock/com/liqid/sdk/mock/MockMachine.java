@@ -39,6 +39,16 @@ public class MockMachine extends Machine {
               new LinkedList<>());
     }
 
+    MockMachine(
+        final Machine source
+    ) {
+        this(source.getIndex(),
+             source.getMachineId(),
+             source.getGroupId(),
+             source.getFabricId(),
+             source.getMachineName());
+    }
+
     @Override
     public boolean equals(
         final Object obj

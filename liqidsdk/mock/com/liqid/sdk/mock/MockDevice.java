@@ -19,6 +19,7 @@ import com.liqid.sdk.MemoryDeviceInfo;
 import com.liqid.sdk.MemoryDeviceStatus;
 import com.liqid.sdk.NetworkDeviceInfo;
 import com.liqid.sdk.NetworkDeviceStatus;
+import com.liqid.sdk.PreDevice;
 import com.liqid.sdk.StorageDeviceInfo;
 import com.liqid.sdk.StorageDeviceStatus;
 

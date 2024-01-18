@@ -10,6 +10,7 @@ package com.liqid.sdk.mock;
 
 import com.liqid.sdk.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -21,7 +22,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * This is not an exact mock, but it should be sufficient for casual use
+ * This is not an exact mock, but it should be sufficient for casual use.
+ * WARNING: NONE OF THIS IS THREAD-SAFE.
+ * Neither is the SDK, so we don't worry too much about that, bue client beware!
  */
 public class MockLiqidClient extends LiqidClient {
 
@@ -50,7 +53,7 @@ public class MockLiqidClient extends LiqidClient {
     private Integer _groupBeingEdited = null;
     private Integer _machineBeingEdited = null;
     private SSHStatus _sshStatus;
-    private Map<String, DigestInfo> _digestTable = new HashMap<>();
+    private final Map<String, DigestInfo> _digestTable = new HashMap<>();
 
     private MockLiqidClient(
         final Integer fabricIdentifier,
@@ -119,6 +122,38 @@ public class MockLiqidClient extends LiqidClient {
 
     // mock-specific methods
 
+    public Collection<Integer> createDevices(
+        final DeviceType deviceType,
+        final String vendor,
+        final String model
+    ) {
+        return null; // TODO
+    }
+
+    public MockLiqidClient injectFrom(
+        final LiqidClient source
+    ) {
+        // TODO
+        return this;
+    }
+
+    public MockLiqidClient injectDevice(
+        final DeviceStatus deviceStatus,
+        final DeviceInfo deviceInfo
+    ) {
+        // TODO
+        return this;
+    }
+
+    public MockLiqidClient injectMockDevices(
+        final Collection<MockDevice> devices
+    ) {
+        // TODO
+        return this;
+    }
+
+    // private helpful functions
+
     private void checkCoordinates() throws WrongCoordinatesException {
         var ex = new WrongCoordinatesException(_defaultCoordinates, _coordinates);
         _logger.throwing(ex);
@@ -160,9 +195,9 @@ public class MockLiqidClient extends LiqidClient {
     }
 
     private void checkGroupIdentifier(
-        final int machineId
+        final int groupId
     ) throws LiqidException {
-        if (!isValidGroupIdentifier(machineId)) {
+        if (!isValidGroupIdentifier(groupId)) {
             var ex = new LiqidException("Group ID must be greater than 0x0");
             _logger.throwing(ex);
             throw ex;
@@ -209,6 +244,81 @@ public class MockLiqidClient extends LiqidClient {
             _logger.throwing(ex);
             throw ex;
         }
+    }
+
+    private PreDevice createPreDevice(
+        final MockDevice device
+    ) {
+        var preDevType =
+            switch (device.getDeviceType()) {
+                case INFINIBAND_LINK -> PreDeviceType.INFINIBAND;
+                case ETHERNET_LINK -> PreDeviceType.LINK;
+                case FIBER_CHANNEL_LINK -> PreDeviceType.FIBER_CHANNEL;
+                case GPU -> PreDeviceType.GPU;
+                case SSD -> PreDeviceType.TARGET;
+                case FPGA -> PreDeviceType.FPGA;
+                case COMPUTE -> PreDeviceType.COMPUTE;
+                case MEMORY -> PreDeviceType.MEMORY;
+            };
+
+
+        var groupId = 0;
+        var machineId = 0;
+        for (var group : _groups.values()) {
+            if (group._freePool.containsKey(device.getDeviceId())) {
+                groupId = group.getGroupId();
+                break;
+            }
+
+            for (var machine : group._machines.values()) {
+                if (machine._attachedDevices.containsKey(device.getDeviceId())) {
+                    groupId = group.getGroupId();
+                    machineId = machine.getMachineId();
+                    break;
+                }
+            }
+        }
+        var machineStr = machineId > 0 ? String.format("0x%08x", machineId) : "n/a";
+
+        return new PreDevice.Builder().setDeviceName(device.getDeviceStatus().getName())
+                                      .setFabricGlobalId("0x0")
+                                      .setFabricId(_fabricIdentifier)
+                                      .setGroupId(groupId)
+                                      .setMachineId(machineStr)
+                                      .setPreDeviceType(preDevType)
+                                      .setPodId(_podIdentifier)
+                                      .build();
+    }
+
+    private Integer[] getDeviceRelation(
+        final int deviceId
+    ) {
+        // result is a two=value array as such:
+        //  [0] is null if the device is in the system free pool, or
+        //      contains the group id which contains the device, while
+        //  [1] is null if the device is in the system or a group free pool, or
+        //      contains the machine id to which the device is attached.
+        var result = new Integer[]{ null, null };
+        if (!_systemFreePool.contains(deviceId)) {
+            for (var group : _groups.values()) {
+                if (group._freePool.containsKey(deviceId)) {
+                    result[0] = group.getGroupId();
+                    break;
+                } else {
+                    for (var machine : group._machines.values()) {
+                        if (machine._attachedDevices.containsKey(deviceId)) {
+                            result[0] = group.getGroupId();
+                            result[1] = machine.getMachineId();
+                            break;
+                        }
+                    }
+                    if (result[0] != null) {
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     private MockDevice getMockDeviceByName(
@@ -785,7 +895,8 @@ public class MockLiqidClient extends LiqidClient {
         String description
     ) throws LiqidException {
         var fn = "createDeviceDescription";
-        _logger.trace("Entering %s queryDeviceType:%s deviceId:%s description:%s", fn, queryDeviceType, deviceId, description);
+        _logger.trace("Entering %s queryDeviceType:%s deviceId:%s description:%s",
+                      fn, queryDeviceType, deviceId, description);
         checkParameterNotNull(queryDeviceType, "queryDeviceType", fn);
         checkParameterNotNull(deviceId, "deviceId", fn);
         checkParameterNotNull(description, "description", fn);
@@ -833,7 +944,8 @@ public class MockLiqidClient extends LiqidClient {
         String machineName
     ) throws LiqidException {
         var fn = "createMachineWithId";
-        _logger.trace("Entering %s groupId:%s machineId:%s machineName:%s", fn, groupId, machineId, machineName);
+        _logger.trace("Entering %s groupId:%s machineId:%s machineName:%s",
+                      fn, groupId, machineId, machineName);
         checkParameterNotNull(groupId, "groupId", fn);
         checkParameterNotNull(machineId, "machineId", fn);
         checkParameterNotNull(machineName, "machineName", fn);
@@ -1170,15 +1282,36 @@ public class MockLiqidClient extends LiqidClient {
         Integer machineId
     ) throws LiqidException {
         var fn = "getPreDevices";
-        _logger.trace("Entering %s queryDeviceType:%s groupId:%s machineId:%s", fn, queryDeviceType, groupId, machineId);
+        _logger.trace("Entering %s queryDeviceType:%s groupId:%s machineId:%s",
+                      fn, queryDeviceType, groupId, machineId);
         checkParameterNotNull(groupId, "groupId", fn);
         checkCoordinates();
+        checkGroupIdentifier(groupId);
+        if (machineId != null) {
+            checkMachineIdentifier(machineId);
+        }
 
-        // TODO
+        //  with no machineId, we return devices in the given group's free pool.
+        var group = _groups.get(groupId);
+        var result = new LinkedList<PreDevice>();
+        if (group != null) {
+            for (var device : _devices.values()) {
+                if (queryDeviceType != null) {
+                    var devQueryDeviceType = deviceTypeToQueryDeviceType(device.getDeviceType());
+                    if (!Objects.equals(queryDeviceType, devQueryDeviceType)) {
+                        continue;
+                    }
+                }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+                var ids = getDeviceRelation(device.getDeviceId());
+                if (Objects.equals(groupId, ids[0]) && Objects.equals(machineId, ids[1])) {
+                    result.add(createPreDevice(device));
+                }
+            }
+        }
+
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1321,11 +1454,15 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = new LinkedList<ComputeDeviceStatus>();
+        for (var device : _devices.values()) {
+            if (_systemFreePool.contains(device.getDeviceId()) && (device.getDeviceType() == DeviceType.COMPUTE)) {
+                result.add(device.getComputeDeviceStatus());
+            }
+        }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1334,11 +1471,15 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = new LinkedList<FPGADeviceStatus>();
+        for (var device : _devices.values()) {
+            if (_systemFreePool.contains(device.getDeviceId()) && (device.getDeviceType() == DeviceType.FPGA)) {
+                result.add(device.getFPGADeviceStatus());
+            }
+        }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1347,11 +1488,15 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = new LinkedList<GPUDeviceStatus>();
+        for (var device : _devices.values()) {
+            if (_systemFreePool.contains(device.getDeviceId()) && (device.getDeviceType() == DeviceType.GPU)) {
+                result.add(device.getGPUDeviceStatus());
+            }
+        }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1360,11 +1505,15 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = new LinkedList<MemoryDeviceStatus>();
+        for (var device : _devices.values()) {
+            if (_systemFreePool.contains(device.getDeviceId()) && (device.getDeviceType() == DeviceType.MEMORY)) {
+                result.add(device.getMemoryDeviceStatus());
+            }
+        }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1373,11 +1522,15 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = new LinkedList<NetworkDeviceStatus>();
+        for (var device : _devices.values()) {
+            if (_systemFreePool.contains(device.getDeviceId()) && (device.getDeviceType() == DeviceType.ETHERNET_LINK)) {
+                result.add(device.getNetworkDeviceStatus());
+            }
+        }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1386,11 +1539,15 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = new LinkedList<StorageDeviceStatus>();
+        for (var device : _devices.values()) {
+            if (_systemFreePool.contains(device.getDeviceId()) && (device.getDeviceType() == DeviceType.SSD)) {
+                result.add(device.getStorageDeviceStatus());
+            }
+        }
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1495,17 +1652,7 @@ public class MockLiqidClient extends LiqidClient {
         Integer groupId,
         Integer deviceId
     ) throws LiqidException {
-        var fn = "getGroupComputeDeviceRelator";
-        _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", fn);
-        checkParameterNotNull(deviceId, "deviceId", fn);
-        checkCoordinates();
-
-        // TODO
-
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        return super.getGroupComputeDeviceRelator(groupId, deviceId);
     }
 
     @Override
@@ -1513,17 +1660,7 @@ public class MockLiqidClient extends LiqidClient {
         Integer groupId,
         Integer deviceId
     ) throws LiqidException {
-        var fn = "getGroupFPGADeviceRelator";
-        _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", fn);
-        checkParameterNotNull(deviceId, "deviceId", fn);
-        checkCoordinates();
-
-        // TODO
-
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        return super.getGroupFPGADeviceRelator(groupId, deviceId);
     }
 
     @Override
@@ -1531,17 +1668,7 @@ public class MockLiqidClient extends LiqidClient {
         Integer groupId,
         Integer deviceId
     ) throws LiqidException {
-        var fn = "getGroupGPUDeviceRelator";
-        _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", fn);
-        checkParameterNotNull(deviceId, "deviceId", fn);
-        checkCoordinates();
-
-        // TODO
-
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        return super.getGroupGPUDeviceRelator(groupId, deviceId);
     }
 
     @Override
@@ -1549,17 +1676,7 @@ public class MockLiqidClient extends LiqidClient {
         Integer groupId,
         Integer deviceId
     ) throws LiqidException {
-        var fn = "getGroupMemoryDeviceRelator";
-        _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", fn);
-        checkParameterNotNull(deviceId, "deviceId", fn);
-        checkCoordinates();
-
-        // TODO
-
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        return super.getGroupMemoryDeviceRelator(groupId, deviceId);
     }
 
     @Override
@@ -1567,17 +1684,7 @@ public class MockLiqidClient extends LiqidClient {
         Integer groupId,
         Integer deviceId
     ) throws LiqidException {
-        var fn = "getGroupNetworkDeviceRelator";
-        _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", fn);
-        checkParameterNotNull(deviceId, "deviceId", fn);
-        checkCoordinates();
-
-        // TODO
-
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        return super.getGroupNetworkDeviceRelator(groupId, deviceId);
     }
 
     @Override
@@ -1585,17 +1692,7 @@ public class MockLiqidClient extends LiqidClient {
         Integer groupId,
         Integer deviceId
     ) throws LiqidException {
-        var fn = "getGroupStorageDeviceRelator";
-        _logger.trace("Entering %s groupId:%s deviceId:%s", fn, groupId, deviceId);
-        checkParameterNotNull(groupId, "groupId", fn);
-        checkParameterNotNull(deviceId, "deviceId", fn);
-        checkCoordinates();
-
-        // TODO
-
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        return super.getGroupStorageDeviceRelator(groupId, deviceId);
     }
 
     @Override
@@ -2748,7 +2845,8 @@ public class MockLiqidClient extends LiqidClient {
 
         var machine = _machines.get(machineId);
         if (p2pEnabled.equals(machine.getP2PEnabled())) {
-            var ex = new LiqidException(String.format("P2P is already %s for machine with identifier %d", p2pEnabled, machineId));
+            var msg = String.format("P2P is already %s for machine with identifier %d", p2pEnabled, machineId);
+            var ex = new LiqidException(msg);
             _logger.throwing(ex);
             throw ex;
         }

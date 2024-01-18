@@ -35,8 +35,9 @@ public class NetworkDeviceInfo extends DeviceInfo {
         return _dramSize;
     }
 
-    public void setDRAMSize(String value) {
+    public NetworkDeviceInfo setDRAMSize(String value) {
         _dramSize = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class NetworkDeviceInfo extends DeviceInfo {
         return _dramType;
     }
 
-    public void setDRAMType(String value) {
+    public NetworkDeviceInfo setDRAMType(String value) {
         _dramType = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class NetworkDeviceInfo extends DeviceInfo {
         return _linkSpeed;
     }
 
-    public void setLinkSpeed(String value) {
+    public NetworkDeviceInfo setLinkSpeed(String value) {
         _linkSpeed = value;
+        return this;
     }
 
     /**

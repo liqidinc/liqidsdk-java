@@ -36,8 +36,9 @@ public class Coordinates {
         return _node;
     }
 
-    public void setNode(Integer value) {
+    public Coordinates setNode(Integer value) {
         _node = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class Coordinates {
         return _rack;
     }
 
-    public void setRack(Integer value) {
+    public Coordinates setRack(Integer value) {
         _rack = value;
+        return this;
     }
 
     /**
@@ -64,8 +66,9 @@ public class Coordinates {
         return _shelf;
     }
 
-    public void setShelf(Integer value) {
+    public Coordinates setShelf(Integer value) {
         _shelf = value;
+        return this;
     }
 
     /**

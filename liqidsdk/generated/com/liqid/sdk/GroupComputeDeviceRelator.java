@@ -35,8 +35,9 @@ public class GroupComputeDeviceRelator {
         return _deviceStatus;
     }
 
-    public void setDeviceStatus(ComputeDeviceStatus value) {
+    public GroupComputeDeviceRelator setDeviceStatus(ComputeDeviceStatus value) {
         _deviceStatus = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GroupComputeDeviceRelator {
         return _group;
     }
 
-    public void setGroup(Group value) {
+    public GroupComputeDeviceRelator setGroup(Group value) {
         _group = value;
+        return this;
     }
 
     /**

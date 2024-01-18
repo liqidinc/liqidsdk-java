@@ -35,8 +35,9 @@ public class FPGADeviceStatus extends DeviceStatus {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public FPGADeviceStatus setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**

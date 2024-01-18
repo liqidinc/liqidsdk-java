@@ -36,8 +36,9 @@ public class Group {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public Group setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class Group {
         return _groupId;
     }
 
-    public void setGroupId(Integer value) {
+    public Group setGroupId(Integer value) {
         _groupId = value;
+        return this;
     }
 
     /**
@@ -64,8 +66,9 @@ public class Group {
         return _groupName;
     }
 
-    public void setGroupName(String value) {
+    public Group setGroupName(String value) {
         _groupName = value;
+        return this;
     }
 
     /**
@@ -78,8 +81,9 @@ public class Group {
         return _podId;
     }
 
-    public void setPodId(Integer value) {
+    public Group setPodId(Integer value) {
         _podId = value;
+        return this;
     }
 
     /**

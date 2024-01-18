@@ -35,8 +35,9 @@ public class GroupGPUDeviceRelator {
         return _deviceStatus;
     }
 
-    public void setDeviceStatus(GPUDeviceStatus value) {
+    public GroupGPUDeviceRelator setDeviceStatus(GPUDeviceStatus value) {
         _deviceStatus = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GroupGPUDeviceRelator {
         return _group;
     }
 
-    public void setGroup(Group value) {
+    public GroupGPUDeviceRelator setGroup(Group value) {
         _group = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class NameValuePair {
         return _name;
     }
 
-    public void setName(String value) {
+    public NameValuePair setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class NameValuePair {
         return _valueString;
     }
 
-    public void setValueString(String value) {
+    public NameValuePair setValueString(String value) {
         _valueString = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class DeviceUserDescription {
         return _userDescription;
     }
 
-    public void setUserDescription(String value) {
+    public DeviceUserDescription setUserDescription(String value) {
         _userDescription = value;
+        return this;
     }
 
     /**

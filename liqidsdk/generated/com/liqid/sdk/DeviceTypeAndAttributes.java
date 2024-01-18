@@ -36,8 +36,9 @@ public class DeviceTypeAndAttributes {
         return _attributes;
     }
 
-    public void setAttributes(HashMap<String, String[]> value) {
+    public DeviceTypeAndAttributes setAttributes(HashMap<String, String[]> value) {
         _attributes = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class DeviceTypeAndAttributes {
         return _deviceType;
     }
 
-    public void setDeviceType(DeviceType value) {
+    public DeviceTypeAndAttributes setDeviceType(DeviceType value) {
         _deviceType = value;
+        return this;
     }
 
     /**

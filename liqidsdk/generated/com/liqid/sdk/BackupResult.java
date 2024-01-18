@@ -35,8 +35,9 @@ public class BackupResult {
         return _commandLine;
     }
 
-    public void setCommandLine(String value) {
+    public BackupResult setCommandLine(String value) {
         _commandLine = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class BackupResult {
         return _exitValue;
     }
 
-    public void setExitValue(Integer value) {
+    public BackupResult setExitValue(Integer value) {
         _exitValue = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class BackupResult {
         return _standardError;
     }
 
-    public void setStandardError(String value) {
+    public BackupResult setStandardError(String value) {
         _standardError = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class BackupResult {
         return _standardOutput;
     }
 
-    public void setStandardOutput(String value) {
+    public BackupResult setStandardOutput(String value) {
         _standardOutput = value;
+        return this;
     }
 
     /**

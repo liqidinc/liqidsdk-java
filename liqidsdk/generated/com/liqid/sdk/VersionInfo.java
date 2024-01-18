@@ -35,8 +35,9 @@ public class VersionInfo {
         return _branch;
     }
 
-    public void setBranch(String value) {
+    public VersionInfo setBranch(String value) {
         _branch = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class VersionInfo {
         return _changeSet;
     }
 
-    public void setChangeSet(String value) {
+    public VersionInfo setChangeSet(String value) {
         _changeSet = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class VersionInfo {
         return _component;
     }
 
-    public void setComponent(String value) {
+    public VersionInfo setComponent(String value) {
         _component = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class VersionInfo {
         return _date;
     }
 
-    public void setDate(String value) {
+    public VersionInfo setDate(String value) {
         _date = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class VersionInfo {
         return _shortChangeSet;
     }
 
-    public void setShortChangeSet(String value) {
+    public VersionInfo setShortChangeSet(String value) {
         _shortChangeSet = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class VersionInfo {
         return _shortDate;
     }
 
-    public void setShortDate(String value) {
+    public VersionInfo setShortDate(String value) {
         _shortDate = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class VersionInfo {
         return _version;
     }
 
-    public void setVersion(String value) {
+    public VersionInfo setVersion(String value) {
         _version = value;
+        return this;
     }
 
     /**

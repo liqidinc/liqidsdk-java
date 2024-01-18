@@ -35,8 +35,9 @@ public class GroupMemoryDeviceRelator {
         return _deviceStatus;
     }
 
-    public void setDeviceStatus(MemoryDeviceStatus value) {
+    public GroupMemoryDeviceRelator setDeviceStatus(MemoryDeviceStatus value) {
         _deviceStatus = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GroupMemoryDeviceRelator {
         return _group;
     }
 
-    public void setGroup(Group value) {
+    public GroupMemoryDeviceRelator setGroup(Group value) {
         _group = value;
+        return this;
     }
 
     /**

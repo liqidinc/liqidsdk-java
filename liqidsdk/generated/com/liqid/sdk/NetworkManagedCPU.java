@@ -35,8 +35,9 @@ public class NetworkManagedCPU {
         return _cpuName;
     }
 
-    public void setCPUName(String value) {
+    public NetworkManagedCPU setCPUName(String value) {
         _cpuName = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class NetworkManagedCPU {
         return _credentials;
     }
 
-    public void setCredentials(Credentials value) {
+    public NetworkManagedCPU setCredentials(Credentials value) {
         _credentials = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class NetworkManagedCPU {
         return _ipAddress;
     }
 
-    public void setIPAddress(String value) {
+    public NetworkManagedCPU setIPAddress(String value) {
         _ipAddress = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class NetworkManagedCPU {
         return _managerType;
     }
 
-    public void setManagerType(ManageableType value) {
+    public NetworkManagedCPU setManagerType(ManageableType value) {
         _managerType = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class NetworkManagedCPU {
         return _portNumber;
     }
 
-    public void setPortNumber(Integer value) {
+    public NetworkManagedCPU setPortNumber(Integer value) {
         _portNumber = value;
+        return this;
     }
 
     /**

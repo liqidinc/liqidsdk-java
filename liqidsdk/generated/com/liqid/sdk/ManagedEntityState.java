@@ -35,8 +35,9 @@ public class ManagedEntityState {
         return _active;
     }
 
-    public void setActive(Boolean value) {
+    public ManagedEntityState setActive(Boolean value) {
         _active = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class ManagedEntityState {
         return _required;
     }
 
-    public void setRequired(Boolean value) {
+    public ManagedEntityState setRequired(Boolean value) {
         _required = value;
+        return this;
     }
 
     /**

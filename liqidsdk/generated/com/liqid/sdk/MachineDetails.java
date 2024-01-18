@@ -35,8 +35,9 @@ public class MachineDetails {
         return _bootDevice;
     }
 
-    public void setBootDevice(String value) {
+    public MachineDetails setBootDevice(String value) {
         _bootDevice = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class MachineDetails {
         return _bootImage;
     }
 
-    public void setBootImage(String value) {
+    public MachineDetails setBootImage(String value) {
         _bootImage = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class MachineDetails {
         return _cpuCoreCount;
     }
 
-    public void setCPUCoreCount(Integer value) {
+    public MachineDetails setCPUCoreCount(Integer value) {
         _cpuCoreCount = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class MachineDetails {
         return _cpuFrequency;
     }
 
-    public void setCPUFrequency(String value) {
+    public MachineDetails setCPUFrequency(String value) {
         _cpuFrequency = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class MachineDetails {
         return _cpuSockets;
     }
 
-    public void setCPUSockets(String value) {
+    public MachineDetails setCPUSockets(String value) {
         _cpuSockets = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class MachineDetails {
         return _cpuSocketsField;
     }
 
-    public void setCPUSocketsField(String value) {
+    public MachineDetails setCPUSocketsField(String value) {
         _cpuSocketsField = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class MachineDetails {
         return _cpuThreadCount;
     }
 
-    public void setCPUThreadCount(Integer value) {
+    public MachineDetails setCPUThreadCount(Integer value) {
         _cpuThreadCount = value;
+        return this;
     }
 
     /**
@@ -133,8 +140,9 @@ public class MachineDetails {
         return _createdAt;
     }
 
-    public void setCreatedAt(Long value) {
+    public MachineDetails setCreatedAt(Long value) {
         _createdAt = value;
+        return this;
     }
 
     /**
@@ -147,8 +155,9 @@ public class MachineDetails {
         return _dynamicRAM;
     }
 
-    public void setDynamicRAM(String value) {
+    public MachineDetails setDynamicRAM(String value) {
         _dynamicRAM = value;
+        return this;
     }
 
     /**
@@ -161,8 +170,9 @@ public class MachineDetails {
         return _fabricConnect;
     }
 
-    public void setFabricConnect(String value) {
+    public MachineDetails setFabricConnect(String value) {
         _fabricConnect = value;
+        return this;
     }
 
     /**
@@ -175,8 +185,9 @@ public class MachineDetails {
         return _fpgaCount;
     }
 
-    public void setFPGACount(Integer value) {
+    public MachineDetails setFPGACount(Integer value) {
         _fpgaCount = value;
+        return this;
     }
 
     /**
@@ -189,8 +200,9 @@ public class MachineDetails {
         return _fpgadramSize;
     }
 
-    public void setFPGADRAMSize(Integer value) {
+    public MachineDetails setFPGADRAMSize(Integer value) {
         _fpgadramSize = value;
+        return this;
     }
 
     /**
@@ -203,8 +215,9 @@ public class MachineDetails {
         return _fpgaSpeed;
     }
 
-    public void setFPGASpeed(String value) {
+    public MachineDetails setFPGASpeed(String value) {
         _fpgaSpeed = value;
+        return this;
     }
 
     /**
@@ -217,8 +230,9 @@ public class MachineDetails {
         return _gpuCoreCount;
     }
 
-    public void setGPUCoreCount(Integer value) {
+    public MachineDetails setGPUCoreCount(Integer value) {
         _gpuCoreCount = value;
+        return this;
     }
 
     /**
@@ -231,8 +245,9 @@ public class MachineDetails {
         return _gpuCount;
     }
 
-    public void setGPUCount(Integer value) {
+    public MachineDetails setGPUCount(Integer value) {
         _gpuCount = value;
+        return this;
     }
 
     /**
@@ -245,8 +260,9 @@ public class MachineDetails {
         return _ipAddress;
     }
 
-    public void setIPAddress(String value) {
+    public MachineDetails setIPAddress(String value) {
         _ipAddress = value;
+        return this;
     }
 
     /**
@@ -259,8 +275,9 @@ public class MachineDetails {
         return _ipmiAddress;
     }
 
-    public void setIPMIAddress(String value) {
+    public MachineDetails setIPMIAddress(String value) {
         _ipmiAddress = value;
+        return this;
     }
 
     /**
@@ -273,8 +290,9 @@ public class MachineDetails {
         return _lastModifiedAt;
     }
 
-    public void setLastModifiedAt(Long value) {
+    public MachineDetails setLastModifiedAt(Long value) {
         _lastModifiedAt = value;
+        return this;
     }
 
     /**
@@ -287,8 +305,9 @@ public class MachineDetails {
         return _machineId;
     }
 
-    public void setMachineId(Integer value) {
+    public MachineDetails setMachineId(Integer value) {
         _machineId = value;
+        return this;
     }
 
     /**
@@ -301,8 +320,9 @@ public class MachineDetails {
         return _machineName;
     }
 
-    public void setMachineName(String value) {
+    public MachineDetails setMachineName(String value) {
         _machineName = value;
+        return this;
     }
 
     /**
@@ -315,8 +335,9 @@ public class MachineDetails {
         return _networkAdapterCount;
     }
 
-    public void setNetworkAdapterCount(Integer value) {
+    public MachineDetails setNetworkAdapterCount(Integer value) {
         _networkAdapterCount = value;
+        return this;
     }
 
     /**
@@ -329,8 +350,9 @@ public class MachineDetails {
         return _operatingSystem;
     }
 
-    public void setOperatingSystem(String value) {
+    public MachineDetails setOperatingSystem(String value) {
         _operatingSystem = value;
+        return this;
     }
 
     /**
@@ -343,8 +365,9 @@ public class MachineDetails {
         return _storageDriveCount;
     }
 
-    public void setStorageDriveCount(Integer value) {
+    public MachineDetails setStorageDriveCount(Integer value) {
         _storageDriveCount = value;
+        return this;
     }
 
     /**
@@ -357,8 +380,9 @@ public class MachineDetails {
         return _totalCapacity;
     }
 
-    public void setTotalCapacity(Long value) {
+    public MachineDetails setTotalCapacity(Long value) {
         _totalCapacity = value;
+        return this;
     }
 
     /**
@@ -371,8 +395,9 @@ public class MachineDetails {
         return _totalThroughput;
     }
 
-    public void setTotalThroughput(String value) {
+    public MachineDetails setTotalThroughput(String value) {
         _totalThroughput = value;
+        return this;
     }
 
     /**

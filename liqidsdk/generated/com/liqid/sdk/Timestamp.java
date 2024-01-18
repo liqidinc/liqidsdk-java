@@ -35,8 +35,9 @@ public class Timestamp {
         return _oldTimestamp;
     }
 
-    public void setOldTimestamp(Integer value) {
+    public Timestamp setOldTimestamp(Integer value) {
         _oldTimestamp = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class Timestamp {
         return _timestamp;
     }
 
-    public void setTimestamp(Long value) {
+    public Timestamp setTimestamp(Long value) {
         _timestamp = value;
+        return this;
     }
 
     /**

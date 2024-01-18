@@ -35,8 +35,9 @@ public class PreDevice {
         return _deviceName;
     }
 
-    public void setDeviceName(String value) {
+    public PreDevice setDeviceName(String value) {
         _deviceName = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class PreDevice {
         return LiqidClientBase.hexStringToInteger(_fabricGlobalId);
     }
 
-    public void setFabricGlobalId(Integer value) {
+    public PreDevice setFabricGlobalId(Integer value) {
         _fabricGlobalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class PreDevice {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public PreDevice setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class PreDevice {
         return LiqidClientBase.hexStringToLong(_flags);
     }
 
-    public void setFlags(Long value) {
+    public PreDevice setFlags(Long value) {
         _flags = String.format("0x%016x", value);
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class PreDevice {
         return _groupId;
     }
 
-    public void setGroupId(Integer value) {
+    public PreDevice setGroupId(Integer value) {
         _groupId = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class PreDevice {
         return _groupName;
     }
 
-    public void setGroupName(String value) {
+    public PreDevice setGroupName(String value) {
         _groupName = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class PreDevice {
         return _index;
     }
 
-    public void setIndex(String value) {
+    public PreDevice setIndex(String value) {
         _index = value;
+        return this;
     }
 
     /**
@@ -139,12 +146,13 @@ public class PreDevice {
         return Integer.parseInt(_machineId);
     }
 
-    public void setMachineId(Integer value) {
+    public PreDevice setMachineId(Integer value) {
         if (value.equals(0)) {
             _machineId = "n/a";
-            return;
+            return this;
         }
         _machineId = String.format("%d", value);
+        return this;
     }
 
     /**
@@ -157,8 +165,9 @@ public class PreDevice {
         return _machineName;
     }
 
-    public void setMachineName(String value) {
+    public PreDevice setMachineName(String value) {
         _machineName = value;
+        return this;
     }
 
     /**
@@ -171,8 +180,9 @@ public class PreDevice {
         return LiqidClientBase.hexStringToInteger(_ownerId);
     }
 
-    public void setOwnerId(Integer value) {
+    public PreDevice setOwnerId(Integer value) {
         _ownerId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -185,8 +195,9 @@ public class PreDevice {
         return _pciLaneCount;
     }
 
-    public void setPCILaneCount(Integer value) {
+    public PreDevice setPCILaneCount(Integer value) {
         _pciLaneCount = value;
+        return this;
     }
 
     /**
@@ -199,8 +210,9 @@ public class PreDevice {
         return _podId;
     }
 
-    public void setPodId(Integer value) {
+    public PreDevice setPodId(Integer value) {
         _podId = value;
+        return this;
     }
 
     /**
@@ -213,8 +225,9 @@ public class PreDevice {
         return LiqidClientBase.hexStringToInteger(_portGlobalId);
     }
 
-    public void setPortGlobalId(Integer value) {
+    public PreDevice setPortGlobalId(Integer value) {
         _portGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**
@@ -227,8 +240,9 @@ public class PreDevice {
         return _preDeviceType;
     }
 
-    public void setPreDeviceType(PreDeviceType value) {
+    public PreDevice setPreDeviceType(PreDeviceType value) {
         _preDeviceType = value;
+        return this;
     }
 
     /**
@@ -241,8 +255,9 @@ public class PreDevice {
         return LiqidClientBase.hexStringToInteger(_switchGlobalId);
     }
 
-    public void setSwitchGlobalId(Integer value) {
+    public PreDevice setSwitchGlobalId(Integer value) {
         _switchGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class AsynchronousStatus {
         return _deviceId;
     }
 
-    public void setDeviceId(String value) {
+    public AsynchronousStatus setDeviceId(String value) {
         _deviceId = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class AsynchronousStatus {
         return _executionDateTime;
     }
 
-    public void setExecutionDateTime(String value) {
+    public AsynchronousStatus setExecutionDateTime(String value) {
         _executionDateTime = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class AsynchronousStatus {
         return _executionState;
     }
 
-    public void setExecutionState(String value) {
+    public AsynchronousStatus setExecutionState(String value) {
         _executionState = value;
+        return this;
     }
 
     /**

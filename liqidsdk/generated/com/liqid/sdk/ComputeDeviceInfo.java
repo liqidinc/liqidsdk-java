@@ -35,8 +35,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _coreCount;
     }
 
-    public void setCoreCount(String value) {
+    public ComputeDeviceInfo setCoreCount(String value) {
         _coreCount = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _coreMHz;
     }
 
-    public void setCoreMHz(Double value) {
+    public ComputeDeviceInfo setCoreMHz(Double value) {
         _coreMHz = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _dramSize;
     }
 
-    public void setDRAMSize(String value) {
+    public ComputeDeviceInfo setDRAMSize(String value) {
         _dramSize = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _dramType;
     }
 
-    public void setDRAMType(String value) {
+    public ComputeDeviceInfo setDRAMType(String value) {
         _dramType = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _instructionSet;
     }
 
-    public void setInstructionSet(String value) {
+    public ComputeDeviceInfo setInstructionSet(String value) {
         _instructionSet = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _numberOfThreads;
     }
 
-    public void setNumberOfThreads(Integer value) {
+    public ComputeDeviceInfo setNumberOfThreads(Integer value) {
         _numberOfThreads = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class ComputeDeviceInfo extends DeviceInfo {
         return _socket;
     }
 
-    public void setSocket(String value) {
+    public ComputeDeviceInfo setSocket(String value) {
         _socket = value;
+        return this;
     }
 
     /**

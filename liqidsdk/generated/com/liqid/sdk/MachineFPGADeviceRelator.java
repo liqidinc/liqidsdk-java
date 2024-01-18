@@ -35,8 +35,9 @@ public class MachineFPGADeviceRelator {
         return _groupDeviceRelator;
     }
 
-    public void setGroupDeviceRelator(GroupFPGADeviceRelator value) {
+    public MachineFPGADeviceRelator setGroupDeviceRelator(GroupFPGADeviceRelator value) {
         _groupDeviceRelator = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class MachineFPGADeviceRelator {
         return _machine;
     }
 
-    public void setMachine(Machine value) {
+    public MachineFPGADeviceRelator setMachine(Machine value) {
         _machine = value;
+        return this;
     }
 
     /**

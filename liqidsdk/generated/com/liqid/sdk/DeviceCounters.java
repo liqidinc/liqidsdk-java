@@ -35,8 +35,9 @@ public class DeviceCounters {
         return _cpuCount;
     }
 
-    public void setCPUCount(Integer value) {
+    public DeviceCounters setCPUCount(Integer value) {
         _cpuCount = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class DeviceCounters {
         return _fpgaCount;
     }
 
-    public void setFPGACount(Integer value) {
+    public DeviceCounters setFPGACount(Integer value) {
         _fpgaCount = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class DeviceCounters {
         return _gpuCount;
     }
 
-    public void setGPUCount(Integer value) {
+    public DeviceCounters setGPUCount(Integer value) {
         _gpuCount = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class DeviceCounters {
         return _linkCount;
     }
 
-    public void setLinkCount(Integer value) {
+    public DeviceCounters setLinkCount(Integer value) {
         _linkCount = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class DeviceCounters {
         return _plxCount;
     }
 
-    public void setPLXCount(Integer value) {
+    public DeviceCounters setPLXCount(Integer value) {
         _plxCount = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class DeviceCounters {
         return _targetCount;
     }
 
-    public void setTargetCount(Integer value) {
+    public DeviceCounters setTargetCount(Integer value) {
         _targetCount = value;
+        return this;
     }
 
     /**

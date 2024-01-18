@@ -35,8 +35,9 @@ public class SSHStatus {
         return _active;
     }
 
-    public void setActive(Boolean value) {
+    public SSHStatus setActive(Boolean value) {
         _active = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class SSHStatus {
         return _enabled;
     }
 
-    public void setEnabled(Boolean value) {
+    public SSHStatus setEnabled(Boolean value) {
         _enabled = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class PortCPU {
         return _busWidth;
     }
 
-    public void setBusWidth(String value) {
+    public PortCPU setBusWidth(String value) {
         _busWidth = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class PortCPU {
         return _deviceId;
     }
 
-    public void setDeviceId(String value) {
+    public PortCPU setDeviceId(String value) {
         _deviceId = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class PortCPU {
         return _direction;
     }
 
-    public void setDirection(String value) {
+    public PortCPU setDirection(String value) {
         _direction = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class PortCPU {
         return _globalId;
     }
 
-    public void setGlobalId(String value) {
+    public PortCPU setGlobalId(String value) {
         _globalId = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class PortCPU {
         return _name;
     }
 
-    public void setName(String value) {
+    public PortCPU setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class PortCPU {
         return _portType;
     }
 
-    public void setPortType(String value) {
+    public PortCPU setPortType(String value) {
         _portType = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class PortCPU {
         return _vendorId;
     }
 
-    public void setVendorId(String value) {
+    public PortCPU setVendorId(String value) {
         _vendorId = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class GroupNetworkDeviceRelator {
         return _deviceStatus;
     }
 
-    public void setDeviceStatus(NetworkDeviceStatus value) {
+    public GroupNetworkDeviceRelator setDeviceStatus(NetworkDeviceStatus value) {
         _deviceStatus = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GroupNetworkDeviceRelator {
         return _group;
     }
 
-    public void setGroup(Group value) {
+    public GroupNetworkDeviceRelator setGroup(Group value) {
         _group = value;
+        return this;
     }
 
     /**

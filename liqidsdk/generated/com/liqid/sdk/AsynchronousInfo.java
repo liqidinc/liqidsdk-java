@@ -35,8 +35,9 @@ public class AsynchronousInfo {
         return _asynchronousId;
     }
 
-    public void setAsynchronousId(String value) {
+    public AsynchronousInfo setAsynchronousId(String value) {
         _asynchronousId = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class AsynchronousInfo {
         return _deviceId;
     }
 
-    public void setDeviceId(String value) {
+    public AsynchronousInfo setDeviceId(String value) {
         _deviceId = value;
+        return this;
     }
 
     /**

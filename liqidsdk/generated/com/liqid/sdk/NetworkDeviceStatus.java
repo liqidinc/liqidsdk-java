@@ -35,8 +35,9 @@ public class NetworkDeviceStatus extends DeviceStatus {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public NetworkDeviceStatus setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**

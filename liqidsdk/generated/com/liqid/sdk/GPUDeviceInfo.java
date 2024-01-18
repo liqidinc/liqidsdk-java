@@ -35,8 +35,9 @@ public class GPUDeviceInfo extends DeviceInfo {
         return _cacheSize;
     }
 
-    public void setCacheSize(String value) {
+    public GPUDeviceInfo setCacheSize(String value) {
         _cacheSize = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GPUDeviceInfo extends DeviceInfo {
         return _coreCount;
     }
 
-    public void setCoreCount(String value) {
+    public GPUDeviceInfo setCoreCount(String value) {
         _coreCount = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class GPUDeviceInfo extends DeviceInfo {
         return _coreSpeed;
     }
 
-    public void setCoreSpeed(String value) {
+    public GPUDeviceInfo setCoreSpeed(String value) {
         _coreSpeed = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class GPUDeviceInfo extends DeviceInfo {
         return _dramSize;
     }
 
-    public void setDRAMSize(String value) {
+    public GPUDeviceInfo setDRAMSize(String value) {
         _dramSize = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class GPUDeviceInfo extends DeviceInfo {
         return _dramType;
     }
 
-    public void setDRAMType(String value) {
+    public GPUDeviceInfo setDRAMType(String value) {
         _dramType = value;
+        return this;
     }
 
     /**

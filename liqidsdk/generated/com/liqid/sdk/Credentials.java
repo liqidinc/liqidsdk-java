@@ -35,8 +35,9 @@ public class Credentials {
         return _password;
     }
 
-    public void setPassword(String value) {
+    public Credentials setPassword(String value) {
         _password = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class Credentials {
         return _principal;
     }
 
-    public void setPrincipal(String value) {
+    public Credentials setPrincipal(String value) {
         _principal = value;
+        return this;
     }
 
     /**

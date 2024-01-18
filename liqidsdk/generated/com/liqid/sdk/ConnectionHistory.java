@@ -35,8 +35,9 @@ public class ConnectionHistory {
         return _attachTime;
     }
 
-    public void setAttachTime(Long value) {
+    public ConnectionHistory setAttachTime(Long value) {
         _attachTime = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class ConnectionHistory {
         return _detachTime;
     }
 
-    public void setDetachTime(Long value) {
+    public ConnectionHistory setDetachTime(Long value) {
         _detachTime = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class ConnectionHistory {
         return _deviceType;
     }
 
-    public void setDeviceType(PreDeviceType value) {
+    public ConnectionHistory setDeviceType(PreDeviceType value) {
         _deviceType = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class ConnectionHistory {
         return LiqidClientBase.hexStringToInteger(_fabricGlobalId);
     }
 
-    public void setFabricGlobalId(Integer value) {
+    public ConnectionHistory setFabricGlobalId(Integer value) {
         _fabricGlobalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class ConnectionHistory {
         return _free;
     }
 
-    public void setFree(Boolean value) {
+    public ConnectionHistory setFree(Boolean value) {
         _free = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class ConnectionHistory {
         return _name;
     }
 
-    public void setName(String value) {
+    public ConnectionHistory setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class ConnectionHistory {
         return _ownerGlobalId;
     }
 
-    public void setOwnerGlobalId(String value) {
+    public ConnectionHistory setOwnerGlobalId(String value) {
         _ownerGlobalId = value;
+        return this;
     }
 
     /**
@@ -133,8 +140,9 @@ public class ConnectionHistory {
         return _userDescription;
     }
 
-    public void setUserDescription(String value) {
+    public ConnectionHistory setUserDescription(String value) {
         _userDescription = value;
+        return this;
     }
 
     /**

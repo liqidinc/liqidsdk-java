@@ -35,8 +35,9 @@ public class DiscoveryToken {
         return _index;
     }
 
-    public void setIndex(Integer value) {
+    public DiscoveryToken setIndex(Integer value) {
         _index = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class DiscoveryToken {
         return _token;
     }
 
-    public void setToken(String value) {
+    public DiscoveryToken setToken(String value) {
         _token = value;
+        return this;
     }
 
     /**

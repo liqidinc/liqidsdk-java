@@ -35,8 +35,9 @@ public class FPGADeviceInfo extends DeviceInfo {
         return _coreCount;
     }
 
-    public void setCoreCount(String value) {
+    public FPGADeviceInfo setCoreCount(String value) {
         _coreCount = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class FPGADeviceInfo extends DeviceInfo {
         return _coreMHz;
     }
 
-    public void setCoreMHz(Double value) {
+    public FPGADeviceInfo setCoreMHz(Double value) {
         _coreMHz = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class FPGADeviceInfo extends DeviceInfo {
         return _dramSize;
     }
 
-    public void setDRAMSize(String value) {
+    public FPGADeviceInfo setDRAMSize(String value) {
         _dramSize = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class FPGADeviceInfo extends DeviceInfo {
         return _dramType;
     }
 
-    public void setDRAMType(String value) {
+    public FPGADeviceInfo setDRAMType(String value) {
         _dramType = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class FPGADeviceInfo extends DeviceInfo {
         return _fpgaSpeed;
     }
 
-    public void setFPGASpeed(String value) {
+    public FPGADeviceInfo setFPGASpeed(String value) {
         _fpgaSpeed = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class FPGADeviceInfo extends DeviceInfo {
         return _numberOfThreads;
     }
 
-    public void setNumberOfThreads(Integer value) {
+    public FPGADeviceInfo setNumberOfThreads(Integer value) {
         _numberOfThreads = value;
+        return this;
     }
 
     /**

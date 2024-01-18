@@ -35,8 +35,9 @@ public class ComputeDeviceStatus extends DeviceStatus {
         return LiqidClientBase.hexStringToInteger(_hConn);
     }
 
-    public void setHConn(Integer value) {
+    public ComputeDeviceStatus setHConn(Integer value) {
         _hConn = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class ComputeDeviceStatus extends DeviceStatus {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public ComputeDeviceStatus setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**

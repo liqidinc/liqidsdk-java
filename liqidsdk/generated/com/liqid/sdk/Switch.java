@@ -35,8 +35,9 @@ public class Switch {
         return _busWidth;
     }
 
-    public void setBusWidth(String value) {
+    public Switch setBusWidth(String value) {
         _busWidth = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class Switch {
         return _deviceId;
     }
 
-    public void setDeviceId(String value) {
+    public Switch setDeviceId(String value) {
         _deviceId = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class Switch {
         return _direction;
     }
 
-    public void setDirection(String value) {
+    public Switch setDirection(String value) {
         _direction = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class Switch {
         return _globalId;
     }
 
-    public void setGlobalId(String value) {
+    public Switch setGlobalId(String value) {
         _globalId = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class Switch {
         return _name;
     }
 
-    public void setName(String value) {
+    public Switch setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class Switch {
         return _switchDevice;
     }
 
-    public void setSwitchDevice(SwitchDevice value) {
+    public Switch setSwitchDevice(SwitchDevice value) {
         _switchDevice = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class Switch {
         return _switchType;
     }
 
-    public void setSwitchType(String value) {
+    public Switch setSwitchType(String value) {
         _switchType = value;
+        return this;
     }
 
     /**
@@ -133,8 +140,9 @@ public class Switch {
         return _vendorId;
     }
 
-    public void setVendorId(String value) {
+    public Switch setVendorId(String value) {
         _vendorId = value;
+        return this;
     }
 
     /**

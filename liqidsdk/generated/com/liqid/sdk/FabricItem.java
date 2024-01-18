@@ -35,8 +35,9 @@ public class FabricItem {
         return _deviceType;
     }
 
-    public void setDeviceType(DeviceType value) {
+    public FabricItem setDeviceType(DeviceType value) {
         _deviceType = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class FabricItem {
         return _hardwareComponent;
     }
 
-    public void setHardwareComponent(HardwareComponent value) {
+    public FabricItem setHardwareComponent(HardwareComponent value) {
         _hardwareComponent = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class FabricItem {
         return _id;
     }
 
-    public void setId(Integer value) {
+    public FabricItem setId(Integer value) {
         _id = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class FabricItem {
         return _name;
     }
 
-    public void setName(String value) {
+    public FabricItem setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class FabricItem {
         return _parentId;
     }
 
-    public void setParentId(Integer value) {
+    public FabricItem setParentId(Integer value) {
         _parentId = value;
+        return this;
     }
 
     /**

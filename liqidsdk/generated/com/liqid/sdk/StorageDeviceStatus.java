@@ -35,8 +35,9 @@ public class StorageDeviceStatus extends DeviceStatus {
         return _capacityMB;
     }
 
-    public void setCapacityMB(Long value) {
+    public StorageDeviceStatus setCapacityMB(Long value) {
         _capacityMB = value;
+        return this;
     }
 
     /**

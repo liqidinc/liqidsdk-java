@@ -35,8 +35,9 @@ public class StorageDeviceInfo extends DeviceInfo {
         return _capacity;
     }
 
-    public void setCapacity(String value) {
+    public StorageDeviceInfo setCapacity(String value) {
         _capacity = value;
+        return this;
     }
 
     /**

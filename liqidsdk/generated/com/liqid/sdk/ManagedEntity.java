@@ -35,8 +35,9 @@ public class ManagedEntity {
         return _capacity;
     }
 
-    public void setCapacity(Integer value) {
+    public ManagedEntity setCapacity(Integer value) {
         _capacity = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class ManagedEntity {
         return _companionDevice;
     }
 
-    public void setCompanionDevice(String value) {
+    public ManagedEntity setCompanionDevice(String value) {
         _companionDevice = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class ManagedEntity {
         return _coreMHZ;
     }
 
-    public void setCoreMHZ(Integer value) {
+    public ManagedEntity setCoreMHZ(Integer value) {
         _coreMHZ = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class ManagedEntity {
         return _description;
     }
 
-    public void setDescription(String value) {
+    public ManagedEntity setDescription(String value) {
         _description = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class ManagedEntity {
         return _deviceType;
     }
 
-    public void setDeviceType(String value) {
+    public ManagedEntity setDeviceType(String value) {
         _deviceType = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class ManagedEntity {
         return _discoveryToken;
     }
 
-    public void setDiscoveryToken(String value) {
+    public ManagedEntity setDiscoveryToken(String value) {
         _discoveryToken = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class ManagedEntity {
         return _dramSize;
     }
 
-    public void setDRAMSize(Integer value) {
+    public ManagedEntity setDRAMSize(Integer value) {
         _dramSize = value;
+        return this;
     }
 
     /**
@@ -133,8 +140,9 @@ public class ManagedEntity {
         return _dramType;
     }
 
-    public void setDRAMType(String value) {
+    public ManagedEntity setDRAMType(String value) {
         _dramType = value;
+        return this;
     }
 
     /**
@@ -147,8 +155,9 @@ public class ManagedEntity {
         return _entryDescription;
     }
 
-    public void setEntryDescription(ManagedEntityState value) {
+    public ManagedEntity setEntryDescription(ManagedEntityState value) {
         _entryDescription = value;
+        return this;
     }
 
     /**
@@ -161,8 +170,9 @@ public class ManagedEntity {
         return _managedEntityType;
     }
 
-    public void setManagedEntityType(String value) {
+    public ManagedEntity setManagedEntityType(String value) {
         _managedEntityType = value;
+        return this;
     }
 
     /**
@@ -175,8 +185,9 @@ public class ManagedEntity {
         return _manufacturer;
     }
 
-    public void setManufacturer(String value) {
+    public ManagedEntity setManufacturer(String value) {
         _manufacturer = value;
+        return this;
     }
 
     /**
@@ -189,8 +200,9 @@ public class ManagedEntity {
         return _model;
     }
 
-    public void setModel(String value) {
+    public ManagedEntity setModel(String value) {
         _model = value;
+        return this;
     }
 
     /**
@@ -203,8 +215,9 @@ public class ManagedEntity {
         return _numberOfCores;
     }
 
-    public void setNumberOfCores(Integer value) {
+    public ManagedEntity setNumberOfCores(Integer value) {
         _numberOfCores = value;
+        return this;
     }
 
     /**
@@ -217,8 +230,9 @@ public class ManagedEntity {
         return _numberOfThreads;
     }
 
-    public void setNumberOfThreads(Integer value) {
+    public ManagedEntity setNumberOfThreads(Integer value) {
         _numberOfThreads = value;
+        return this;
     }
 
     /**
@@ -231,8 +245,9 @@ public class ManagedEntity {
         return _pciDeviceId;
     }
 
-    public void setPCIDeviceId(String value) {
+    public ManagedEntity setPCIDeviceId(String value) {
         _pciDeviceId = value;
+        return this;
     }
 
     /**
@@ -245,8 +260,9 @@ public class ManagedEntity {
         return _pciVendorId;
     }
 
-    public void setPCIVendorId(String value) {
+    public ManagedEntity setPCIVendorId(String value) {
         _pciVendorId = value;
+        return this;
     }
 
     /**
@@ -259,8 +275,9 @@ public class ManagedEntity {
         return _speed;
     }
 
-    public void setSpeed(Integer value) {
+    public ManagedEntity setSpeed(Integer value) {
         _speed = value;
+        return this;
     }
 
     /**
@@ -273,8 +290,9 @@ public class ManagedEntity {
         return _sriovEnabled;
     }
 
-    public void setSRIOVEnabled(Boolean value) {
+    public ManagedEntity setSRIOVEnabled(Boolean value) {
         _sriovEnabled = value;
+        return this;
     }
 
     /**
@@ -287,8 +305,9 @@ public class ManagedEntity {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public ManagedEntity setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class FabricToggleComposite {
         return _controlFlag;
     }
 
-    public void setControlFlag(NameValuePair value) {
+    public FabricToggleComposite setControlFlag(NameValuePair value) {
         _controlFlag = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class FabricToggleComposite {
         return _coordinates;
     }
 
-    public void setCoordinates(Coordinates value) {
+    public FabricToggleComposite setCoordinates(Coordinates value) {
         _coordinates = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class FabricToggleComposite {
         return _options;
     }
 
-    public void setOptions(FabricToggleCompositeOption value) {
+    public FabricToggleComposite setOptions(FabricToggleCompositeOption value) {
         _options = value;
+        return this;
     }
 
     /**

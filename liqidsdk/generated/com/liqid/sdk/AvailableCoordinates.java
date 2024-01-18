@@ -35,8 +35,9 @@ public class AvailableCoordinates {
         return _coordinates;
     }
 
-    public void setCoordinates(Coordinates value) {
+    public AvailableCoordinates setCoordinates(Coordinates value) {
         _coordinates = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class AvailableCoordinates {
         return _ipAddress;
     }
 
-    public void setIPAddress(String value) {
+    public AvailableCoordinates setIPAddress(String value) {
         _ipAddress = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class AvailableCoordinates {
         return _portNumber;
     }
 
-    public void setPortNumber(Integer value) {
+    public AvailableCoordinates setPortNumber(Integer value) {
         _portNumber = value;
+        return this;
     }
 
     /**

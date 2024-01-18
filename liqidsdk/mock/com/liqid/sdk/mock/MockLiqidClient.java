@@ -218,12 +218,13 @@ public class MockLiqidClient extends LiqidClient {
     public Integer createDevice(
         final DeviceType deviceType,
         final short pciVendorId,
+        final short pciDeviceId,
         final String vendor,
         final String model
     ) {
         var fn = "createDevice";
-        _logger.trace("Entering %s with devType=%s pciVendorId=0x%04x vendor=%s model=%s",
-                      fn, deviceType, pciVendorId, vendor, model);
+        _logger.trace("Entering %s with devType=%s pciVendorId=0x%04x pciDeviceId=0x%04x, vendor=%s model=%s",
+                      fn, deviceType, pciVendorId, pciDeviceId, vendor, model);
 
         MockDevice mockDevice = switch (deviceType) {
             case COMPUTE -> createComputeMockDevice();
@@ -234,11 +235,25 @@ public class MockLiqidClient extends LiqidClient {
             case SSD -> createStorageMockDevice();
         };
 
+        var pciVendorIdStr = String.format("0x%04x", pciVendorId);
+        var pciDeviceIdStr = String.format("0x%04x", pciDeviceId);
+
         var deviceStatus = mockDevice.getDeviceStatus();
+        deviceStatus.setConnectionType("gen4");
+        deviceStatus.setDeviceState("active | online");
         deviceStatus.setDeviceType(deviceType);
         deviceStatus.setFabricType(FabricType.GEN4.getValue());
+        deviceStatus.setGlobalId(0x10000000 + deviceStatus.getDeviceId());
         deviceStatus.setFabricId(_fabricIdentifier);
+        deviceStatus.setFlags(0x4000000401005160L);
+        deviceStatus.setFlags2("0x00000000");
+        deviceStatus.setPCIDeviceId(pciDeviceIdStr);
+        deviceStatus.setPCILaneCount(0);
+        deviceStatus.setPCIVendorId(pciVendorIdStr);
         deviceStatus.setPodId(_podIdentifier);
+        deviceStatus.setPortGlobalId(0);
+        deviceStatus.setSledId(-1);
+        deviceStatus.setSwitchGlobalId(0);
 
         var deviceInfo = mockDevice.getDeviceInfo();
         deviceInfo.setDeviceInfoType(deviceType);
@@ -266,17 +281,18 @@ public class MockLiqidClient extends LiqidClient {
     public Collection<Integer> createDevices(
         final DeviceType deviceType,
         final short pciVendorId,
+        final short pciDeviceId,
         final String vendor,
         final String model,
         final int count
     ) {
         var fn = "createDevices";
-        _logger.trace("Entering %s with devType=%s pciVendorId=0x%04x vendor=%s model=%s count=%d",
-                      fn, deviceType, pciVendorId, vendor, model, count);
+        _logger.trace("Entering %s with devType=%s pciVendorId=0x%04x pciDeviceId=0x%04x, vendor=%s model=%s count=%d",
+                      fn, deviceType, pciVendorId, pciDeviceId, vendor, model, count);
 
         var deviceIds = new LinkedList<Integer>();
         for (var dx = 0; dx < count; dx++) {
-            deviceIds.add(createDevice(deviceType, pciVendorId, vendor, model));
+            deviceIds.add(createDevice(deviceType, pciVendorId, pciDeviceId, vendor, model));
         }
 
         _logger.trace("%s returning %s", fn, deviceIds);
@@ -286,9 +302,11 @@ public class MockLiqidClient extends LiqidClient {
     // private helpful functions
 
     private void checkCoordinates() throws WrongCoordinatesException {
-        var ex = new WrongCoordinatesException(_defaultCoordinates, _coordinates);
-        _logger.throwing(ex);
-        throw ex;
+        if (!Objects.equals(_coordinates, _defaultCoordinates)) {
+            var ex = new WrongCoordinatesException(_coordinates, _defaultCoordinates);
+            _logger.throwing(ex);
+            throw ex;
+        }
     }
 
     private void checkDeviceExists(
@@ -383,20 +401,11 @@ public class MockLiqidClient extends LiqidClient {
 
         var index = _computeDeviceIds.size();
         var deviceId = index;
-        var deviceIdStr = String.format("0x%08x", deviceId);
         _computeDeviceIds.add(deviceId);
         var deviceName = String.format("cpu%d", deviceId);
 
-        var deviceStatus = new ComputeDeviceStatus.Builder().setDeviceId(deviceIdStr)
-                                                            .setName(deviceName)
-                                                            .setIndex(index)
-                                                            .build();
-
-        var deviceInfo = new ComputeDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
-                                                        .setName(deviceName)
-                                                        .setIndex(index)
-                                                        .build();
-
+        var deviceStatus = new ComputeDeviceStatus().setName(deviceName).setIndex(index);
+        var deviceInfo = new ComputeDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
@@ -410,20 +419,11 @@ public class MockLiqidClient extends LiqidClient {
 
         var index = _fpgaDeviceIds.size();
         var deviceId = 0x1000 + index;
-        var deviceIdStr = String.format("0x%08x", deviceId);
         _fpgaDeviceIds.add(deviceId);
         var deviceName = String.format("fpga%d", deviceId);
 
-        var deviceStatus = new FPGADeviceStatus.Builder().setDeviceId(deviceIdStr)
-                                                         .setName(deviceName)
-                                                         .setIndex(index)
-                                                         .build();
-
-        var deviceInfo = new FPGADeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
-                                                     .setName(deviceName)
-                                                     .setIndex(index)
-                                                     .build();
-
+        var deviceStatus = new FPGADeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
+        var deviceInfo = new FPGADeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
@@ -438,20 +438,11 @@ public class MockLiqidClient extends LiqidClient {
 
         var index = _gpuDeviceIds.size();
         var deviceId = 0x2000 + index;
-        var deviceIdStr = String.format("0x%08x", deviceId);
         _gpuDeviceIds.add(deviceId);
         var deviceName = String.format("gpu%d", deviceId);
 
-        var deviceStatus = new GPUDeviceStatus.Builder().setDeviceId(deviceIdStr)
-                                                        .setName(deviceName)
-                                                        .setIndex(index)
-                                                        .build();
-
-        var deviceInfo = new GPUDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
-                                                    .setName(deviceName)
-                                                    .setIndex(index)
-                                                    .build();
-
+        var deviceStatus = new GPUDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
+        var deviceInfo = new GPUDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
@@ -466,20 +457,11 @@ public class MockLiqidClient extends LiqidClient {
 
         var index = _memoryDeviceIds.size();
         var deviceId = 0x3000 + index;
-        var deviceIdStr = String.format("0x%08x", deviceId);
         _memoryDeviceIds.add(deviceId);
         var deviceName = String.format("mem%d", deviceId);
 
-        var deviceStatus = new MemoryDeviceStatus.Builder().setDeviceId(deviceIdStr)
-                                                           .setName(deviceName)
-                                                           .setIndex(index)
-                                                           .build();
-
-        var deviceInfo = new MemoryDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
-                                                       .setName(deviceName)
-                                                       .setIndex(index)
-                                                       .build();
-
+        var deviceStatus = new MemoryDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
+        var deviceInfo = new MemoryDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
@@ -494,20 +476,11 @@ public class MockLiqidClient extends LiqidClient {
 
         var index = _networkDeviceIds.size();
         var deviceId = 0x4000 + index;
-        var deviceIdStr = String.format("0x%08x", deviceId);
         _networkDeviceIds.add(deviceId);
         var deviceName = String.format("nic%d", deviceId);
 
-        var deviceStatus = new NetworkDeviceStatus.Builder().setDeviceId(deviceIdStr)
-                                                            .setName(deviceName)
-                                                            .setIndex(index)
-                                                            .build();
-
-        var deviceInfo = new MemoryDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
-                                                       .setName(deviceName)
-                                                       .setIndex(index)
-                                                       .build();
-
+        var deviceStatus = new NetworkDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
+        var deviceInfo = new MemoryDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
@@ -522,20 +495,11 @@ public class MockLiqidClient extends LiqidClient {
 
         var index = _storageDeviceIds.size();
         var deviceId = 0x5000 + index;
-        var deviceIdStr = String.format("0x%08x", deviceId);
         _storageDeviceIds.add(deviceId);
         var deviceName = String.format("targ%d", deviceId);
 
-        var deviceStatus = new StorageDeviceStatus.Builder().setDeviceId(deviceIdStr)
-                                                            .setName(deviceName)
-                                                            .setIndex(index)
-                                                            .build();
-
-        var deviceInfo = new StorageDeviceInfo.Builder().setDeviceIdentifier(deviceIdStr)
-                                                        .setName(deviceName)
-                                                        .setIndex(index)
-                                                        .build();
-
+        var deviceStatus = new StorageDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
+        var deviceInfo = new StorageDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);

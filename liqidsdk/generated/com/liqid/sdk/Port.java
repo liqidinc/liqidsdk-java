@@ -36,8 +36,9 @@ public class Port {
         return _badDLLPCount;
     }
 
-    public void setBadDLLPCount(Integer value) {
+    public Port setBadDLLPCount(Integer value) {
         _badDLLPCount = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class Port {
         return _badTLPCount;
     }
 
-    public void setBadTLPCount(Integer value) {
+    public Port setBadTLPCount(Integer value) {
         _badTLPCount = value;
+        return this;
     }
 
     /**
@@ -64,8 +66,9 @@ public class Port {
         return _cpu;
     }
 
-    public void setCPU(PortCPU value) {
+    public Port setCPU(PortCPU value) {
         _cpu = value;
+        return this;
     }
 
     /**
@@ -78,8 +81,9 @@ public class Port {
         return _deviceState;
     }
 
-    public void setDeviceState(String value) {
+    public Port setDeviceState(String value) {
         _deviceState = value;
+        return this;
     }
 
     /**
@@ -92,8 +96,9 @@ public class Port {
         return _egressBytes;
     }
 
-    public void setEgressBytes(Integer value) {
+    public Port setEgressBytes(Integer value) {
         _egressBytes = value;
+        return this;
     }
 
     /**
@@ -106,8 +111,9 @@ public class Port {
         return _errorCount;
     }
 
-    public void setErrorCount(Integer value) {
+    public Port setErrorCount(Integer value) {
         _errorCount = value;
+        return this;
     }
 
     /**
@@ -120,8 +126,9 @@ public class Port {
         return LiqidClientBase.hexStringToInteger(_fabricGlobalId);
     }
 
-    public void setFabricGlobalId(Integer value) {
+    public Port setFabricGlobalId(Integer value) {
         _fabricGlobalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -134,8 +141,9 @@ public class Port {
         return LiqidClientBase.hexStringToLong(_flags);
     }
 
-    public void setFlags(Long value) {
+    public Port setFlags(Long value) {
         _flags = String.format("0x%016x", value);
+        return this;
     }
 
     /**
@@ -148,8 +156,9 @@ public class Port {
         return _index;
     }
 
-    public void setIndex(String value) {
+    public Port setIndex(String value) {
         _index = value;
+        return this;
     }
 
     /**
@@ -162,8 +171,9 @@ public class Port {
         return _ingressBytes;
     }
 
-    public void setIngressBytes(Integer value) {
+    public Port setIngressBytes(Integer value) {
         _ingressBytes = value;
+        return this;
     }
 
     /**
@@ -176,8 +186,9 @@ public class Port {
         return _pciLaneCount;
     }
 
-    public void setPCILaneCount(Integer value) {
+    public Port setPCILaneCount(Integer value) {
         _pciLaneCount = value;
+        return this;
     }
 
     /**
@@ -190,8 +201,9 @@ public class Port {
         return _portType;
     }
 
-    public void setPortType(String value) {
+    public Port setPortType(String value) {
         _portType = value;
+        return this;
     }
 
     /**
@@ -204,8 +216,9 @@ public class Port {
         return _receiverErrorCount;
     }
 
-    public void setReceiverErrorCount(Integer value) {
+    public Port setReceiverErrorCount(Integer value) {
         _receiverErrorCount = value;
+        return this;
     }
 
     /**
@@ -218,8 +231,9 @@ public class Port {
         return _state;
     }
 
-    public void setState(String value) {
+    public Port setState(String value) {
         _state = value;
+        return this;
     }
 
     /**
@@ -232,8 +246,9 @@ public class Port {
         return _switches;
     }
 
-    public void setSwitches(LinkedList<Switch> value) {
+    public Port setSwitches(LinkedList<Switch> value) {
         _switches = value;
+        return this;
     }
 
     /**

@@ -36,8 +36,9 @@ public class Machine {
         return _computeName;
     }
 
-    public void setComputeName(String value) {
+    public Machine setComputeName(String value) {
         _computeName = value;
+        return this;
     }
 
     /**
@@ -51,8 +52,9 @@ public class Machine {
         return _connectionHistory;
     }
 
-    public void setConnectionHistory(LinkedList<ConnectionHistory> value) {
+    public Machine setConnectionHistory(LinkedList<ConnectionHistory> value) {
         _connectionHistory = value;
+        return this;
     }
 
     /**
@@ -65,8 +67,9 @@ public class Machine {
         return _createdTimestamp;
     }
 
-    public void setCreatedTimestamp(Long value) {
+    public Machine setCreatedTimestamp(Long value) {
         _createdTimestamp = value;
+        return this;
     }
 
     /**
@@ -85,12 +88,13 @@ public class Machine {
         return LiqidClientBase.hexStringToInteger(_fabricGlobalId);
     }
 
-    public void setFabricGlobalId(Integer value) {
+    public Machine setFabricGlobalId(Integer value) {
         if (value.equals(0)) {
             _fabricGlobalId = "n/a";
-            return;
+            return this;
         }
         _fabricGlobalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -103,8 +107,9 @@ public class Machine {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public Machine setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -117,8 +122,9 @@ public class Machine {
         return _groupId;
     }
 
-    public void setGroupId(Integer value) {
+    public Machine setGroupId(Integer value) {
         _groupId = value;
+        return this;
     }
 
     /**
@@ -131,8 +137,9 @@ public class Machine {
         return _index;
     }
 
-    public void setIndex(Integer value) {
+    public Machine setIndex(Integer value) {
         _index = value;
+        return this;
     }
 
     /**
@@ -145,8 +152,9 @@ public class Machine {
         return _machineId;
     }
 
-    public void setMachineId(Integer value) {
+    public Machine setMachineId(Integer value) {
         _machineId = value;
+        return this;
     }
 
     /**
@@ -159,8 +167,9 @@ public class Machine {
         return _machineName;
     }
 
-    public void setMachineName(String value) {
+    public Machine setMachineName(String value) {
         _machineName = value;
+        return this;
     }
 
     /**
@@ -173,8 +182,9 @@ public class Machine {
         return _p2PEnabled;
     }
 
-    public void setP2PEnabled(P2PType value) {
+    public Machine setP2PEnabled(P2PType value) {
         _p2PEnabled = value;
+        return this;
     }
 
     /**
@@ -187,8 +197,9 @@ public class Machine {
         return LiqidClientBase.hexStringToInteger(_portGlobalId);
     }
 
-    public void setPortGlobalId(Integer value) {
+    public Machine setPortGlobalId(Integer value) {
         _portGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**
@@ -201,8 +212,9 @@ public class Machine {
         return LiqidClientBase.hexStringToInteger(_switchGlobalId);
     }
 
-    public void setSwitchGlobalId(Integer value) {
+    public Machine setSwitchGlobalId(Integer value) {
         _switchGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**

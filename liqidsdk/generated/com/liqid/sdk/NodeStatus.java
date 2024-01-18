@@ -37,8 +37,9 @@ public class NodeStatus {
         return _comps;
     }
 
-    public void setComps(Integer value) {
+    public NodeStatus setComps(Integer value) {
         _comps = value;
+        return this;
     }
 
     /**
@@ -51,8 +52,9 @@ public class NodeStatus {
         return _configIdentifier;
     }
 
-    public void setConfigIdentifier(Integer value) {
+    public NodeStatus setConfigIdentifier(Integer value) {
         _configIdentifier = value;
+        return this;
     }
 
     /**
@@ -65,8 +67,9 @@ public class NodeStatus {
         return _configVersion;
     }
 
-    public void setConfigVersion(Integer value) {
+    public NodeStatus setConfigVersion(Integer value) {
         _configVersion = value;
+        return this;
     }
 
     /**
@@ -79,8 +82,9 @@ public class NodeStatus {
         return _currentTime;
     }
 
-    public void setCurrentTime(String value) {
+    public NodeStatus setCurrentTime(String value) {
         _currentTime = value;
+        return this;
     }
 
     /**
@@ -93,8 +97,9 @@ public class NodeStatus {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public NodeStatus setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -107,8 +112,9 @@ public class NodeStatus {
         return LiqidClientBase.hexStringToLong(_flags);
     }
 
-    public void setFlags(Long value) {
+    public NodeStatus setFlags(Long value) {
         _flags = String.format("0x%016x", value);
+        return this;
     }
 
     /**
@@ -121,8 +127,9 @@ public class NodeStatus {
         return _linkCount;
     }
 
-    public void setLinkCount(Integer value) {
+    public NodeStatus setLinkCount(Integer value) {
         _linkCount = value;
+        return this;
     }
 
     /**
@@ -135,8 +142,9 @@ public class NodeStatus {
         return _location;
     }
 
-    public void setLocation(Coordinates value) {
+    public NodeStatus setLocation(Coordinates value) {
         _location = value;
+        return this;
     }
 
     /**
@@ -149,8 +157,9 @@ public class NodeStatus {
         return _operatingSystem;
     }
 
-    public void setOperatingSystem(OperatingSystemType value) {
+    public NodeStatus setOperatingSystem(OperatingSystemType value) {
         _operatingSystem = value;
+        return this;
     }
 
     /**
@@ -163,8 +172,9 @@ public class NodeStatus {
         return _runState;
     }
 
-    public void setRunState(RunType value) {
+    public NodeStatus setRunState(RunType value) {
         _runState = value;
+        return this;
     }
 
     /**
@@ -177,8 +187,9 @@ public class NodeStatus {
         return _softwareVersion;
     }
 
-    public void setSoftwareVersion(Integer value) {
+    public NodeStatus setSoftwareVersion(Integer value) {
         _softwareVersion = value;
+        return this;
     }
 
     /**
@@ -191,8 +202,9 @@ public class NodeStatus {
         return _targetCount;
     }
 
-    public void setTargetCount(Integer value) {
+    public NodeStatus setTargetCount(Integer value) {
         _targetCount = value;
+        return this;
     }
 
     /**
@@ -205,8 +217,9 @@ public class NodeStatus {
         return _upTime;
     }
 
-    public void setUpTime(String value) {
+    public NodeStatus setUpTime(String value) {
         _upTime = value;
+        return this;
     }
 
     /**

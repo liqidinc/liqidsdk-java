@@ -35,8 +35,9 @@ public class DeviceStatus {
         return _connectionType;
     }
 
-    public void setConnectionType(String value) {
+    public DeviceStatus setConnectionType(String value) {
         _connectionType = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class DeviceStatus {
         return LiqidClientBase.hexStringToInteger(_deviceId);
     }
 
-    public void setDeviceId(Integer value) {
+    public DeviceStatus setDeviceId(Integer value) {
         _deviceId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class DeviceStatus {
         return _deviceState;
     }
 
-    public void setDeviceState(String value) {
+    public DeviceStatus setDeviceState(String value) {
         _deviceState = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class DeviceStatus {
         return _deviceStatusType;
     }
 
-    public void setDeviceStatusType(String value) {
+    public DeviceStatus setDeviceStatusType(String value) {
         _deviceStatusType = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class DeviceStatus {
         return _deviceType;
     }
 
-    public void setDeviceType(DeviceType value) {
+    public DeviceStatus setDeviceType(DeviceType value) {
         _deviceType = value;
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class DeviceStatus {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public DeviceStatus setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class DeviceStatus {
         return _fabricType;
     }
 
-    public void setFabricType(String value) {
+    public DeviceStatus setFabricType(String value) {
         _fabricType = value;
+        return this;
     }
 
     /**
@@ -133,8 +140,9 @@ public class DeviceStatus {
         return LiqidClientBase.hexStringToLong(_flags);
     }
 
-    public void setFlags(Long value) {
+    public DeviceStatus setFlags(Long value) {
         _flags = String.format("0x%016x", value);
+        return this;
     }
 
     /**
@@ -147,8 +155,9 @@ public class DeviceStatus {
         return _flags2;
     }
 
-    public void setFlags2(String value) {
+    public DeviceStatus setFlags2(String value) {
         _flags2 = value;
+        return this;
     }
 
     /**
@@ -161,8 +170,9 @@ public class DeviceStatus {
         return LiqidClientBase.hexStringToInteger(_globalId);
     }
 
-    public void setGlobalId(Integer value) {
+    public DeviceStatus setGlobalId(Integer value) {
         _globalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -175,8 +185,9 @@ public class DeviceStatus {
         return _index;
     }
 
-    public void setIndex(Integer value) {
+    public DeviceStatus setIndex(Integer value) {
         _index = value;
+        return this;
     }
 
     /**
@@ -189,8 +200,9 @@ public class DeviceStatus {
         return _location;
     }
 
-    public void setLocation(Coordinates value) {
+    public DeviceStatus setLocation(Coordinates value) {
         _location = value;
+        return this;
     }
 
     /**
@@ -203,8 +215,9 @@ public class DeviceStatus {
         return _name;
     }
 
-    public void setName(String value) {
+    public DeviceStatus setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -217,8 +230,9 @@ public class DeviceStatus {
         return _owner;
     }
 
-    public void setOwner(Coordinates value) {
+    public DeviceStatus setOwner(Coordinates value) {
         _owner = value;
+        return this;
     }
 
     /**
@@ -231,8 +245,9 @@ public class DeviceStatus {
         return _pciDeviceId;
     }
 
-    public void setPCIDeviceId(String value) {
+    public DeviceStatus setPCIDeviceId(String value) {
         _pciDeviceId = value;
+        return this;
     }
 
     /**
@@ -245,8 +260,9 @@ public class DeviceStatus {
         return _pciLaneCount;
     }
 
-    public void setPCILaneCount(Integer value) {
+    public DeviceStatus setPCILaneCount(Integer value) {
         _pciLaneCount = value;
+        return this;
     }
 
     /**
@@ -259,8 +275,9 @@ public class DeviceStatus {
         return _pciVendorId;
     }
 
-    public void setPCIVendorId(String value) {
+    public DeviceStatus setPCIVendorId(String value) {
         _pciVendorId = value;
+        return this;
     }
 
     /**
@@ -273,8 +290,9 @@ public class DeviceStatus {
         return _podId;
     }
 
-    public void setPodId(Integer value) {
+    public DeviceStatus setPodId(Integer value) {
         _podId = value;
+        return this;
     }
 
     /**
@@ -287,8 +305,9 @@ public class DeviceStatus {
         return LiqidClientBase.hexStringToInteger(_portGlobalId);
     }
 
-    public void setPortGlobalId(Integer value) {
+    public DeviceStatus setPortGlobalId(Integer value) {
         _portGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**
@@ -301,8 +320,9 @@ public class DeviceStatus {
         return LiqidClientBase.hexStringToInteger(_sledId);
     }
 
-    public void setSledId(Integer value) {
+    public DeviceStatus setSledId(Integer value) {
         _sledId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -315,8 +335,9 @@ public class DeviceStatus {
         return LiqidClientBase.hexStringToInteger(_switchGlobalId);
     }
 
-    public void setSwitchGlobalId(Integer value) {
+    public DeviceStatus setSwitchGlobalId(Integer value) {
         _switchGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**

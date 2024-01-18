@@ -35,8 +35,9 @@ public class MemoryDeviceStatus extends DeviceStatus {
         return _capacityMB;
     }
 
-    public void setCapacityMB(Long value) {
+    public MemoryDeviceStatus setCapacityMB(Long value) {
         _capacityMB = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class MemoryDeviceStatus extends DeviceStatus {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public MemoryDeviceStatus setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**

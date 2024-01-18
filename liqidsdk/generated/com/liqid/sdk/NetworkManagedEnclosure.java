@@ -35,8 +35,9 @@ public class NetworkManagedEnclosure {
         return _credentials;
     }
 
-    public void setCredentials(Credentials value) {
+    public NetworkManagedEnclosure setCredentials(Credentials value) {
         _credentials = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class NetworkManagedEnclosure {
         return _enclosureName;
     }
 
-    public void setEnclosureName(String value) {
+    public NetworkManagedEnclosure setEnclosureName(String value) {
         _enclosureName = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class NetworkManagedEnclosure {
         return _ipAddress;
     }
 
-    public void setIPAddress(String value) {
+    public NetworkManagedEnclosure setIPAddress(String value) {
         _ipAddress = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class NetworkManagedEnclosure {
         return _managerType;
     }
 
-    public void setManagerType(ManageableType value) {
+    public NetworkManagedEnclosure setManagerType(ManageableType value) {
         _managerType = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class NetworkManagedEnclosure {
         return _portNumber;
     }
 
-    public void setPortNumber(Integer value) {
+    public NetworkManagedEnclosure setPortNumber(Integer value) {
         _portNumber = value;
+        return this;
     }
 
     /**

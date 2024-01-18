@@ -36,8 +36,9 @@ public class GroupDetails {
         return _cpuCoreCount;
     }
 
-    public void setCpuCoreCount(Integer value) {
+    public GroupDetails setCpuCoreCount(Integer value) {
         _cpuCoreCount = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class GroupDetails {
         return _cpuCount;
     }
 
-    public void setCpuCount(Integer value) {
+    public GroupDetails setCpuCount(Integer value) {
         _cpuCount = value;
+        return this;
     }
 
     /**
@@ -64,8 +66,9 @@ public class GroupDetails {
         return _cpuFrequency;
     }
 
-    public void setCpuFrequency(Double value) {
+    public GroupDetails setCpuFrequency(Double value) {
         _cpuFrequency = value;
+        return this;
     }
 
     /**
@@ -78,8 +81,9 @@ public class GroupDetails {
         return _cpuLanes;
     }
 
-    public void setCpuLanes(Integer value) {
+    public GroupDetails setCpuLanes(Integer value) {
         _cpuLanes = value;
+        return this;
     }
 
     /**
@@ -92,8 +96,9 @@ public class GroupDetails {
         return _gpuCores;
     }
 
-    public void setGPUCores(Integer value) {
+    public GroupDetails setGPUCores(Integer value) {
         _gpuCores = value;
+        return this;
     }
 
     /**
@@ -106,8 +111,9 @@ public class GroupDetails {
         return _groupId;
     }
 
-    public void setGroupId(Integer value) {
+    public GroupDetails setGroupId(Integer value) {
         _groupId = value;
+        return this;
     }
 
     /**
@@ -120,8 +126,9 @@ public class GroupDetails {
         return _groupName;
     }
 
-    public void setGroupName(String value) {
+    public GroupDetails setGroupName(String value) {
         _groupName = value;
+        return this;
     }
 
     /**
@@ -134,8 +141,9 @@ public class GroupDetails {
         return _networkAdapterCount;
     }
 
-    public void setNetworkAdapterCount(Integer value) {
+    public GroupDetails setNetworkAdapterCount(Integer value) {
         _networkAdapterCount = value;
+        return this;
     }
 
     /**
@@ -148,8 +156,9 @@ public class GroupDetails {
         return _storageDriveCount;
     }
 
-    public void setStorageDriveCount(Integer value) {
+    public GroupDetails setStorageDriveCount(Integer value) {
         _storageDriveCount = value;
+        return this;
     }
 
     /**
@@ -162,8 +171,9 @@ public class GroupDetails {
         return _totalCapacity;
     }
 
-    public void setTotalCapacity(Long value) {
+    public GroupDetails setTotalCapacity(Long value) {
         _totalCapacity = value;
+        return this;
     }
 
     /**
@@ -176,8 +186,9 @@ public class GroupDetails {
         return _totalDRAM;
     }
 
-    public void setTotalDRAM(Integer value) {
+    public GroupDetails setTotalDRAM(Integer value) {
         _totalDRAM = value;
+        return this;
     }
 
     /**
@@ -190,8 +201,9 @@ public class GroupDetails {
         return _totalMachines;
     }
 
-    public void setTotalMachines(Integer value) {
+    public GroupDetails setTotalMachines(Integer value) {
         _totalMachines = value;
+        return this;
     }
 
     /**
@@ -204,8 +216,9 @@ public class GroupDetails {
         return _totalThroughput;
     }
 
-    public void setTotalThroughput(String value) {
+    public GroupDetails setTotalThroughput(String value) {
         _totalThroughput = value;
+        return this;
     }
 
     /**

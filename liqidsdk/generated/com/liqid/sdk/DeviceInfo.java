@@ -35,8 +35,9 @@ public class DeviceInfo {
         return _busGeneration;
     }
 
-    public void setBusGeneration(String value) {
+    public DeviceInfo setBusGeneration(String value) {
         _busGeneration = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class DeviceInfo {
         return _busWidth;
     }
 
-    public void setBusWidth(String value) {
+    public DeviceInfo setBusWidth(String value) {
         _busWidth = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class DeviceInfo {
         return _connectionType;
     }
 
-    public void setConnectionType(String value) {
+    public DeviceInfo setConnectionType(String value) {
         _connectionType = value;
+        return this;
     }
 
     /**
@@ -77,8 +80,9 @@ public class DeviceInfo {
         return _deviceClass;
     }
 
-    public void setDeviceClass(String value) {
+    public DeviceInfo setDeviceClass(String value) {
         _deviceClass = value;
+        return this;
     }
 
     /**
@@ -91,8 +95,9 @@ public class DeviceInfo {
         return LiqidClientBase.hexStringToInteger(_deviceIdentifier);
     }
 
-    public void setDeviceIdentifier(Integer value) {
+    public DeviceInfo setDeviceIdentifier(Integer value) {
         _deviceIdentifier = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -105,8 +110,9 @@ public class DeviceInfo {
         return _deviceInfoType;
     }
 
-    public void setDeviceInfoType(DeviceType value) {
+    public DeviceInfo setDeviceInfoType(DeviceType value) {
         _deviceInfoType = value;
+        return this;
     }
 
     /**
@@ -119,8 +125,9 @@ public class DeviceInfo {
         return _deviceState;
     }
 
-    public void setDeviceState(String value) {
+    public DeviceInfo setDeviceState(String value) {
         _deviceState = value;
+        return this;
     }
 
     /**
@@ -133,8 +140,9 @@ public class DeviceInfo {
         return LiqidClientBase.hexStringToInteger(_fabricGlobalId);
     }
 
-    public void setFabricGlobalId(Integer value) {
+    public DeviceInfo setFabricGlobalId(Integer value) {
         _fabricGlobalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -147,8 +155,9 @@ public class DeviceInfo {
         return _fabricType;
     }
 
-    public void setFabricType(FabricType value) {
+    public DeviceInfo setFabricType(FabricType value) {
         _fabricType = value;
+        return this;
     }
 
     /**
@@ -161,8 +170,9 @@ public class DeviceInfo {
         return _family;
     }
 
-    public void setFamily(String value) {
+    public DeviceInfo setFamily(String value) {
         _family = value;
+        return this;
     }
 
     /**
@@ -175,8 +185,9 @@ public class DeviceInfo {
         return _firmwareRevision;
     }
 
-    public void setFirmwareRevision(String value) {
+    public DeviceInfo setFirmwareRevision(String value) {
         _firmwareRevision = value;
+        return this;
     }
 
     /**
@@ -189,8 +200,9 @@ public class DeviceInfo {
         return LiqidClientBase.hexStringToLong(_flags);
     }
 
-    public void setFlags(Long value) {
+    public DeviceInfo setFlags(Long value) {
         _flags = String.format("0x%016x", value);
+        return this;
     }
 
     /**
@@ -203,8 +215,9 @@ public class DeviceInfo {
         return _index;
     }
 
-    public void setIndex(Integer value) {
+    public DeviceInfo setIndex(Integer value) {
         _index = value;
+        return this;
     }
 
     /**
@@ -217,8 +230,9 @@ public class DeviceInfo {
         return _location;
     }
 
-    public void setLocation(Coordinates value) {
+    public DeviceInfo setLocation(Coordinates value) {
         _location = value;
+        return this;
     }
 
     /**
@@ -231,8 +245,9 @@ public class DeviceInfo {
         return _model;
     }
 
-    public void setModel(String value) {
+    public DeviceInfo setModel(String value) {
         _model = value;
+        return this;
     }
 
     /**
@@ -245,8 +260,9 @@ public class DeviceInfo {
         return _name;
     }
 
-    public void setName(String value) {
+    public DeviceInfo setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -259,8 +275,9 @@ public class DeviceInfo {
         return _owner;
     }
 
-    public void setOwner(Coordinates value) {
+    public DeviceInfo setOwner(Coordinates value) {
         _owner = value;
+        return this;
     }
 
     /**
@@ -273,8 +290,9 @@ public class DeviceInfo {
         return _partNumber;
     }
 
-    public void setPartNumber(String value) {
+    public DeviceInfo setPartNumber(String value) {
         _partNumber = value;
+        return this;
     }
 
     /**
@@ -287,8 +305,9 @@ public class DeviceInfo {
         return _pciDeviceId;
     }
 
-    public void setPCIDeviceId(String value) {
+    public DeviceInfo setPCIDeviceId(String value) {
         _pciDeviceId = value;
+        return this;
     }
 
     /**
@@ -301,8 +320,9 @@ public class DeviceInfo {
         return _pciVendorId;
     }
 
-    public void setPCIVendorId(String value) {
+    public DeviceInfo setPCIVendorId(String value) {
         _pciVendorId = value;
+        return this;
     }
 
     /**
@@ -315,8 +335,9 @@ public class DeviceInfo {
         return _podId;
     }
 
-    public void setPodId(Integer value) {
+    public DeviceInfo setPodId(Integer value) {
         _podId = value;
+        return this;
     }
 
     /**
@@ -329,8 +350,9 @@ public class DeviceInfo {
         return _serialNumber;
     }
 
-    public void setSerialNumber(String value) {
+    public DeviceInfo setSerialNumber(String value) {
         _serialNumber = value;
+        return this;
     }
 
     /**
@@ -343,8 +365,9 @@ public class DeviceInfo {
         return LiqidClientBase.hexStringToInteger(_sledId);
     }
 
-    public void setSledId(Integer value) {
+    public DeviceInfo setSledId(Integer value) {
         _sledId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -357,8 +380,9 @@ public class DeviceInfo {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public DeviceInfo setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**
@@ -371,8 +395,9 @@ public class DeviceInfo {
         return _userDescription;
     }
 
-    public void setUserDescription(String value) {
+    public DeviceInfo setUserDescription(String value) {
         _userDescription = value;
+        return this;
     }
 
     /**
@@ -385,8 +410,9 @@ public class DeviceInfo {
         return _vendor;
     }
 
-    public void setVendor(String value) {
+    public DeviceInfo setVendor(String value) {
         _vendor = value;
+        return this;
     }
 
     /**

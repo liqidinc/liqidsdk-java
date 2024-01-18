@@ -35,8 +35,9 @@ public class GroupFPGADeviceRelator {
         return _deviceStatus;
     }
 
-    public void setDeviceStatus(FPGADeviceStatus value) {
+    public GroupFPGADeviceRelator setDeviceStatus(FPGADeviceStatus value) {
         _deviceStatus = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GroupFPGADeviceRelator {
         return _group;
     }
 
-    public void setGroup(Group value) {
+    public GroupFPGADeviceRelator setGroup(Group value) {
         _group = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class DigestInfo {
         return _digestId;
     }
 
-    public void setDigestId(Integer value) {
+    public DigestInfo setDigestId(Integer value) {
         _digestId = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class DigestInfo {
         return _digestKey;
     }
 
-    public void setDigestKey(String value) {
+    public DigestInfo setDigestKey(String value) {
         _digestKey = value;
+        return this;
     }
 
     /**
@@ -65,8 +67,9 @@ public class DigestInfo {
         return _digestLabel;
     }
 
-    public void setDigestLabel(String value) {
+    public DigestInfo setDigestLabel(String value) {
         _digestLabel = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class MachineComputeDeviceRelator {
         return _groupDeviceRelator;
     }
 
-    public void setGroupDeviceRelator(GroupComputeDeviceRelator value) {
+    public MachineComputeDeviceRelator setGroupDeviceRelator(GroupComputeDeviceRelator value) {
         _groupDeviceRelator = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class MachineComputeDeviceRelator {
         return _machine;
     }
 
-    public void setMachine(Machine value) {
+    public MachineComputeDeviceRelator setMachine(Machine value) {
         _machine = value;
+        return this;
     }
 
     /**

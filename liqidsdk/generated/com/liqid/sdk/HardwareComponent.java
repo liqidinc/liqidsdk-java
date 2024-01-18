@@ -36,8 +36,9 @@ public class HardwareComponent {
         return _badDLLPCount;
     }
 
-    public void setBadDLLPCount(Integer value) {
+    public HardwareComponent setBadDLLPCount(Integer value) {
         _badDLLPCount = value;
+        return this;
     }
 
     /**
@@ -50,8 +51,9 @@ public class HardwareComponent {
         return _badTLPCount;
     }
 
-    public void setBadTLPCount(Integer value) {
+    public HardwareComponent setBadTLPCount(Integer value) {
         _badTLPCount = value;
+        return this;
     }
 
     /**
@@ -64,8 +66,9 @@ public class HardwareComponent {
         return _egressBytes;
     }
 
-    public void setEgressBytes(Integer value) {
+    public HardwareComponent setEgressBytes(Integer value) {
         _egressBytes = value;
+        return this;
     }
 
     /**
@@ -78,8 +81,9 @@ public class HardwareComponent {
         return _errorCount;
     }
 
-    public void setErrorCount(Integer value) {
+    public HardwareComponent setErrorCount(Integer value) {
         _errorCount = value;
+        return this;
     }
 
     /**
@@ -92,8 +96,9 @@ public class HardwareComponent {
         return LiqidClientBase.hexStringToInteger(_fabricGlobalId);
     }
 
-    public void setFabricGlobalId(Integer value) {
+    public HardwareComponent setFabricGlobalId(Integer value) {
         _fabricGlobalId = String.format("0x%08x", value);
+        return this;
     }
 
     /**
@@ -106,8 +111,9 @@ public class HardwareComponent {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public HardwareComponent setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -120,8 +126,9 @@ public class HardwareComponent {
         return LiqidClientBase.hexStringToLong(_flags);
     }
 
-    public void setFlags(Long value) {
+    public HardwareComponent setFlags(Long value) {
         _flags = String.format("0x%016x", value);
+        return this;
     }
 
     /**
@@ -134,8 +141,9 @@ public class HardwareComponent {
         return _hardwareType;
     }
 
-    public void setHardwareType(String value) {
+    public HardwareComponent setHardwareType(String value) {
         _hardwareType = value;
+        return this;
     }
 
     /**
@@ -148,8 +156,9 @@ public class HardwareComponent {
         return _ingressBytes;
     }
 
-    public void setIngressBytes(Integer value) {
+    public HardwareComponent setIngressBytes(Integer value) {
         _ingressBytes = value;
+        return this;
     }
 
     /**
@@ -162,8 +171,9 @@ public class HardwareComponent {
         return _location;
     }
 
-    public void setLocation(Coordinates value) {
+    public HardwareComponent setLocation(Coordinates value) {
         _location = value;
+        return this;
     }
 
     /**
@@ -176,8 +186,9 @@ public class HardwareComponent {
         return _name;
     }
 
-    public void setName(String value) {
+    public HardwareComponent setName(String value) {
         _name = value;
+        return this;
     }
 
     /**
@@ -190,8 +201,9 @@ public class HardwareComponent {
         return _owner;
     }
 
-    public void setOwner(Coordinates value) {
+    public HardwareComponent setOwner(Coordinates value) {
         _owner = value;
+        return this;
     }
 
     /**
@@ -204,8 +216,9 @@ public class HardwareComponent {
         return LiqidClientBase.hexStringToInteger(_pciDeviceId);
     }
 
-    public void setPCIDeviceId(Integer value) {
+    public HardwareComponent setPCIDeviceId(Integer value) {
         _pciDeviceId = String.format("0x%04x", value);
+        return this;
     }
 
     /**
@@ -218,8 +231,9 @@ public class HardwareComponent {
         return _pciLaneCount;
     }
 
-    public void setPCILaneCount(Integer value) {
+    public HardwareComponent setPCILaneCount(Integer value) {
         _pciLaneCount = value;
+        return this;
     }
 
     /**
@@ -232,8 +246,9 @@ public class HardwareComponent {
         return LiqidClientBase.hexStringToInteger(_pciVendorId);
     }
 
-    public void setPCIVendorId(Integer value) {
+    public HardwareComponent setPCIVendorId(Integer value) {
         _pciVendorId = String.format("0x%04x", value);
+        return this;
     }
 
     /**
@@ -246,8 +261,9 @@ public class HardwareComponent {
         return _portCount;
     }
 
-    public void setPortCount(Integer value) {
+    public HardwareComponent setPortCount(Integer value) {
         _portCount = value;
+        return this;
     }
 
     /**
@@ -260,8 +276,9 @@ public class HardwareComponent {
         return _ports;
     }
 
-    public void setPorts(LinkedList<Port> value) {
+    public HardwareComponent setPorts(LinkedList<Port> value) {
         _ports = value;
+        return this;
     }
 
     /**
@@ -274,8 +291,9 @@ public class HardwareComponent {
         return _receiverErrorCount;
     }
 
-    public void setReceiverErrorCount(Integer value) {
+    public HardwareComponent setReceiverErrorCount(Integer value) {
         _receiverErrorCount = value;
+        return this;
     }
 
     /**
@@ -288,8 +306,9 @@ public class HardwareComponent {
         return _revision;
     }
 
-    public void setRevision(String value) {
+    public HardwareComponent setRevision(String value) {
         _revision = value;
+        return this;
     }
 
     /**
@@ -302,8 +321,9 @@ public class HardwareComponent {
         return _state;
     }
 
-    public void setState(String value) {
+    public HardwareComponent setState(String value) {
         _state = value;
+        return this;
     }
 
     /**
@@ -316,8 +336,9 @@ public class HardwareComponent {
         return LiqidClientBase.hexStringToInteger(_switchGlobalId);
     }
 
-    public void setSwitchGlobalId(Integer value) {
+    public HardwareComponent setSwitchGlobalId(Integer value) {
         _switchGlobalId = String.format("0x%06x", value);
+        return this;
     }
 
     /**

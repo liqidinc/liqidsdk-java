@@ -35,8 +35,9 @@ public class GroupPool {
         return _coordinates;
     }
 
-    public void setCoordinates(Coordinates value) {
+    public GroupPool setCoordinates(Coordinates value) {
         _coordinates = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class GroupPool {
         return _fabricId;
     }
 
-    public void setFabricId(Integer value) {
+    public GroupPool setFabricId(Integer value) {
         _fabricId = value;
+        return this;
     }
 
     /**
@@ -63,8 +65,9 @@ public class GroupPool {
         return _groupId;
     }
 
-    public void setGroupId(Integer value) {
+    public GroupPool setGroupId(Integer value) {
         _groupId = value;
+        return this;
     }
 
     /**

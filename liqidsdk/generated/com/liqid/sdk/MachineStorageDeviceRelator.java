@@ -35,8 +35,9 @@ public class MachineStorageDeviceRelator {
         return _groupDeviceRelator;
     }
 
-    public void setGroupDeviceRelator(GroupStorageDeviceRelator value) {
+    public MachineStorageDeviceRelator setGroupDeviceRelator(GroupStorageDeviceRelator value) {
         _groupDeviceRelator = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class MachineStorageDeviceRelator {
         return _machine;
     }
 
-    public void setMachine(Machine value) {
+    public MachineStorageDeviceRelator setMachine(Machine value) {
         _machine = value;
+        return this;
     }
 
     /**

@@ -35,8 +35,9 @@ public class MachineGPUDeviceRelator {
         return _groupDeviceRelator;
     }
 
-    public void setGroupDeviceRelator(GroupGPUDeviceRelator value) {
+    public MachineGPUDeviceRelator setGroupDeviceRelator(GroupGPUDeviceRelator value) {
         _groupDeviceRelator = value;
+        return this;
     }
 
     /**
@@ -49,8 +50,9 @@ public class MachineGPUDeviceRelator {
         return _machine;
     }
 
-    public void setMachine(Machine value) {
+    public MachineGPUDeviceRelator setMachine(Machine value) {
         _machine = value;
+        return this;
     }
 
     /**

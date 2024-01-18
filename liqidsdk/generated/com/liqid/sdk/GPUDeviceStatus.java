@@ -35,8 +35,9 @@ public class GPUDeviceStatus extends DeviceStatus {
         return _unique;
     }
 
-    public void setUnique(String value) {
+    public GPUDeviceStatus setUnique(String value) {
         _unique = value;
+        return this;
     }
 
     /**

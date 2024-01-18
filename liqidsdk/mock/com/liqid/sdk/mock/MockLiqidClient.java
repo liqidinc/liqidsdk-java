@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -41,12 +43,14 @@ public class MockLiqidClient extends LiqidClient {
     private final MockCoordinates _coordinates;
     private final Integer _fabricIdentifier;
     private final Integer _podIdentifier;
+    private final Random _random = new Random(System.currentTimeMillis());
 
     // can change over time
     private MockCoordinates _defaultCoordinates;
     private Integer _groupBeingEdited = null;
     private Integer _machineBeingEdited = null;
     private SSHStatus _sshStatus;
+    private Map<String, DigestInfo> _digestTable = new HashMap<>();
 
     private MockLiqidClient(
         final Integer fabricIdentifier,
@@ -847,11 +851,39 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(label, "label", fn);
         checkCoordinates();
 
-        // TODO
+        var digestInfo = new DigestInfo.Builder().setDigestLabel(label)
+                                                 .setDigestId(_random.nextInt())
+                                                 .setDigestKey(UUID.randomUUID().toString())
+                                                 .build();
+        _digestTable.put(label, digestInfo);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, digestInfo);
+        return digestInfo;
+    }
+
+    @Override
+    public String deleteMessageDigest(
+        String label
+    ) throws LiqidException {
+        var fn = "deleteMessageDigest";
+        _logger.trace("Entering %s label:%s", fn, label);
+
+        if (label != null && label.equalsIgnoreCase("slurm")) {
+            var ex = new LiqidException("Cannot delete this label");
+            _logger.throwing(ex);
+            throw ex;
+        }
+
+        if (!_digestTable.containsKey(label)) {
+            var ex = new LiqidException("Digest label does not exist");
+            _logger.throwing(ex);
+            throw ex;
+        }
+
+        _digestTable.remove(label);
+
+        _logger.trace("%s returning %s", fn, label);
+        return label;
     }
 
     @Override

@@ -622,7 +622,7 @@ public abstract class LiqidClientBase {
      * @return Returns the label associated with the deleted message digest
      * @throws LiqidException if anything goes wrong
      */
-    public final String deleteMessageDigest(String label) throws LiqidException {
+    public String deleteMessageDigest(String label) throws LiqidException {
         var fn = "deleteMessageDigest";
         _logger.trace("Entering %s label:%s", fn, label);
 

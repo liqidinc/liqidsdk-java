@@ -211,6 +211,20 @@ public class MockLiqidClient extends LiqidClient {
         }
     }
 
+    private MockDevice getMockDeviceByName(
+        final String deviceName
+    ) throws LiqidException {
+        for (var device : _devices.values()) {
+            if (device.getDeviceName().equals(deviceName)) {
+                return device;
+            }
+        }
+
+        var ex = new LiqidException(String.format("Device '%s' does not exist", deviceName));
+        _logger.throwing(ex);
+        throw ex;
+    }
+
     private boolean isValidGroupIdentifier(
         final int groupId
     ) {
@@ -1092,8 +1106,6 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
-
         var ex = new MethodNotImplementedException(fn);
         _logger.throwing(ex);
         throw ex;
@@ -1105,11 +1117,14 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = _devices.values()
+                             .stream()
+                             .filter(device -> device.getDeviceType().equals(DeviceType.COMPUTE))
+                             .map(MockDevice::getComputeDeviceInfo)
+                             .collect(Collectors.toCollection(LinkedList::new));
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1121,11 +1136,12 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(deviceName, "deviceName", fn);
         checkCoordinates();
 
-        // TODO
+        var device = getMockDeviceByName(deviceName);
+        checkDeviceType(device, DeviceType.COMPUTE);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        var devInfo = device.getComputeDeviceInfo();
+        _logger.trace("%s returning %s", fn, devInfo);
+        return devInfo;
     }
 
     @Override
@@ -1272,11 +1288,14 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = _devices.values()
+                             .stream()
+                             .filter(device -> device.getDeviceType().equals(DeviceType.FPGA))
+                             .map(MockDevice::getFPGADeviceInfo)
+                             .collect(Collectors.toCollection(LinkedList::new));
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1288,11 +1307,12 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(deviceName, "deviceName", fn);
         checkCoordinates();
 
-        // TODO
+        var device = getMockDeviceByName(deviceName);
+        checkDeviceType(device, DeviceType.FPGA);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        var devInfo = device.getFPGADeviceInfo();
+        _logger.trace("%s returning %s", fn, devInfo);
+        return devInfo;
     }
 
     @Override
@@ -1412,11 +1432,14 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = _devices.values()
+                             .stream()
+                             .filter(device -> device.getDeviceType().equals(DeviceType.GPU))
+                             .map(MockDevice::getGPUDeviceInfo)
+                             .collect(Collectors.toCollection(LinkedList::new));
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1428,11 +1451,12 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(deviceName, "deviceName", fn);
         checkCoordinates();
 
-        // TODO
+        var device = getMockDeviceByName(deviceName);
+        checkDeviceType(device, DeviceType.GPU);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        var devInfo = device.getGPUDeviceInfo();
+        _logger.trace("%s returning %s", fn, devInfo);
+        return devInfo;
     }
 
     @Override
@@ -1747,11 +1771,14 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = _devices.values()
+                             .stream()
+                             .filter(device -> device.getDeviceType().equals(DeviceType.MEMORY))
+                             .map(MockDevice::getMemoryDeviceInfo)
+                             .collect(Collectors.toCollection(LinkedList::new));
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1763,11 +1790,12 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(deviceName, "deviceName", fn);
         checkCoordinates();
 
-        // TODO
+        var device = getMockDeviceByName(deviceName);
+        checkDeviceType(device, DeviceType.MEMORY);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        var devInfo = device.getMemoryDeviceInfo();
+        _logger.trace("%s returning %s", fn, devInfo);
+        return devInfo;
     }
 
     @Override
@@ -1820,11 +1848,14 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = _devices.values()
+                             .stream()
+                             .filter(device -> device.getDeviceType().equals(DeviceType.ETHERNET_LINK))
+                             .map(MockDevice::getNetworkDeviceInfo)
+                             .collect(Collectors.toCollection(LinkedList::new));
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -1836,11 +1867,12 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(deviceName, "deviceName", fn);
         checkCoordinates();
 
-        // TODO
+        var device = getMockDeviceByName(deviceName);
+        checkDeviceType(device, DeviceType.ETHERNET_LINK);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        var devInfo = device.getNetworkDeviceInfo();
+        _logger.trace("%s returning %s", fn, devInfo);
+        return devInfo;
     }
 
     @Override
@@ -2032,11 +2064,14 @@ public class MockLiqidClient extends LiqidClient {
         _logger.trace("Entering %s", fn);
         checkCoordinates();
 
-        // TODO
+        var result = _devices.values()
+                             .stream()
+                             .filter(device -> device.getDeviceType().equals(DeviceType.SSD))
+                             .map(MockDevice::getStorageDeviceInfo)
+                             .collect(Collectors.toCollection(LinkedList::new));
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        _logger.trace("%s returning %s", fn, result);
+        return result;
     }
 
     @Override
@@ -2048,11 +2083,12 @@ public class MockLiqidClient extends LiqidClient {
         checkParameterNotNull(deviceName, "deviceName", fn);
         checkCoordinates();
 
-        // TODO
+        var device = getMockDeviceByName(deviceName);
+        checkDeviceType(device, DeviceType.SSD);
 
-        var ex = new MethodNotImplementedException(fn);
-        _logger.throwing(ex);
-        throw ex;
+        var devInfo = device.getStorageDeviceInfo();
+        _logger.trace("%s returning %s", fn, devInfo);
+        return devInfo;
     }
 
     @Override

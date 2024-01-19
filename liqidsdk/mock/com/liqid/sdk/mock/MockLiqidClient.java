@@ -299,6 +299,157 @@ public class MockLiqidClient extends LiqidClient {
         return deviceIds;
     }
 
+    public static Collection<Integer> getDeviceIdsFromMockDevices(
+        final Collection<MockDevice> mockDevices
+    ) {
+        return mockDevices.stream()
+                          .map(MockDevice::getDeviceId)
+                          .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public Collection<MockDevice> getMockDevices() { return _devices.values(); }
+
+    public Collection<MockDevice> getMockDevices(
+        final DeviceType devType
+    ) {
+        return _devices.values()
+                       .stream()
+                       .filter(mockDev -> mockDev.getDeviceType().equals(devType))
+                       .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public Collection<MockGroup> getMockGroups() { return _groups.values(); }
+    public Collection<MockMachine> getMockMachines() { return _machines.values(); }
+
+    /**
+     * For debugging
+     */
+    public void show() {
+        System.out.println("Miscellany ----------------------------");
+        System.out.printf("  Coordinates:        %s\n", _coordinates);
+        System.out.printf("  Default Coordinate: %s\n", _defaultCoordinates);
+        System.out.printf("  Fabric Identifier:  %d\n", _fabricIdentifier);
+        System.out.printf("  Pod Identifier:     %d\n", _podIdentifier);
+        System.out.printf("  SSH Status:         %s\n", _sshStatus);
+
+        // TODO show digest labels
+
+        System.out.println("Devices -------------------------------");
+        for (var entry : _devices.entrySet()) {
+            System.out.printf("  0x%08x -> %s\n", entry.getKey(), entry.getValue());
+        }
+        System.out.println();
+
+        System.out.println("Devices by Name -----------------------");
+        for (var entry : _devicesByName.entrySet()) {
+            System.out.printf("  %-12s -> %s\n", entry.getKey(), entry.getValue());
+        }
+        System.out.println();
+
+        System.out.println("Compute Device IDs --------------------");
+        for (var devId : _computeDeviceIds) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("FPGA Device IDs -----------------------");
+        for (var devId : _fpgaDeviceIds) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("GPU Device IDs ------------------------");
+        for (var devId : _gpuDeviceIds) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Memory Device IDs ---------------------");
+        for (var devId : _memoryDeviceIds) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Network Device IDs --------------------");
+        for (var devId : _networkDeviceIds) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Storage Device IDs --------------------");
+        for (var devId : _storageDeviceIds) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("System Free Pool ----------------------");
+        for (var devId : _systemFreePool) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Devices to be Added -------------------");
+        for (var devId : _devicesToBeAdded) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Devices to be Removed -----------------");
+        for (var devId : _devicesToBeRemoved) {
+            System.out.printf("  0x%08x", devId);
+        }
+        System.out.println();
+
+        System.out.println();
+
+        // --------------------
+
+        System.out.println("Groups --------------------------------");
+        if (_groupBeingEdited != null) {
+            System.out.printf("  Group Being Edited: 0x%08x\n", _groupBeingEdited);
+        }
+
+        for (var grp : _groups.values()) {
+            System.out.println("  " + grp.toString());
+            System.out.println("    Free Pool:");
+            for (var mockDev : grp._freePool.values()) {
+                System.out.println("      " + mockDev.toString());
+            }
+            System.out.println();
+
+            System.out.println("    Machines:");
+            for (var mach : grp._machines.values()) {
+                System.out.println("      " + mach.toString());
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+        // --------------------
+
+        System.out.println("Machines ------------------------------");
+        if (_groupBeingEdited != null) {
+            System.out.printf("  Machine Being Edited: 0x%08x\n", _machineBeingEdited);
+        }
+
+        for (var mach : _machines.values()) {
+            System.out.println("  " + mach.toString());
+
+            System.out.println("    Attached Devices:");
+            for (var mockDev : mach._attachedDevices.values()) {
+                System.out.println("      " + mockDev.toString());
+            }
+        }
+    }
+
     // private helpful functions
 
     private void checkCoordinates() throws WrongCoordinatesException {
@@ -402,13 +553,15 @@ public class MockLiqidClient extends LiqidClient {
         var index = _computeDeviceIds.size();
         var deviceId = index;
         _computeDeviceIds.add(deviceId);
-        var deviceName = String.format("cpu%d", deviceId);
+        var deviceName = String.format("pcpu%d", index);
 
         var deviceStatus = new ComputeDeviceStatus().setName(deviceName).setIndex(index);
         var deviceInfo = new ComputeDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
+        _systemFreePool.add(deviceId);
+
         _logger.trace("%s returning %s", fn, mockDevice);
         return mockDevice;
     }
@@ -420,13 +573,14 @@ public class MockLiqidClient extends LiqidClient {
         var index = _fpgaDeviceIds.size();
         var deviceId = 0x1000 + index;
         _fpgaDeviceIds.add(deviceId);
-        var deviceName = String.format("fpga%d", deviceId);
+        var deviceName = String.format("fpga%d", index);
 
         var deviceStatus = new FPGADeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
         var deviceInfo = new FPGADeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
+        _systemFreePool.add(deviceId);
 
         _logger.trace("%s returning %s", fn, mockDevice);
         return mockDevice;
@@ -439,13 +593,14 @@ public class MockLiqidClient extends LiqidClient {
         var index = _gpuDeviceIds.size();
         var deviceId = 0x2000 + index;
         _gpuDeviceIds.add(deviceId);
-        var deviceName = String.format("gpu%d", deviceId);
+        var deviceName = String.format("gpu%d", index);
 
         var deviceStatus = new GPUDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
         var deviceInfo = new GPUDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
+        _systemFreePool.add(deviceId);
 
         _logger.trace("%s returning %s", fn, mockDevice);
         return mockDevice;
@@ -458,13 +613,14 @@ public class MockLiqidClient extends LiqidClient {
         var index = _memoryDeviceIds.size();
         var deviceId = 0x3000 + index;
         _memoryDeviceIds.add(deviceId);
-        var deviceName = String.format("mem%d", deviceId);
+        var deviceName = String.format("mem%d", index);
 
         var deviceStatus = new MemoryDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
         var deviceInfo = new MemoryDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
+        _systemFreePool.add(deviceId);
 
         _logger.trace("%s returning %s", fn, mockDevice);
         return mockDevice;
@@ -477,13 +633,14 @@ public class MockLiqidClient extends LiqidClient {
         var index = _networkDeviceIds.size();
         var deviceId = 0x4000 + index;
         _networkDeviceIds.add(deviceId);
-        var deviceName = String.format("nic%d", deviceId);
+        var deviceName = String.format("nic%d", index);
 
         var deviceStatus = new NetworkDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
         var deviceInfo = new MemoryDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
+        _systemFreePool.add(deviceId);
 
         _logger.trace("%s returning %s", fn, mockDevice);
         return mockDevice;
@@ -496,13 +653,14 @@ public class MockLiqidClient extends LiqidClient {
         var index = _storageDeviceIds.size();
         var deviceId = 0x5000 + index;
         _storageDeviceIds.add(deviceId);
-        var deviceName = String.format("targ%d", deviceId);
+        var deviceName = String.format("targ%d", index);
 
         var deviceStatus = new StorageDeviceStatus().setDeviceId(deviceId).setName(deviceName).setIndex(index);
         var deviceInfo = new StorageDeviceInfo().setDeviceIdentifier(deviceId).setName(deviceName).setIndex(index);
         var mockDevice = new MockDevice(deviceStatus, deviceInfo);
         _devices.put(deviceId, mockDevice);
         _devicesByName.put(deviceName, mockDevice);
+        _systemFreePool.add(deviceId);
 
         _logger.trace("%s returning %s", fn, mockDevice);
         return mockDevice;
@@ -540,16 +698,12 @@ public class MockLiqidClient extends LiqidClient {
                 }
             }
         }
-        var machineStr = machineId > 0 ? String.format("0x%08x", machineId) : "n/a";
 
-        return new PreDevice.Builder().setDeviceName(device.getDeviceStatus().getName())
-                                      .setFabricGlobalId("0x0")
-                                      .setFabricId(_fabricIdentifier)
-                                      .setGroupId(groupId)
-                                      .setMachineId(machineStr)
-                                      .setPreDeviceType(preDevType)
-                                      .setPodId(_podIdentifier)
-                                      .build();
+        return new PreDevice().setDeviceName(device.getDeviceStatus().getName())
+                              .setFabricId(_fabricIdentifier)
+                              .setGroupId(groupId)
+                              .setMachineId(machineId)
+                              .setPreDeviceType(preDevType);
     }
 
     private Integer[] getDeviceRelation(

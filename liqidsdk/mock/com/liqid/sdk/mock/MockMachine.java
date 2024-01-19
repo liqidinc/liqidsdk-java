@@ -9,6 +9,7 @@ package com.liqid.sdk.mock;
 import com.liqid.sdk.Machine;
 import com.liqid.sdk.P2PType;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -48,6 +49,9 @@ public class MockMachine extends Machine {
              source.getFabricId(),
              source.getMachineName());
     }
+
+    public Collection<MockDevice> getAttachedDevices() { return _attachedDevices.values(); }
+    public Collection<Integer> getAttachedDeviceIds() { return _attachedDevices.keySet(); }
 
     @Override
     public boolean equals(

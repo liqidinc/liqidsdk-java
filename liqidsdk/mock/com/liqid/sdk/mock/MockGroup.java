@@ -8,6 +8,7 @@ package com.liqid.sdk.mock;
 
 import com.liqid.sdk.Group;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -31,6 +32,11 @@ public class MockGroup extends Group {
     ) {
         this(source.getGroupId(), source.getGroupName(), source.getFabricId(), source.getPodId());
     }
+
+    public Collection<MockDevice> getFreePool() { return _freePool.values(); }
+    public Collection<Integer> getFreePoolIds() { return _freePool.keySet(); }
+    public Collection<MockMachine> getMockMachines() { return _machines.values(); }
+    public Collection<Integer> getMockMachineIds() { return _machines.keySet(); }
 
     @Override
     public boolean equals(

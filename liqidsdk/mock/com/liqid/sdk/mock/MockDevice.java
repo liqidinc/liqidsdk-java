@@ -75,6 +75,6 @@ public class MockDevice {
 
     @Override
     public String toString() {
-        return String.format("{id=%d, name=%s, type=%s}", getDeviceId(), getDeviceName(), getDeviceType());
+        return String.format("{type=%s, id=0x%08x, name=%s}", getDeviceType(), getDeviceId(), getDeviceName());
     }
 }

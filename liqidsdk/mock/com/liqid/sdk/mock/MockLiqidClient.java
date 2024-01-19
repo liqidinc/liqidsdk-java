@@ -307,6 +307,14 @@ public class MockLiqidClient extends LiqidClient {
                           .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    public static <T> Collection<Integer> getDeviceIdsFromDeviceStatuses(
+        final Collection<T> devStats
+    ) {
+        return devStats.stream()
+                       .map(dev -> ((DeviceStatus) dev).getDeviceId())
+                       .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     public Collection<MockDevice> getMockDevices() { return _devices.values(); }
 
     public Collection<MockDevice> getMockDevices(

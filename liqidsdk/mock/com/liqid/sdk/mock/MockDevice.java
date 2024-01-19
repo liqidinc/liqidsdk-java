@@ -24,7 +24,7 @@ import com.liqid.sdk.StorageDeviceStatus;
 
 import java.util.Objects;
 
-public class MockDevice {
+public class MockDevice implements Comparable<MockDevice> {
 
     private final DeviceInfo _deviceInfo;
     private final DeviceStatus _deviceStatus;
@@ -37,25 +37,25 @@ public class MockDevice {
         _deviceStatus = deviceStatus;
     }
 
-    Integer getDeviceId() { return _deviceStatus.getDeviceId(); }
-    DeviceInfo getDeviceInfo() { return _deviceInfo; }
-    String getDeviceName() { return _deviceStatus.getName(); }
-    DeviceStatus getDeviceStatus() { return _deviceStatus; }
-    DeviceType getDeviceType() { return _deviceStatus.getDeviceType(); }
+    public Integer getDeviceId() { return _deviceStatus.getDeviceId(); }
+    public DeviceInfo getDeviceInfo() { return _deviceInfo; }
+    public String getDeviceName() { return _deviceStatus.getName(); }
+    public DeviceStatus getDeviceStatus() { return _deviceStatus; }
+    public DeviceType getDeviceType() { return _deviceStatus.getDeviceType(); }
 
-    ComputeDeviceStatus getComputeDeviceStatus() { return (ComputeDeviceStatus) _deviceStatus; }
-    FPGADeviceStatus getFPGADeviceStatus() { return (FPGADeviceStatus) _deviceStatus; }
-    GPUDeviceStatus getGPUDeviceStatus() { return (GPUDeviceStatus) _deviceStatus; }
-    MemoryDeviceStatus getMemoryDeviceStatus() { return (MemoryDeviceStatus) _deviceStatus; }
-    NetworkDeviceStatus getNetworkDeviceStatus() { return (NetworkDeviceStatus) _deviceStatus; }
-    StorageDeviceStatus getStorageDeviceStatus() { return (StorageDeviceStatus) _deviceStatus; }
+    public ComputeDeviceStatus getComputeDeviceStatus() { return (ComputeDeviceStatus) _deviceStatus; }
+    public FPGADeviceStatus getFPGADeviceStatus() { return (FPGADeviceStatus) _deviceStatus; }
+    public GPUDeviceStatus getGPUDeviceStatus() { return (GPUDeviceStatus) _deviceStatus; }
+    public MemoryDeviceStatus getMemoryDeviceStatus() { return (MemoryDeviceStatus) _deviceStatus; }
+    public NetworkDeviceStatus getNetworkDeviceStatus() { return (NetworkDeviceStatus) _deviceStatus; }
+    public StorageDeviceStatus getStorageDeviceStatus() { return (StorageDeviceStatus) _deviceStatus; }
 
-    ComputeDeviceInfo getComputeDeviceInfo() { return (ComputeDeviceInfo) _deviceInfo; }
-    FPGADeviceInfo getFPGADeviceInfo() { return (FPGADeviceInfo) _deviceInfo; }
-    GPUDeviceInfo getGPUDeviceInfo() { return (GPUDeviceInfo) _deviceInfo; }
-    MemoryDeviceInfo getMemoryDeviceInfo() { return (MemoryDeviceInfo) _deviceInfo; }
-    NetworkDeviceInfo getNetworkDeviceInfo() { return (NetworkDeviceInfo) _deviceInfo; }
-    StorageDeviceInfo getStorageDeviceInfo() { return (StorageDeviceInfo) _deviceInfo; }
+    public ComputeDeviceInfo getComputeDeviceInfo() { return (ComputeDeviceInfo) _deviceInfo; }
+    public FPGADeviceInfo getFPGADeviceInfo() { return (FPGADeviceInfo) _deviceInfo; }
+    public GPUDeviceInfo getGPUDeviceInfo() { return (GPUDeviceInfo) _deviceInfo; }
+    public MemoryDeviceInfo getMemoryDeviceInfo() { return (MemoryDeviceInfo) _deviceInfo; }
+    public NetworkDeviceInfo getNetworkDeviceInfo() { return (NetworkDeviceInfo) _deviceInfo; }
+    public StorageDeviceInfo getStorageDeviceInfo() { return (StorageDeviceInfo) _deviceInfo; }
 
     @Override
     public boolean equals(
@@ -76,5 +76,10 @@ public class MockDevice {
     @Override
     public String toString() {
         return String.format("{type=%s, id=0x%08x, name=%s}", getDeviceType(), getDeviceId(), getDeviceName());
+    }
+
+    @Override
+    public int compareTo(MockDevice device) {
+        return getDeviceId().compareTo(device.getDeviceId());
     }
 }

@@ -1107,7 +1107,7 @@ public class MockLiqidClient extends LiqidClient {
 
         var device = _devices.get(deviceId);
         var group = _groups.get(groupId);
-        checkDeviceType(device, DeviceType.GPU);
+        checkDeviceType(device, DeviceType.MEMORY);
         queueAddDeviceToGroup(deviceId, groupId);
 
         var groupRel = new GroupMemoryDeviceRelator.Builder().setGroup(group)
@@ -1215,7 +1215,7 @@ public class MockLiqidClient extends LiqidClient {
 
         var device = _devices.get(deviceId);
         var group = _groups.get(groupId);
-        checkDeviceType(device, DeviceType.GPU);
+        checkDeviceType(device, DeviceType.SSD);
         queueAddDeviceToGroup(deviceId, groupId);
 
         var groupRel = new GroupStorageDeviceRelator.Builder().setGroup(group)
